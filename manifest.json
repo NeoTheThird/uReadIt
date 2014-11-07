@@ -1,0 +1,15 @@
+{
+    "architecture": "all",
+    "description": "description of ureadit",
+    "framework": "ubuntu-sdk-14.10-dev2",
+    "hooks": {
+        "ureadit": {
+            "apparmor": "ureadit.apparmor",
+            "desktop": "ureadit.desktop"
+        }
+    },
+    "maintainer": "Michael Hall <mhall119@ubuntu.com>",
+    "name": "com.ubuntu.developer.mhall119.ureadit",
+    "title": "ureadit",
+    "version": "2.0"
+}
