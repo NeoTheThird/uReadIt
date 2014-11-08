@@ -9,12 +9,11 @@ Item {
     property string domain
     property alias thumbnail: postThumbnail.source
 
-    height: postThumbnail.height > 0 ? units.gu(20) : titleLabel.height + authorLabel.height + actionsRow.height + (text == "" ? units.gu(3) : units.gu(10))
-    width: parent.width
+    height: postThumbnail.height > 0 ? units.gu(19) : titleLabel.height + authorLabel.height + actionsRow.height + (text == "" ? units.gu(3) : units.gu(10))
+    //width: parent.width
 
     Rectangle {
         color: "#222222"
-        anchors.margins: units.gu(1)
         anchors.fill: parent
         border.color: "#111111"
 
@@ -22,7 +21,7 @@ Item {
             id: postThumbnail
             anchors.verticalCenter: parent.verticalCenter
             anchors.left: parent.left
-            anchors.leftMargin: units.gu(2)
+            anchors.leftMargin: source == "" ? 0 : units.gu(1)
             height: source == "" ? 0 : units.gu(15)
             width: source == "" ? 0 : units.gu(15)
             fillMode: Image.PreserveAspectCrop
@@ -64,7 +63,7 @@ Item {
             fontSize: "small"
             font.weight: Font.Light
             color: UbuntuColors.lightGrey
-            text: "("+domain+")"
+            text: domain ? "("+domain+")" : ""
         }
 
         Label {
@@ -85,7 +84,7 @@ Item {
 
         Item {
             id: actionsRow
-            width: parent.width - units.gu(20)
+            width: parent.width - units.gu(17)
             anchors.right: parent.right
             anchors.bottom: parent.bottom
             height: units.gu(3)

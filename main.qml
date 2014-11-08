@@ -17,12 +17,12 @@ MainView {
      This property enables the application to change orientation
      when the device is rotated. The default is false.
     */
-    //automaticOrientation: true
+    automaticOrientation: true
 
     // Removes the old toolbar and enables new features of the new header.
     useDeprecatedToolbar: false
 
-    width: units.gu(60)
+    width: units.gu(100)
     height: units.gu(75)
 
     headerColor: "#333333"

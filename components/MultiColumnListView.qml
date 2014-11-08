@@ -1,7 +1,9 @@
 import QtQuick 2.0
-import Ubuntu.Components 1.1
 
-Item {
+Flickable {
+    id: display
+    contentWidth: parent.width
+    contentHeight: contentItem.childrenRect.height
 
     // List model that feeds the view
     property var model
@@ -9,60 +11,74 @@ Item {
     // Component to be used to display each item
     property Component delegate
 
-    // How wide to make a column before creating another
-    property int maxColumnWidth
+    // Number of columns to use
+    property int columns: 1
+    property var columnItems: Array()
+
+    property int rowSpacing: 0
+    property int colSpacing: 0
+
+    Row {
+        width: parent.width
+        spacing: rowSpacing
+
+        Repeater {
+            model: columns
+            onModelChanged: {
+                console.log('Number of columns changed to: '+columns);
+                update();
+                loadItems();
+            }
+            Column {
+                spacing: colSpacing
+                width: parent.width / columns
+                Component.onCompleted: {
+                    console.log("Created Column: "+index)
+                    columnItems[index] = this
+                }
+            }
+        }
+    }
+
+    Component {
+        id: delegateItemLoader
+
+        Loader {
+            property variant model
+            width: display.contentItem.width / columns
+        }
+    }
 
     Component.onCompleted: {
+        console.log('Creating list view with '+columns+' columns')
         loadItems();
     }
 
     function loadItems() {
-        if (model == null) {
+        console.log('Loading items from model')
+        if (model === null) {
             console.log("No model defined, nothing to load")
             return;
         }
 
+        var lastColumn = -1;
         for (var i = 0; i < model.count; i++) {
-            console.log("Loading index: "+i)
             var modelObject = model.get(i);
-            console.log('Model: '+modelObject);
-            console.log('Delegate: '+delegate);
-            for(var k in delegate) {
-                console.log('  '+k+': '+delegate[k])
-            }
 
             var properties = {
+                'sourceComponent': delegate,
                 'model': modelObject,
                 'index': i,
+
             }
 
-            var delegateItem = delegate.createObject(display.contentItem, properties)
-            itemManager.placeObject(delegateItem)
+            if (lastColumn >= columns-1) {
+                lastColumn = 0;
+            } else {
+                lastColumn++;
+            }
+
+            var delegateItem = delegateItemLoader.createObject(columnItems[lastColumn], properties)
         }
     }
-
-    Flickable {
-        id: display
-
-        anchors.fill: parent
-        contentWidth: parent.width
-        contentHeight: contentItem.childrenRect.height
-
-    }
-    property alias flickable: display
-
-    // Component responsible for placing child items
-    QtObject {
-        id: itemManager
-
-        property int lastItemRight: 0
-        property int lastItemBottom: 0
-
-        function placeObject(obj) {
-            obj.y = lastItemBottom
-            lastItemBottom += obj.height
-            obj.x = 0
-        }
-    }
-
 }
