@@ -2,6 +2,8 @@ import QtQuick 2.0
 import Ubuntu.Components 1.1
 import Ubuntu.Components.ListItems 1.0
 import "../models/QReddit"
+import "../components"
+import "../utils/Autolinker.js" as AutoLinkText
 
 Page {
     id: commentsPage
@@ -37,12 +39,19 @@ Page {
             post: commentsPage.postObj.data.id
         }
 
-        delegate: Empty {
-            Text {
-                anchors.fill: parent
-                text: model.data.body
-                color: UbuntuColors.lightGrey
+        delegate: CommentListItem {
+            text: {
+                if (model.data.selftext != undefined) {
+                    return  AutoLinkText.Autolinker.link(model.data.selftext)
+                } else if (model.data.body != undefined) {
+                    return AutoLinkText.Autolinker.link(model.data.body)
+                } else {
+                    return ''+model.data.count+' more comments...'
+                }
             }
+            author: model.data.author
+            depth: model.depth
+            color: (index % 2 == 0) ? '#444444' : '#262626'
         }
     }
 }

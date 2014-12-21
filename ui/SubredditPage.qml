@@ -122,7 +122,13 @@ Page {
             comments: model.data.num_comments
 
 
-            onClicked: mainStack.push(Qt.resolvedUrl("ArticlePage.qml"), {'postObj': model})
+            onClicked: {
+                if (model.data.is_self) {
+                    mainStack.push(Qt.resolvedUrl("CommentsPage.qml"), {'postObj': model})
+                } else {
+                    mainStack.push(Qt.resolvedUrl("ArticlePage.qml"), {'postObj': model})
+                }
+            }
             onUpvoteClicked: console.log('item upvoted')
             onDownvoteClicked: console.log('item downvoted')
             onCommentsClicked: mainStack.push(Qt.resolvedUrl("CommentsPage.qml"), {'postObj': model})

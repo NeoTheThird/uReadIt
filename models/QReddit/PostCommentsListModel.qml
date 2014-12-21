@@ -27,12 +27,22 @@ ListModel {
         var connObj = postObj.getComments('hot', {})
         connObj.onSuccess.connect(function(response) {
             //console.log("Connection Succeeded")
-            for (var i = 0; i < connObj.response[1].length; i++) {
-                var commentObj = connObj.response[1][i];
-                postCommentsListModel.append(commentObj);
+            addComments(connObj.response[1], 0);
+        });
+    }
+
+    function addComments(commentsResponse, depth) {
+        for (var i = 0; i < commentsResponse.length; i++) {
+            var commentObj = commentsResponse[i];
+            if (commentObj == undefined) return
+            commentObj['depth'] = depth
+            console.log('Adding at '+depth+': '+commentObj.data.body)
+            postCommentsListModel.append(commentObj);
+            if (commentObj.data.replies !== undefined && commentObj.data.replies.data !== undefined) {
+                addComments(commentObj.data.replies.data.children, depth+1)
             }
 
-        });
+        }
     }
 
 }
