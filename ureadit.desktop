@@ -1,8 +1,11 @@
 [Desktop Entry]
-Name=ureadit
+Name=uReadIt
 Exec=qmlscene $@ main.qml
 Icon=ureadit.png
 Terminal=false
 Type=Application
 X-Ubuntu-Touch=true
 
+X-Ubuntu-Splash-Show-Header=true
+X-Ubuntu-Splash-Title=uReadIt
+X-Ubuntu-Splash-Color=#444444

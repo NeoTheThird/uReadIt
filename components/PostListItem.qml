@@ -1,118 +1,77 @@
 import QtQuick 2.0
 import Ubuntu.Components 1.1
+import Ubuntu.Connectivity 1.0
 
 Item {
-    property alias title: titleLabel.text
-    property alias text: selfTextLabel.text
+    id: postitemroot
+    property string title
+    property string text
     property string score
-    property alias author: authorLabel.text
+    property string author
     property string domain
-    property alias thumbnail: postThumbnail.source
+    property string thumbnail
+    property string url
+    property string comments
 
-    height: postThumbnail.height > 0 ? units.gu(19) : titleLabel.height + authorLabel.height + actionsRow.height + (text == "" ? units.gu(3) : units.gu(10))
-    //width: parent.width
+    signal clicked
+    signal upvoteClicked
+    signal downvoteClicked
+    signal commentsClicked
 
-    Rectangle {
-        color: "#222222"
-        anchors.fill: parent
-        border.color: "#111111"
+    height: postItemLoader.item.height
+    width: parent.width
 
-        Image {
-            id: postThumbnail
-            anchors.verticalCenter: parent.verticalCenter
-            anchors.left: parent.left
-            anchors.leftMargin: source == "" ? 0 : units.gu(1)
-            height: source == "" ? 0 : units.gu(15)
-            width: source == "" ? 0 : units.gu(15)
-            fillMode: Image.PreserveAspectCrop
+    Connections {
+        target: NetworkingStatus
+        // full status can be retrieved from the base C++ class
+        // status property
+        onStatusChanged: {
+            if (status === NetworkingStatus.Offline)
+                console.log("Status: Offline")
+            if (status === NetworkingStatus.Connecting)
+                console.log("Status: Connecting")
+            if (status === NetworkingStatus.Online)
+                console.log("Status: Online")
         }
+    }
+    Loader {
+        id: postItemLoader
+        property string title: parent.title
+        property string text: parent.text
+        property string score: parent.score
+        property string author: parent.author
+        property string domain: parent.domain
+        property string thumbnail: parent.thumbnail
+        property string url: parent.url
+        property string comments: parent.comments
 
-        Label {
-            id: titleLabel
-            anchors.left: postThumbnail.right
-            anchors.leftMargin: units.gu(1)
-            anchors.right: parent.right
-            y: parent.y
+        width: parent.width
 
-            fontSize: "medium"
-            font.weight: Font.DemiBold
-            color: UbuntuColors.lightGrey
+        signal clicked
+        signal upvoteClicked
+        signal downvoteClicked
+        signal commentsClicked
+        onClicked: postitemroot.clicked()
+        onUpvoteClicked: postitemroot.upVoteClicked()
+        onDownvoteClicked: postitemroot.downVoteClicked()
+        onCommentsClicked: postitemroot.commentsClicked()
 
-            maximumLineCount: 3
-            elide: Text.ElideRight
-            wrapMode: Text.WordWrap
-        }
+        onOpacityChanged: console.log('Opacity set to '+opacity)
 
-        Label {
-            id: authorLabel
-            anchors.left: postThumbnail.right
-            anchors.leftMargin: units.gu(1)
-            anchors.top: titleLabel.bottom
-            anchors.right: domainLabel.left
-            fontSize: "small"
-            font.weight: Font.Light
-            color: UbuntuColors.lightGrey
-            elide: Text.ElideRight
-        }
-
-        Label {
-            id: domainLabel
-            anchors.right: parent.right
-            anchors.rightMargin: units.gu(1)
-            anchors.top: titleLabel.bottom
-            fontSize: "small"
-            font.weight: Font.Light
-            color: UbuntuColors.lightGrey
-            text: domain ? "("+domain+")" : ""
-        }
-
-        Label {
-            id: selfTextLabel
-            anchors.left: postThumbnail.right
-            anchors.leftMargin: units.gu(1)
-            anchors.right: parent.right
-            anchors.top: authorLabel.bottom
-            anchors.bottom: actionsRow.top
-
-            fontSize: "small"
-            font.weight: Font.Light
-            color: UbuntuColors.lightGrey
-
-            elide: Text.ElideRight
-            wrapMode: Text.WordWrap
-        }
-
-        Item {
-            id: actionsRow
-            width: parent.width - units.gu(17)
-            anchors.right: parent.right
-            anchors.bottom: parent.bottom
-            height: units.gu(3)
-
-            Label {
-                id: scoreLabel
-                text: (score > 0 ? "+" : "")+score
-                x: 1*(parent.width / 4)-(parent.width / 8)-(width/2)
-                color: score > 100 ? "#55AA55" : score > 10 ? "#5555AA" : UbuntuColors.lightGrey
+        source: {
+            //console.log('Link: '+url)
+            if (NetworkingStatus.limitedBandwith) {
+                console.log('Using low-res image to conserve bandwidth')
+                return "SmallImagePostItem.qml";
             }
-            Image {
-                x: 2*(parent.width / 4)-(parent.width / 8)-(width/2)
-                source: Qt.resolvedUrl("../images/upvote.png")
-                width: units.gu(2)
-                height: units.gu(2)
+
+            var ext = url.substring(url.length - 4)
+            if (ext == '.gif' || ext == '.jpg') {
+                return "LargeImagePostItem.qml";
+            } else {
+                return "SmallImagePostItem.qml";
             }
-            Image {
-                x: 3*(parent.width / 4)-(parent.width / 8)-(width/2)
-                source: Qt.resolvedUrl("../images/downvote.png")
-                width: units.gu(2)
-                height: units.gu(2)
-            }
-            Image {
-                x: 4*(parent.width / 4)-(parent.width / 8)-(width/2)
-                source: Qt.resolvedUrl("image://theme/message")
-                width: units.gu(2)
-                height: units.gu(2)
-            }
+
         }
     }
 

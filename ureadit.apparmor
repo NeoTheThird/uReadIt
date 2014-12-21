@@ -1,8 +1,9 @@
 {
     "policy_groups": [
-        "networking"
+        "networking",
+        "webview",
+        "connectivity",
+        "content_exchange_source"
     ],
     "policy_version": 1.2
 }
-
-

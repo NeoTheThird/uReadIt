@@ -438,6 +438,10 @@ var QReddit = function(userAgent, applicationName) {
         return srName ? new SubredditObj(this, srName) : new SubredditObj(this);
     }
 
+    this.getCommentsObj = function(srName, postId) {
+
+    }
+
     this.getUserObj = function(username) {
         //Returns a User Object.
         return new UserObj(this, username || "");
