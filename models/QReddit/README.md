@@ -151,6 +151,29 @@ The paramObj is based on Reddit API. See http://www.reddit.com/dev/api#GET_comme
 
 The moreObj are special objects returned by `postObj.getComments()` that represent the "load more comments" seen on the original Reddit website. You may access the underlying comments using `moreObj.getMoreComments(sort)`.
 
+####ListModels
+
+You can more easily add Reddit data to your ListViews with one of the provided ListModel implementations:
+```javascript
+import "./QReddit/"
+
+ListView {
+    id: postList
+
+    model: SubredditListModel {
+        subreddit: 'linux'
+        filter: 'hot'
+    }
+
+    delegate: Item {
+        Text {
+            anchors.fill: parent
+            text: model.data.title
+        }
+    }
+}
+```
+
 -------------
 
 ###Authors
