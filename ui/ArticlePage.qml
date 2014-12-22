@@ -47,6 +47,7 @@ Page {
     Component.onCompleted : {
         articlewebview.url = postObj.data.url
     }
+
     WebView {
         id: articlewebview
         anchors.fill: parent
@@ -78,7 +79,7 @@ Page {
             }
         }
     }
-    flickable: articlewebview
+
     ProgressBar {
         id: loadProgressBar
         anchors.bottom: articlewebview.top

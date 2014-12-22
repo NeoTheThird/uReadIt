@@ -34,17 +34,24 @@ Page {
     ListView {
         id: commentsList
         anchors.fill: parent
+
         model: PostCommentsListModel {
             id: commentsModel
             post: commentsPage.postObj.data.id
         }
 
+        header:  CommentListItem {
+            text: AutoLinkText.Autolinker.link(commentsPage.postObj.data.selftext).replace(/\n/g, "<br>\n")
+            author: commentsPage.postObj.data.author
+            color:'#262626'
+        }
+
         delegate: CommentListItem {
             text: {
                 if (model.data.selftext != undefined) {
-                    return  AutoLinkText.Autolinker.link(model.data.selftext)
+                    return  AutoLinkText.Autolinker.link(model.data.selftext).replace(/\n/g, "<br>\n")
                 } else if (model.data.body != undefined) {
-                    return AutoLinkText.Autolinker.link(model.data.body)
+                    return AutoLinkText.Autolinker.link(model.data.body).replace(/\n/g, "<br>\n")
                 } else {
                     return ''+model.data.count+' more comments...'
                 }

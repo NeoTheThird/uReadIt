@@ -31,8 +31,9 @@ Rectangle {
         anchors.leftMargin: units.gu(depth+1)
         anchors.top: name.bottom
         color: UbuntuColors.warmGrey
+        linkColor: 'lightblue'
         fontSize: "medium"
-        textFormat: Text.RichText
+        textFormat: Text.StyledText
 
         onLinkActivated: {
             console.log("Link clicked: "+ link)

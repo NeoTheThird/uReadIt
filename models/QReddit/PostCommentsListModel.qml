@@ -35,9 +35,10 @@ ListModel {
         for (var i = 0; i < commentsResponse.length; i++) {
             var commentObj = commentsResponse[i];
             if (commentObj == undefined) return
+
             commentObj['depth'] = depth
-            console.log('Adding at '+depth+': '+commentObj.data.body)
             postCommentsListModel.append(commentObj);
+
             if (commentObj.data.replies !== undefined && commentObj.data.replies.data !== undefined) {
                 addComments(commentObj.data.replies.data.children, depth+1)
             }
