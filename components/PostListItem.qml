@@ -52,8 +52,8 @@ Item {
         signal downvoteClicked
         signal commentsClicked
         onClicked: postitemroot.clicked()
-        onUpvoteClicked: postitemroot.upVoteClicked()
-        onDownvoteClicked: postitemroot.downVoteClicked()
+        onUpvoteClicked: postitemroot.upvoteClicked()
+        onDownvoteClicked: postitemroot.downvoteClicked()
         onCommentsClicked: postitemroot.commentsClicked()
 
         onOpacityChanged: console.log('Opacity set to '+opacity)
