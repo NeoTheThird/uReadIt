@@ -79,8 +79,8 @@ Flickable {
 
             opacity: ((y+height) >= display.contentY) && (y <= (display.contentY + display.height)) ? 1 : 0
             onOpacityChanged: {
-                if (this.hasOwnProperty('item')) {
-                    item.visible = opacity > 0
+                if (this.hasOwnProperty('item') && this.item != null) {
+                    this.item.visible = opacity > 0.0;
                 }
             }
         }
