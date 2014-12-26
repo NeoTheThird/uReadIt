@@ -5,6 +5,7 @@ import Ubuntu.Web 0.2
 
 
 Page {
+    id: articlePage
     property var postObj
 
     title: postObj.data.title
@@ -43,13 +44,16 @@ Page {
             }
         }
     ]
-
+    state: 'default'
     Component.onCompleted : {
-        articlewebview.url = postObj.data.url
+        articleWebView.url = postObj.data.url
+        articlePage.header.animate=false
+        articlePage.header.show();
+        articlePage.header.animate=true
     }
 
     WebView {
-        id: articlewebview
+        id: articleWebView
         anchors.fill: parent
         incognito: true
 
@@ -82,7 +86,7 @@ Page {
 
     ProgressBar {
         id: loadProgressBar
-        anchors.bottom: articlewebview.top
+        anchors.bottom: articleWebView.top
         anchors.left: parent.left
         anchors.right: parent.right
         minimumValue: 0
