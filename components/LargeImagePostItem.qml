@@ -47,7 +47,7 @@ Item {
 
         PostImage {
             id: postThumbnail
-            width: sourceSize.width >= sourceSize.height ? units.gu(30) : undefined
+            width: sourceSize.width >= sourceSize.height ? parent.width : undefined
             height: sourceSize.width > sourceSize.height ? undefined : units.gu(30)
             anchors.horizontalCenter: parent.horizontalCenter
             anchors.top: parent.top
