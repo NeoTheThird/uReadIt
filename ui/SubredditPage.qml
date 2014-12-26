@@ -142,9 +142,9 @@ Page {
         anchors.bottom: parent.bottom
         anchors.right: parent.right
         anchors.left: parent.left
-        height: units.gu(1)
+        height: units.gu(2)
 
-        property real loadMoreLength: units.gu(16)
+        property real loadMoreLength: units.gu(10)
         property real overflow: 0
         property variant spaceRect: null
 
@@ -156,12 +156,13 @@ Page {
                 if(pf.atYEnd && !pf.atYBeginning && (pf.contentHeight >= parent.height)) {
                     moreLoaderItem.overflow = pf.contentY - pf.contentHeight + pf.height
                     if ((moreLoaderItem.overflow > moreLoaderItem.loadMoreLength) && !moreLoaderItem.spaceRect) {
-                        moreLoaderItem.spaceRect = Qt.createQmlObject("import QtQuick 2.0; Item{width: 1; height: " + moreLoaderItem.loadMoreLength + "}", postsList)
+                        moreLoaderItem.spaceRect = Qt.createQmlObject("import QtQuick 2.0; Item{width: 1; height: " + moreLoaderItem.loadMoreLength + "}", subredditpage)
                         postsModel.loadMore()
                     }
+
                 } else {
-                    //console.log('Wait for it....')
                     moreLoaderItem.overflow = 0
+                    moreLoaderItem.spaceRect = null
                 }
             }
         }
