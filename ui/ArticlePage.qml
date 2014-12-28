@@ -30,7 +30,7 @@ Page {
         Action {
             id: vieInBrowserAction
             text: "Open Page"
-            iconName: "webbrowser-app-symbolic"
+            iconName: "external-link"
             onTriggered: {
                 Qt.openUrlExternally(postObj.data.url)
             }

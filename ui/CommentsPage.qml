@@ -49,7 +49,7 @@ Page {
         delegate: CommentListItem {
             postObj: commentsPage.postObj
             commentObj: model
-            color: (index % 2 == 0) ? Qt.darker('#262626', 1.25) : '#262626'
+            color: (index % 2 == 0) ? Qt.darker('#262626', 1.5) : '#262626'
         }
     }
 }

@@ -20,6 +20,7 @@ Page {
             subredditFilter = head.sections.model[head.sections.selectedIndex].toLowerCase()
         }
     }
+
     states: [
         PageHeadState {
             name: "default"
@@ -40,15 +41,23 @@ Page {
             actions: [
                 Action {
                     id: messagesAction
-                    text: "messages"
+                    text: "Messages"
                     iconName: "email"
                     onTriggered: {
 
                     }
                 },
                 Action {
+                    id: userAction
+                    text: "User"
+                    iconName: "contact"
+                    onTriggered: {
+
+                    }
+                },
+                Action {
                     id: settingsAction
-                    text: "settings"
+                    text: "Settings"
                     iconName: "settings"
                     onTriggered: {
 
