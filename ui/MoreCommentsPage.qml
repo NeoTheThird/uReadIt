@@ -8,13 +8,15 @@ import "../utils/Autolinker.js" as AutoLinkText
 Page {
     id: commentsPage
     property var postObj
+    property var children
+    property string link
 
     title: postObj.data.title
 
     head.contents: Label {
         text: title
-        height: parent.height
-        width: parent.width
+        height: parent ? parent.height : 0
+        width: parent ? parent.width : 0
         verticalAlignment: Text.AlignVCenter
 
         color: "white"
@@ -28,22 +30,18 @@ Page {
     }
 
     Component.onCompleted: {
-        console.log('Loading comments page for post: '+postObj.data.id)
+        console.log('Loading comments page for post: '+link)
     }
 
     ListView {
         id: commentsList
         anchors.fill: parent
 
-        model: PostCommentsListModel {
+        model: MoreCommentsListModel {
             id: commentsModel
             post: commentsPage.postObj.data.id
-        }
-
-        header:  CommentListItem {
-            postObj: commentsPage.postObj
-            commentObj: commentsPage.postObj
-            color:'#262626'
+            more: children
+            link: commentsPage.link
         }
 
         delegate: CommentListItem {
