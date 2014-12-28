@@ -26,7 +26,6 @@ ListModel {
 
         var connObj = postObj.getComments('hot', {})
         connObj.onSuccess.connect(function(response) {
-            //console.log("Connection Succeeded")
             addComments(connObj.response[1], 0);
         });
     }
@@ -35,6 +34,7 @@ ListModel {
         for (var i = 0; i < commentsResponse.length; i++) {
             var commentObj = commentsResponse[i];
             if (commentObj == undefined) return
+            if (commentObj.kind == "more" && commentObj.data.count < 1) return
 
             commentObj['depth'] = depth
             postCommentsListModel.append(commentObj);

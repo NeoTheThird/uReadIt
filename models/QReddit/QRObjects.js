@@ -562,13 +562,13 @@ var MoreObj = function(reddit, thing, link) {
         var moreConnObj = reddit.getAPIConnection('morechildren', paramObj);
         var that = this;
         moreConnObj.onConnection.connect(function(response){
+
             //The returned response is flat. Here we turn it into a tree before translating.
             var flatResponses = response.json.data.things;
             var nodeList = {};
 
-            nodeList[that.data.parent_id] = { data: { 'id': that.data.parent_id, 'replies': { 'data': { 'children': [] } } } };
+            nodeList[that.data.parent_id] = { 'data': { 'id': that.data.parent_id, 'replies': { 'data': { 'children': [] } } } };
             for(var i = 0; i < flatResponses.length; i++) {
-
                 if(flatResponses[i].data.name === "t1__") continue; //Bug with Reddit? There is an occassional empty "more" object
 
                 nodeList[flatResponses[i].data.name] = flatResponses[i];
@@ -576,7 +576,7 @@ var MoreObj = function(reddit, thing, link) {
                     nodeList[flatResponses[i].data.name].data.replies = { 'data': { 'children': [] } };
                 }
 
-                nodeList[flatResponses[i].data.parent_id].data.replies.data.children.push(nodeList[flatResponses[i].data.name]);
+                nodeList[that.data.parent_id].data.replies.data.children.push(nodeList[flatResponses[i].data.name]);
             }
             var treeResponses = nodeList[that.data.parent_id].data.replies.data.children
 
