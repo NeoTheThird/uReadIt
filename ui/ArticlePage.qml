@@ -2,7 +2,8 @@ import QtQuick 2.0
 import Ubuntu.Components 1.1
 import Ubuntu.Components.ListItems 1.0
 import Ubuntu.Web 0.2
-
+import Ubuntu.Content 0.1
+import "../components"
 
 Page {
     id: articlePage
@@ -28,7 +29,15 @@ Page {
 
     head.actions: [
         Action {
-            id: vieInBrowserAction
+            id: shareAction
+            text: "Share"
+            iconName: "share"
+            onTriggered: {
+                mainStack.push(Qt.resolvedUrl("ShareLinkPage.qml"), {'link': postObj.data.url, 'contentType': ContentType.Links})
+            }
+        },
+        Action {
+            id: viewInBrowserAction
             text: "Open Page"
             iconName: "external-link"
             onTriggered: {
@@ -77,9 +86,9 @@ Page {
                 onTriggered: Qt.openUrlExternally(articleWebView.contextualData.img)
             }
             Action {
-                text: i18n.tr("Save image")
+                text: i18n.tr("Share image")
                 enabled: articleWebView.contextualData.img.toString() != ""
-                onTriggered: console.log(articleWebView.contextualData.img)
+                onTriggered: mainStack.push(Qt.resolvedUrl("ShareLinkPage.qml"), {'link': articleWebView.contextualData.img, 'contentType': ContentType.Pictures})
             }
         }
     }
@@ -94,5 +103,6 @@ Page {
         visible: false
         height: units.gu(2)
     }
+
 
 }

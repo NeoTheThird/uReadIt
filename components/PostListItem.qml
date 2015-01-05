@@ -12,14 +12,15 @@ Item {
     property string thumbnail
     property string url
     property string comments
+    property var likes
 
     signal clicked
     signal upvoteClicked
     signal downvoteClicked
     signal commentsClicked
 
-    height: postItemLoader.item.height
-    width: parent.width
+    height: (postItemLoader.item) ? postItemLoader.item.height : 0
+    width: parent ? parent.width : 0
 
     Connections {
         target: NetworkingStatus
@@ -44,6 +45,7 @@ Item {
         property string thumbnail: parent.thumbnail
         property string url: parent.url
         property string comments: parent.comments
+        property var likes: parent.likes
 
         width: parent.width
 

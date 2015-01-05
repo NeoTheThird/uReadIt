@@ -92,7 +92,7 @@ var QReddit = function(userAgent, applicationName) {
             try {
                 var dbTransaction = getDatabaseTransaction('SELECT username FROM ActiveRedditUser LIMIT 1 OFFSET 0');
                 if(dbTransaction.rows.item(0)) {
-                    activeUser = dbTransaction.rows.item(0).username
+                    activeUser = dbTransaction.rows.item(0).username || ""
                 }
             } catch (error) {
                 console.error("Error: _getActiveUserFromDB(): \"" + error + "\"");

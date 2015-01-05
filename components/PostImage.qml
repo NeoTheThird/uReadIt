@@ -9,21 +9,22 @@ Image {
     source: ""
 
     onUrlChanged: update_source()
-    onOpacityChanged: update_source()
-    function update_source() {
-        //console.log('Link: '+url)
 
-        if (opacity == 0) {
-            console.log('Unloading image: '+source)
-            source = ""
+    function update_source() {
+        if (!visible) {
+            //console.log('Unloading image: '+source)
+            //source = ""
+            return
         }
 
         if (thumbnail == 'nsfw') {
             source = Qt.resolvedUrl('../images/nsfw2.png')
+            return
         }
 
         if (thumbnail == 'default') {
             source = ""
+            return
         }
 
         var ext = url.substring(url.length - 4)

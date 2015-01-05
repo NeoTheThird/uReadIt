@@ -40,9 +40,8 @@ Page {
             post: commentsPage.postObj.data.id
         }
 
-        header:  CommentListItem {
+        header:  PostMessageItem {
             postObj: commentsPage.postObj
-            commentObj: commentsPage.postObj
             color:'#262626'
         }
 

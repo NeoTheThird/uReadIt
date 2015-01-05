@@ -11,6 +11,7 @@ Item {
     property string thumbnail: parent.thumbnail
     property string url: parent.url
     property string comments: parent.comments
+    property var likes: parent.likes
 
     height: Math.max(postThumbnail.height + units.gu(2), titleLabel.height + authorLabel.height + actionsRow.height + (text == "" ? units.gu(3) : units.gu(10)))
     width: parent.width
@@ -19,14 +20,15 @@ Item {
         color: "#222222"
         anchors.fill: parent
         border.color: "#111111"
-        Image {
+        PostImage {
             id: postThumbnail
             anchors.verticalCenter: parent.verticalCenter
             anchors.left: parent.left
             anchors.leftMargin: source == "" ? 0 : units.gu(1)
             height: source == "" ? 0 : units.gu(15)
             width: source == "" ? 0 : units.gu(15)
-            source: postitemroot.thumbnail
+            thumbnail: postitemroot.thumbnail
+            url: postitemroot.url
 
             MouseArea {
                 anchors.fill: parent
@@ -99,6 +101,10 @@ Item {
             wrapMode: Text.WordWrap
 
             text: postitemroot.text
+            MouseArea {
+                anchors.fill: parent
+                onClicked: postitemroot.parent.clicked()
+            }
         }
 
         Item {
@@ -119,7 +125,7 @@ Item {
                 source: Qt.resolvedUrl("../images/upvote.png")
                 width: units.gu(2)
                 height: units.gu(2)
-                color: UbuntuColors.warmGrey
+                color: postitemroot.likes === true ? UbuntuColors.orange : UbuntuColors.warmGrey
 
                 MouseArea {
                     anchors.fill: parent
@@ -131,7 +137,7 @@ Item {
                 source: Qt.resolvedUrl("../images/downvote.png")
                 width: units.gu(2)
                 height: units.gu(2)
-                color: UbuntuColors.warmGrey
+                color: postitemroot.likes === false ? UbuntuColors.blue : UbuntuColors.warmGrey
 
                 MouseArea {
                     anchors.fill: parent

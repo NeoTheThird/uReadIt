@@ -11,6 +11,7 @@ Item {
     property string thumbnail: parent.thumbnail
     property string url: parent.url
     property string comments: parent.comments
+    property var likes: parent.likes
 
 
     height: units.gu(36)

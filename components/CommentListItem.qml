@@ -19,7 +19,7 @@ Rectangle {
         anchors.leftMargin: units.gu((commentObj ? commentObj.depth : 0)+1)
         anchors.top: parent.top
         anchors.topMargin: units.gu(1)
-        color: UbuntuColors.warmGrey
+        color: Qt.darker(UbuntuColors.warmGrey, 1.5)
         fontSize: "small"
         text: commentObj ? commentObj.data.author : ""
         visible: commentObj ? (commentObj.kind === "t1" || commentObj.kind === "t3") : false

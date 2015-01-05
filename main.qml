@@ -1,6 +1,7 @@
 import QtQuick 2.0
 import Ubuntu.Components 1.1
 import "ui"
+import "models/QReddit/QReddit.js" as QReddit
 
 /*!
     \brief MainView with a Label and Button elements.
@@ -31,12 +32,16 @@ MainView {
     backgroundColor: "#333333"
     //footerColor: "#555555"
 
+    property var qreddit: new QReddit.QReddit("uReadIt", "ureadit");
+
     PageStack {
         id: mainStack
         anchors.fill: parent
 
     }
-    Component.onCompleted: mainStack.push(Qt.resolvedUrl("./ui/SubredditPage.qml"), {'subreddit': ''})
+    Component.onCompleted: {
+        mainStack.push(Qt.resolvedUrl("./ui/SubredditPage.qml"), {'subreddit': ''});
+    }
 
 }
 

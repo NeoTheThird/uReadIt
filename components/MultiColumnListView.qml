@@ -39,6 +39,7 @@ Flickable {
             for (var j = columnItems[i].children.length-1; j >= 0; j--) {
                 //console.log('i='+i+', j='+j)
                 columnItems[i].children[j].destroy()
+                delete columnItems[i].children[j];
             }
             columnHeights[i] = 0;
         }
@@ -70,17 +71,35 @@ Flickable {
     }
 
     Component {
+        id: hiddenDelegate
+
+        Rectangle {
+            id: hiddenDelegatePlaceholder
+        }
+    }
+
+    Component {
         id: delegateItemLoader
 
         Loader {
             property variant model
             property int index
+            property int fixedHeight
             width: (display.contentItem.width - (rowSpacing * (columns-1))) / columns
 
             opacity: ((y+height) >= display.contentY) && (y <= (display.contentY + display.height)) ? 1 : 0
             onOpacityChanged: {
+
                 if (this.hasOwnProperty('item') && this.item != null) {
-                    this.item.visible = opacity > 0.0;
+                    //console.log('Loader item opacity changed to: '+opacity)
+                    if (opacity > 0.0) {
+                        this.item.visible = true;
+                        this.sourceComponent = delegate;
+                    } else {
+                        this.height = this.item.height
+                        this.item.visible = false;
+                        this.sourceComponent = hiddenDelegate;
+                    }
                 }
             }
         }
