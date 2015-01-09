@@ -20,15 +20,14 @@ Item {
         color: "#222222"
         anchors.fill: parent
         border.color: "#111111"
-        PostImage {
+        Image {
             id: postThumbnail
             anchors.verticalCenter: parent.verticalCenter
             anchors.left: parent.left
             anchors.leftMargin: source == "" ? 0 : units.gu(1)
             height: source == "" ? 0 : units.gu(15)
             width: source == "" ? 0 : units.gu(15)
-            thumbnail: postitemroot.thumbnail
-            url: postitemroot.url
+            source: postitemroot.thumbnail
 
             MouseArea {
                 anchors.fill: parent

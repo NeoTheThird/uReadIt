@@ -68,7 +68,7 @@ Item {
             }
 
             var ext = url.substring(url.length - 4)
-            if (ext == '.gif' || ext == '.jpg') {
+            if (thumbnail && (ext == '.gif' || ext == '.jpg')) {
                 return "LargeImagePostItem.qml";
             } else {
                 return "SmallImagePostItem.qml";
