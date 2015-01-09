@@ -4,6 +4,7 @@ import Ubuntu.Components.ListItems 1.0
 import "../models/QReddit"
 import "../components"
 import "../utils/Autolinker.js" as AutoLinkText
+import "../models/QReddit/QReddit.js" as QReddit
 
 Page {
     id: commentsPage
@@ -47,8 +48,35 @@ Page {
 
         delegate: CommentListItem {
             postObj: commentsPage.postObj
-            commentObj: model
+            commentObj: new QReddit.CommentObj(uReadIt.qreddit, model);
             color: (index % 2 == 0) ? Qt.darker('#262626', 1.5) : '#262626'
-        }
+            score: model.data.score
+            likes: model.data.likes
+
+            onUpvoteClicked: {
+                if (!uReadIt.qreddit.notifier.isLoggedIn) {
+                    console.log("You can't vote when you're not logged in!");
+                    return;
+                }
+
+                var voteConnObj = commentObj.upvote();
+                var commentItem = this;
+                voteConnObj.onSuccess.connect(function(response){
+                    commentItem.likes = model.data.likes = commentObj.data.likes;
+                    commentItem.score = model.data.score = commentObj.data.score;
+                });
+            }
+            onDownvoteClicked: {
+                if (!uReadIt.qreddit.notifier.isLoggedIn) {
+                    console.log("You can't vote when you're not logged in!");
+                    return;
+                }
+                var voteConnObj = commentObj.downvote();
+                var commentItem = this;
+                voteConnObj.onSuccess.connect(function(response){
+                    commentItem.likes = model.data.likes = commentObj.data.likes;
+                    commentItem.score = model.data.score = commentObj.data.score;
+                });
+            }}
     }
 }

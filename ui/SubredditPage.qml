@@ -266,7 +266,6 @@ Page {
     Panel {
         id: subscriptionsPanel
         anchors {
-            top: parent.top
             left: parent.left
             bottom: parent.bottom
         }
@@ -278,6 +277,8 @@ Page {
 
         Rectangle {
             anchors.fill: parent
+            anchors.topMargin: units.gu(10) // Account for the page header
+
             color: Qt.darker('#333333')
 
             ListView {

@@ -81,7 +81,7 @@ Item {
                 source: Qt.resolvedUrl("../images/upvote.png")
                 width: units.gu(2)
                 height: units.gu(2)
-                color: UbuntuColors.warmGrey
+                color: postitemroot.likes === true ? UbuntuColors.orange : UbuntuColors.warmGrey
 
                 MouseArea {
                     anchors.fill: parent
@@ -93,7 +93,7 @@ Item {
                 source: Qt.resolvedUrl("../images/downvote.png")
                 width: units.gu(2)
                 height: units.gu(2)
-                color: UbuntuColors.warmGrey
+                color: postitemroot.likes === false ? UbuntuColors.blue : UbuntuColors.warmGrey
 
                 MouseArea {
                     anchors.fill: parent
