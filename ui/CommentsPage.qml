@@ -28,9 +28,20 @@ Page {
         wrapMode: Text.WordWrap
     }
 
-    Component.onCompleted: {
-        console.log('Loading comments page for post: '+postObj.data.id)
-    }
+    head.actions: [
+        Action {
+            id: replyAction
+            text: "Reply"
+            iconName: "new-message"
+            enabled: uReadIt.qreddit.notifier.isLoggedIn
+            onTriggered: {
+                var postReplyObj = new QReddit.PostObj(uReadIt.qreddit, postObj)
+                mainStack.push(Qt.resolvedUrl("PostMessagePage.qml"), {'replyToObj': postReplyObj})
+            }
+        }
+
+    ]
+
 
     ListView {
         id: commentsList
@@ -77,6 +88,15 @@ Page {
                     commentItem.likes = model.data.likes = commentObj.data.likes;
                     commentItem.score = model.data.score = commentObj.data.score;
                 });
-            }}
+            }
+
+            onReplyClicked: {
+                if (!uReadIt.qreddit.notifier.isLoggedIn) {
+                    console.log("You can't reply when you're not logged in!");
+                    return;
+                }
+                mainStack.push(Qt.resolvedUrl("PostMessagePage.qml"), {'replyToObj': commentObj})
+            }
+        }
     }
 }

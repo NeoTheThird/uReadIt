@@ -1,4 +1,5 @@
 import QtQuick 2.0
+import QtFeedback 5.0
 import Ubuntu.Components 1.1
 import "../utils/Autolinker.js" as AutoLinkText
 
@@ -13,6 +14,16 @@ Rectangle {
     width: parent.width
     height: childrenRect.height
     anchors.horizontalCenter: parent.horizontalCenter
+
+    HapticsEffect {
+        id: pressEffect
+        attackIntensity: 0.0
+        attackTime: 50
+        intensity: 1.0
+        duration: 10
+        fadeTime: 50
+        fadeIntensity: 0.0
+    }
 
     Column {
         id: commentContents
@@ -68,8 +79,10 @@ Rectangle {
                 color: postCommentItem.likes === true ? UbuntuColors.orange : UbuntuColors.warmGrey
 
                 MouseArea {
-                    anchors.fill: parent
-                    onClicked: postCommentItem.parent.upvoteClicked()
+                    anchors.centerIn: parent
+                    height: parent.height * 2
+                    width: parent.width * 2
+                    onClicked: { pressEffect.start(); postCommentItem.parent.upvoteClicked(); }
                 }
             }
             Icon {
@@ -80,20 +93,25 @@ Rectangle {
                 color: postCommentItem.likes === false ? UbuntuColors.blue : UbuntuColors.warmGrey
 
                 MouseArea {
-                    anchors.fill: parent
-                    onClicked: postCommentItem.parent.downvoteClicked()
+                    anchors.centerIn: parent
+                    height: parent.height * 2
+                    width: parent.width * 2
+                    onClicked: { pressEffect.start(); postCommentItem.parent.downvoteClicked(); }
                 }
             }
             Icon {
                 x: 4*(commentContents.width / 4)-(commentContents.width / 8)-(width/2)
-                source: Qt.resolvedUrl('../images/comment_16.png')
+                //source: Qt.resolvedUrl('../images/comment_16.png')
+                name: "new-message"
                 width: units.gu(2)
                 height: units.gu(2.5)
                 color: UbuntuColors.warmGrey
 
                 MouseArea {
-                    anchors.fill: parent
-                    onClicked: postCommentItem.parent.replyClicked()
+                    anchors.centerIn: parent
+                    height: parent.height * 2
+                    width: parent.width * 2
+                    onClicked: { pressEffect.start(); postCommentItem.parent.replyClicked(); }
                 }
             }
         }

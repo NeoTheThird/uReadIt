@@ -36,7 +36,7 @@ Rectangle {
         textFormat: Text.StyledText
 
         text: {
-            return AutoLinkText.Autolinker.link(postObj.data.selftext).replace(/\n/g, "<br>\n")
+            return AutoLinkText.Autolinker.link(postObj.data.selftext || postObj.data.body).replace(/\n/g, "<br>\n")
         }
 
         onLinkActivated: {

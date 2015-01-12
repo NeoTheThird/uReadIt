@@ -29,9 +29,6 @@ Page {
         wrapMode: Text.WordWrap
     }
 
-    Component.onCompleted: {
-        console.log('Loading comments page for post: '+link)
-    }
 
     ListView {
         id: commentsList

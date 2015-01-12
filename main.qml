@@ -25,6 +25,9 @@ MainView {
     // Removes the old toolbar and enables new features of the new header.
     useDeprecatedToolbar: false
 
+    // Make room for the keyboard
+    anchorToKeyboard: true
+
     width: units.gu(100)
     height: units.gu(75)
 

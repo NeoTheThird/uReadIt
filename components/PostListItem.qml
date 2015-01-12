@@ -1,4 +1,5 @@
 import QtQuick 2.0
+import QtFeedback 5.0
 import Ubuntu.Components 1.1
 import Ubuntu.Connectivity 1.0
 
@@ -22,6 +23,15 @@ Item {
     height: (postItemLoader.item) ? postItemLoader.item.height : 0
     width: parent ? parent.width : 0
 
+    HapticsEffect {
+        id: pressEffect
+        attackIntensity: 0.0
+        attackTime: 50
+        intensity: 1.0
+        duration: 10
+        fadeTime: 50
+        fadeIntensity: 0.0
+    }
     Connections {
         target: NetworkingStatus
         // full status can be retrieved from the base C++ class
@@ -53,12 +63,10 @@ Item {
         signal upvoteClicked
         signal downvoteClicked
         signal commentsClicked
-        onClicked: postitemroot.clicked()
-        onUpvoteClicked: postitemroot.upvoteClicked()
-        onDownvoteClicked: postitemroot.downvoteClicked()
-        onCommentsClicked: postitemroot.commentsClicked()
-
-        onOpacityChanged: console.log('Opacity set to '+opacity)
+        onClicked: { pressEffect.start(); postitemroot.clicked(); }
+        onUpvoteClicked: { pressEffect.start(); postitemroot.upvoteClicked(); }
+        onDownvoteClicked: { pressEffect.start(); postitemroot.downvoteClicked(); }
+        onCommentsClicked: { pressEffect.start(); postitemroot.commentsClicked(); }
 
         source: {
             //console.log('Link: '+url)
