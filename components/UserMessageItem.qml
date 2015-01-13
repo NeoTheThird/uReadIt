@@ -31,6 +31,7 @@ Rectangle {
 
     Column {
         id: messageContents
+        anchors.topMargin: units.gu(1)
         anchors.left: parent.left
         anchors.leftMargin: units.gu(1)
         anchors.right: parent.right
