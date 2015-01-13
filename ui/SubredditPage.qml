@@ -55,16 +55,16 @@ Page {
                     iconName: "email"
                     visible: uReadIt.qreddit.notifier.isLoggedIn && !inboxUnreadAction.visible
                     onTriggered: {
-
+                        mainStack.push(Qt.resolvedUrl("UserMessagesPage.qml"), {'where': 'inbox'});
                     }
                 },
                 Action {
                     id: inboxUnreadAction
                     text: "New Unread"
                     iconSource: Qt.resolvedUrl("../images/email-unread.svg")
-                    visible: uReadIt.qreddit.notifier.isLoggedIn && false
+                    visible: uReadIt.qreddit.notifier.isLoggedIn && uReadIt.qreddit.notifier.hasUnreadMessages
                     onTriggered: {
-
+                        mainStack.push(Qt.resolvedUrl("UserMessagesPage.qml"), {'where': 'unread'});
                     }
                 },
                 Action {
@@ -136,6 +136,22 @@ Page {
         }
     ]
 
+    Connections {
+        target: uReadIt.qreddit.notifier
+
+        onActiveUserChanged: {
+            postsList.clear();
+            postsModel.clear();
+            postsModel.load();
+        }
+        onIsLoggedInChanged: {
+            if (uReadIt.qreddit.notifier.isLoggedIn) {
+                var userObj = uReadIt.qreddit.getUserObj(uReadIt.qreddit.getActiveUser());
+                userObj.updateUnread();
+            }
+        }
+    }
+
     MultiColumnListView {
         id: postsList
         anchors.fill: parent
@@ -148,15 +164,6 @@ Page {
 
         balanced: true
 
-        Connections {
-            target: uReadIt.qreddit.notifier
-
-            onActiveUserChanged: {
-                postsList.clear();
-                postsModel.clear();
-                postsModel.load();
-            }
-        }
 
         model: SubredditListModel {
             id: postsModel

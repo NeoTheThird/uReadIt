@@ -88,6 +88,12 @@ var CommentsSort = {
     Random: 'random'
 };
 
+var MessagesSort = {
+    Inbox: 'inbox',
+    Unread: 'unread',
+    Sent: 'sent'
+};
+
 var TimeFilter = {
     Hour: 'hour',
     Day: 'day',
@@ -588,8 +594,53 @@ var MoreObj = function(reddit, thing, link) {
     }
 }
 
+var MessageObj = function(reddit, message) {
 
+    ThingObj.apply(this, arguments);
+
+    this.toString = function() {
+        return "[object MessageObj]"
+    }
+}
 var UserObj = function(reddit, username) {
+
+    this.updateUnread = function() {
+        var connMsgObj = reddit.getAPIConnection("message unread", {'limit': 1});
+        connMsgObj.onConnection.connect(function(response){
+            if (response.data.children.length > 0) {
+                reddit.notifier.hasUnreadMessages = true
+            } else {
+                reddit.notifier.hasUnreadMessages = false
+            }
+        });
+
+    }
+
+    function getMessageObjArray(msgArray) {
+        var msgObjArray = [];
+        for(var i = 0; i < msgArray.length; i++) {
+            msgObjArray.push(new MessageObj(reddit, msgArray[i]));
+        }
+        return msgObjArray;
+    }
+
+    this.getMessageListing = function(where, paramObj) {
+        //Returns a Connection object. Has a response property containing the Messages Array.
+        var apiCommand = "message "+where;
+        paramObj = paramObj || {};
+        paramObj.limit = paramObj.limit || 25;
+
+        var connMsgObj = reddit.getAPIConnection(apiCommand, paramObj);
+        var that = this;
+
+        connMsgObj.onConnection.connect(function(response){
+            var msgObjArray = getMessageObjArray(response.data.children)
+            connMsgObj.response = msgObjArray;
+            connMsgObj.success();
+        });
+
+        return connMsgObj;
+    }
 
     this.toString = function() {
         return "[object UserObject]"
