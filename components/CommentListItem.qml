@@ -16,6 +16,7 @@ Item {
     anchors.leftMargin: units.gu(5)
 
     signal clicked
+    signal linkActivated(var link)
     signal upvoteClicked
     signal downvoteClicked
     signal replyClicked
@@ -31,10 +32,12 @@ Item {
         width: parent.width
 
         signal clicked
+        signal linkActivated(var link)
         signal upvoteClicked
         signal downvoteClicked
         signal replyClicked
         onClicked: commentitemroot.clicked()
+        onLinkActivated: commentitemroot.linkActivated(link)
         onUpvoteClicked: commentitemroot.upvoteClicked()
         onDownvoteClicked: commentitemroot.downvoteClicked()
         onReplyClicked: commentitemroot.replyClicked()

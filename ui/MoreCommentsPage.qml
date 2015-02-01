@@ -19,7 +19,6 @@ Page {
         width: parent ? parent.width : 0
         verticalAlignment: Text.AlignVCenter
 
-        color: "white"
         fontSize: "x-large"
         fontSizeMode: Text.Fit
 
@@ -44,7 +43,8 @@ Page {
         delegate: CommentListItem {
             postObj: commentsPage.postObj
             commentObj: model
-            color: (index % 2 == 0) ? Qt.darker('#262626', 1.5) : '#262626'
+            color: (index % 2 == 0) ? uReadIt.theme.commentBackgroundColorEven : uReadIt.theme.commentBackgroundColorOdd
+            onLinkActivated: uReadIt.openUrl(link);
         }
     }
 }

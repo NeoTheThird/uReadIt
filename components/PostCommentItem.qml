@@ -34,8 +34,9 @@ Rectangle {
             id: name
             anchors.left: parent.left
             anchors.topMargin: units.gu(1)
-            color: Qt.darker(UbuntuColors.warmGrey, 1.5)
+            color: uReadIt.theme.commentFontColor
             fontSize: "small"
+            font.weight: Font.DemiBold
             text: commentObj ? commentObj.data.author : ""
             visible: commentObj ? (commentObj.kind === "t1" || commentObj.kind === "t3") : false
         }
@@ -46,20 +47,17 @@ Rectangle {
             wrapMode: Text.WordWrap
             anchors.left: parent.left
             anchors.right: parent.right
-            color: UbuntuColors.warmGrey
-            linkColor: 'lightblue'
+            color: uReadIt.theme.commentFontColor
+            linkColor: uReadIt.theme.commentLinkColor
             fontSize: "medium"
             textFormat: Text.StyledText
 
             text: AutoLinkText.Autolinker.link(commentObj.data.body).replace(/\n/g, "<br>\n")
 
-            onLinkActivated: {
-                console.log("Link clicked: "+ link)
-                Qt.openUrlExternally(link)
-            }
+            onLinkActivated: { pressEffect.start(); postCommentItem.parent.linkActivated(link); }
         }
 
-        Row {
+        Item {
             id: actionsRow
             anchors.left: commentContents.left
             anchors.right: commentContents.right

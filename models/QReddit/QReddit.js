@@ -442,6 +442,24 @@ var QReddit = function(userAgent, applicationName) {
         //Returns a User Object.
         return new UserObj(this, username || "");
     }
+
+    this.getPostData = function(post_id) {
+        var commentsConnObj = this.getAPIConnection('comments ' + post_id, {'limit':1});
+        commentsConnObj.onConnection.connect(function(response){
+            commentsConnObj.response = response[0].data.children[0].data
+            commentsConnObj.success()
+        });
+        return commentsConnObj
+    }
+
+    this.getCommentData = function(post_id, comment_id) {
+        var commentConnObj = this.getAPIConnection('comments ' + post_id, {'comment':comment_id, 'context':0});
+        commentConnObj.onConnection.connect(function(response){
+            commentConnObj.response = response[1].data.children[0].data
+            commentConnObj.success()
+        });
+        return commentConnObj
+    }
 }
 
 QReddit.prototype = new BaseReddit()

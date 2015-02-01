@@ -18,7 +18,6 @@ Page {
         width: parent.width
         verticalAlignment: Text.AlignVCenter
 
-        color: "white"
         fontSize: "x-large"
         fontSizeMode: Text.Fit
 
@@ -54,15 +53,18 @@ Page {
 
         header:  PostMessageItem {
             postObj: commentsPage.postObj
-            color:'#262626'
+            color: uReadIt.theme.commentBackgroundColorOdd
+            onLinkActivated: uReadIt.openUrl(link);
         }
 
         delegate: CommentListItem {
             postObj: commentsPage.postObj
             commentObj: new QReddit.CommentObj(uReadIt.qreddit, model);
-            color: (index % 2 == 0) ? Qt.darker('#262626', 1.5) : '#262626'
+            color: (index % 2 == 0) ? uReadIt.theme.commentBackgroundColorEven : uReadIt.theme.commentBackgroundColorOdd
             score: model.data.score
             likes: model.data.likes
+
+            onLinkActivated: uReadIt.openUrl(link);
 
             onUpvoteClicked: {
                 if (!uReadIt.qreddit.notifier.isLoggedIn) {

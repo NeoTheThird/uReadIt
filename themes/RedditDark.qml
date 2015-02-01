@@ -1,0 +1,29 @@
+import QtQuick 2.0
+import Ubuntu.Components 1.1
+
+QtObject {
+    // MainView
+    property color backgroundColor: UbuntuColors.coolGrey
+    property color panelColor: Qt.darker('#333333')
+
+    // Base Text
+    property color baseFontColor: UbuntuColors.warmGrey
+    property color baseLinkColor: 'lightblue'
+
+    // Posts
+    property color postItemBackgroundColor: "#222222"
+    property color postItemBorderColor: "#111111"
+    property color postItemFontColor: baseFontColor
+
+    // Comments
+    property color commentBackgroundColorEven: Qt.darker(backgroundColor, 1.2)
+    property color commentBackgroundColorOdd: Qt.darker(backgroundColor, 1.5)
+    property color commentFontColor: baseFontColor
+    property color commentLinkColor: baseLinkColor
+
+    // Messages
+    property color messageBackgroundColor: commentBackgroundColorOdd
+    property color messageFontColor: baseFontColor
+    property color messageLinkColor: baseLinkColor
+}
+

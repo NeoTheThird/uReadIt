@@ -5,11 +5,12 @@
     "hooks": {
         "ureadit": {
             "apparmor": "ureadit.apparmor",
+            "urls": "ureadit.dispatcher",
             "desktop": "ureadit.desktop"
         }
     },
     "maintainer": "Michael Hall <mhall119@ubuntu.com>",
     "name": "com.ubuntu.developer.mhall119.ureadit-dev",
     "title": "uReadIt",
-    "version": "2.4"
+    "version": "2.7"
 }

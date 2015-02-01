@@ -58,6 +58,7 @@ Page {
                 postObj: postMessagePage.replyToObj
                 width: parent.width
                 color: '#262626'
+                onLinkActivated: uReadIt.openUrl(link);
             }
 
             TextArea {

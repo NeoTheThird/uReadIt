@@ -30,9 +30,26 @@ Page {
 
         delegate: UserMessageItem {
             messageObj: new QReddit.MessageObj(uReadIt.qreddit, model);
-            color: (index % 2 == 0) ? Qt.darker('#262626', 1.5) : '#262626'
+            color: (index % 2 == 0) ? uReadIt.theme.commentBackgroundColorEven : uReadIt.theme.commentBackgroundColorOdd
             score: model.data.score
             likes: model.data.likes
+
+            onLinkActivated: uReadIt.openUrl(link);
+            onClicked: {
+                var messageLink = 'http://reddit.com' + messageObj.data.context
+                var contextMatch = messageLink.match(singleCommentUrlRegEx);
+                if (contextMatch) {
+                    var postConn = uReadIt.qreddit.getPostData(contextMatch[2]);
+                    postConn.onSuccess.connect(function() {
+                        console.log('post data: '+postConn.response)
+                        var postObj = new QReddit.PostObj(qreddit, {'data': postConn.response})
+                        console.log('postObj: '+postObj)
+                        console.log('postObj.data.title: '+postObj.data.title)
+                        mainStack.push(Qt.resolvedUrl("./CommentsPage.qml"), {'postObj': postObj});
+                    })
+                }
+                return;
+            }
 
             onUpvoteClicked: {
                 if (!uReadIt.qreddit.notifier.isLoggedIn) {

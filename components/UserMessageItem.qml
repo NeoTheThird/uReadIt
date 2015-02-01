@@ -15,6 +15,7 @@ Rectangle {
     anchors.horizontalCenter: parent.horizontalCenter
 
     signal clicked
+    signal linkActivated(var link)
     signal upvoteClicked
     signal downvoteClicked
     signal replyClicked
@@ -45,6 +46,10 @@ Rectangle {
             font.weight: messageObj.data.new ? Font.Bold : Font.Normal
             text: messageObj && messageObj.data.link_title ? messageObj.data.link_title : ""
             visible: messageObj ? (messageObj.kind === "t1" || messageObj.kind === "t3") : false
+            MouseArea {
+                anchors.fill: parent
+                onClicked: { pressEffect.start(); userMessageItem.clicked(); }
+            }
         }
 
         Label {
@@ -69,11 +74,8 @@ Rectangle {
             textFormat: Text.StyledText
 
             text: AutoLinkText.Autolinker.link(messageObj.data.body).replace(/\n/g, "<br>\n")
+            onLinkActivated: { pressEffect.start(); userMessageItem.linkActivated(link); }
 
-            onLinkActivated: {
-                console.log("Link clicked: "+ link)
-                Qt.openUrlExternally(link)
-            }
         }
 
         Item {

@@ -26,6 +26,9 @@ Project {
         filter: "*.apparmor"
     }
     Files {
+        filter: "*.dispatcher"
+    }
+    Files {
         directory: "."
         paths: ["manifest.json",".excludes"]
     }

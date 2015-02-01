@@ -20,8 +20,9 @@ Rectangle {
         anchors.left: parent.left
         anchors.leftMargin: units.gu(depth+1)
         anchors.verticalCenter: parent.verticalCenter
-        color: 'lightblue'
+        color: uReadIt.theme.commentLinkColor
         fontSize: "medium"
+        font.weight: Font.DemiBold
         textFormat: Text.StyledText
 
         text: commentObj.data.count+' more comments...'

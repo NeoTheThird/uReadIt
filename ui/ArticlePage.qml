@@ -17,7 +17,6 @@ Page {
         width: parent.width
         verticalAlignment: Text.AlignVCenter
 
-        color: "white"
         fontSize: "x-large"
         fontSizeMode: Text.Fit
 

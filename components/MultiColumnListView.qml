@@ -2,7 +2,7 @@ import QtQuick 2.0
 
 Flickable {
     id: display
-    contentWidth: parent.width
+    contentWidth: parent.width - (anchors.margins*2)
     contentHeight: contentItem.childrenRect.height
 
     // List model that feeds the view

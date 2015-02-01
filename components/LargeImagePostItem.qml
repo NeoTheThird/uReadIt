@@ -18,9 +18,9 @@ Item {
     width: parent.width
 
     Rectangle {
-        color: "#222222"
+        color: uReadIt.theme.postItemBackgroundColor
         anchors.fill: parent
-        border.color: "#111111"
+        border.color: uReadIt.theme.postItemBorderColor
         Label {
             id: titleLabel
             anchors.left: parent.left
@@ -33,7 +33,7 @@ Item {
 
             fontSize: "medium"
             font.weight: Font.DemiBold
-            color: UbuntuColors.warmGrey
+            color: uReadIt.theme.postItemFontColor
 
             maximumLineCount: 3
             elide: Text.ElideRight
@@ -74,14 +74,14 @@ Item {
                 id: scoreLabel
                 text: (postitemroot.score > 0 ? "+" : "")+postitemroot.score
                 x: 1*(parent.width / 4)-(parent.width / 8)-(width/2)
-                color: score > 100 ? "#55AA55" : score > 10 ? "#5555AA" : UbuntuColors.warmGrey
+                color: score > 100 ? "#55AA55" : score > 10 ? "#5555AA" : uReadIt.theme.postItemFontColor
             }
             Icon {
                 x: 2*(parent.width / 4)-(parent.width / 8)-(width/2)
                 source: Qt.resolvedUrl("../images/upvote.png")
                 width: units.gu(2)
                 height: units.gu(2)
-                color: postitemroot.likes === true ? UbuntuColors.orange : UbuntuColors.warmGrey
+                color: postitemroot.likes === true ? UbuntuColors.orange : uReadIt.theme.postItemFontColor
 
                 MouseArea {
                     anchors.fill: parent
@@ -93,7 +93,7 @@ Item {
                 source: Qt.resolvedUrl("../images/downvote.png")
                 width: units.gu(2)
                 height: units.gu(2)
-                color: postitemroot.likes === false ? UbuntuColors.blue : UbuntuColors.warmGrey
+                color: postitemroot.likes === false ? UbuntuColors.blue : uReadIt.theme.postItemFontColor
 
                 MouseArea {
                     anchors.fill: parent
@@ -105,7 +105,7 @@ Item {
                 source: Qt.resolvedUrl('../images/comment_16.png')
                 width: Math.max(commentCount.width + units.gu(1), units.gu(2))
                 height: units.gu(2.5)
-                color: UbuntuColors.warmGrey
+                color: uReadIt.theme.postItemFontColor
 
                 border {
                     left: 8
@@ -117,7 +117,7 @@ Item {
                 Text {
                     id: commentCount
                     text: postitemroot.comments
-                    color: UbuntuColors.coolGrey
+                    color: uReadIt.theme.postItemBackgroundColor
                     font.pixelSize: parent.height - units.gu(1)
                     anchors.centerIn: parent
                 }
