@@ -1,7 +1,7 @@
 import QtQuick 2.0
 import QtFeedback 5.0
 import Ubuntu.Components 1.1
-import "../utils/Autolinker.js" as AutoLinkText
+import "../utils/RedditLinker.js" as AutoLinkText
 
 Rectangle {
     id: postCommentItem
@@ -65,9 +65,9 @@ Rectangle {
 
             Label {
                 id: scoreLabel
-                text: (commentObj.data.score > 0 ? "+" : "")+commentObj.data.score
+                text: (postCommentItem.score > 0 ? "+" : "")+postCommentItem.score
                 x: 1*(commentContents.width / 4)-(commentContents.width / 8)-(width/2)
-                color: commentObj.data.score > 100 ? "#55AA55" : commentObj.data.score > 10 ? "#5555AA" : UbuntuColors.warmGrey
+                color: postCommentItem.score > 100 ? "#55AA55" : postCommentItem.score > 10 ? "#5555AA" : UbuntuColors.warmGrey
             }
             Icon {
                 x: 2*(commentContents.width / 4)-(commentContents.width / 8)-(width/2)

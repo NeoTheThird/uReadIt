@@ -51,6 +51,25 @@ Page {
                 return;
             }
 
+            onReadStatusClicked: {
+                var messageItem = this;
+                if (messageObj.data.new) {
+                    var readConnObj = messageObj.mark_read();
+                    readConnObj.onSuccess.connect(function(response) {
+                        messageObj.data.new = false;
+                        messageItem.read = true
+                        uReadIt.checkForMessages();
+                    });
+                } else {
+                    var unReadConnObj = messageObj.mark_unread();
+                    unReadConnObj.onSuccess.connect(function(response) {
+                        messageObj.data.new = true;
+                        messageItem.read = false
+                        uReadIt.checkForMessages();
+                    });
+                }
+            }
+
             onUpvoteClicked: {
                 if (!uReadIt.qreddit.notifier.isLoggedIn) {
                     console.log("You can't vote when you're not logged in!");

@@ -19,11 +19,19 @@ Page {
     }
     head.actions: [
         Action {
+            id: quoteAction
+            text: "Quote"
+            iconSource: Qt.resolvedUrl("../images/quote.png")
+            onTriggered: {
+                message.text = "> "+replyToObj.data.body + "\n" + message.text
+                quoteAction.enabled = false;
+            }
+        },
+        Action {
             id: sendAction
             text: "Send"
             iconName: "chevron"
             onTriggered: {
-                // TODO Post message and pop page from mainStack
                 var msgConnObj = replyToObj.comment(message.text);
                 msgConnObj.onSuccess.connect(function(response){
                     mainStack.pop()

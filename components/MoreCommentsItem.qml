@@ -1,6 +1,6 @@
 import QtQuick 2.0
 import Ubuntu.Components 1.1
-import "../utils/Autolinker.js" as AutoLinkText
+import "../utils/RedditLinker.js" as AutoLinkText
 
 Rectangle {
     id: commentListItem

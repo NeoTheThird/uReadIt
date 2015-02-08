@@ -20,14 +20,15 @@ Item {
         color: uReadIt.theme.postItemBackgroundColor
         anchors.fill: parent
         border.color: uReadIt.theme.postItemBorderColor
-        Image {
+        PostImage {
             id: postThumbnail
             anchors.verticalCenter: parent.verticalCenter
             anchors.left: parent.left
             anchors.leftMargin: source == "" ? 0 : units.gu(1)
             height: source == "" ? 0 : units.gu(15)
             width: source == "" ? 0 : units.gu(15)
-            source: postitemroot.thumbnail
+            url: postitemroot.thumbnail
+            thumbnail: postitemroot.thumbnail
 
             MouseArea {
                 anchors.fill: parent

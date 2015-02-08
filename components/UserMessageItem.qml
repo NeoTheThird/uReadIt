@@ -1,7 +1,7 @@
 import QtQuick 2.0
 import QtFeedback 5.0
 import Ubuntu.Components 1.1
-import "../utils/Autolinker.js" as AutoLinkText
+import "../utils/RedditLinker.js" as AutoLinkText
 
 Rectangle {
     id: userMessageItem
@@ -9,6 +9,7 @@ Rectangle {
     color: UbuntuColors.darkGrey
     property string score: parent.score
     property var likes: parent.likes
+    property bool read: !messageObj.data.new
 
     width: parent.width
     height: childrenRect.height
@@ -19,6 +20,7 @@ Rectangle {
     signal upvoteClicked
     signal downvoteClicked
     signal replyClicked
+    signal readStatusClicked
 
     HapticsEffect {
         id: pressEffect
@@ -43,7 +45,7 @@ Rectangle {
             anchors.topMargin: units.gu(1)
             color: 'lightblue'
             fontSize: "medium"
-            font.weight: messageObj.data.new ? Font.Bold : Font.Normal
+            font.weight: userMessageItem.read ? Font.Normal : Font.Bold
             text: messageObj && messageObj.data.link_title ? messageObj.data.link_title : ""
             visible: messageObj ? (messageObj.kind === "t1" || messageObj.kind === "t3") : false
             MouseArea {
@@ -85,7 +87,21 @@ Rectangle {
             height: units.gu(3)
 
             Icon {
-                x: 1*(messageContents.width / 3)-(messageContents.width / 6)-(width/2)
+                x: 1*(messageContents.width / 4)-(messageContents.width / 8)-(width/2)
+                source: Qt.resolvedUrl("../images/email.svg")
+                width: units.gu(2.25)
+                height: units.gu(2)
+                color: userMessageItem.read ? UbuntuColors.warmGrey : UbuntuColors.orange
+
+                MouseArea {
+                    anchors.centerIn: parent
+                    height: parent.height * 2
+                    width: parent.width * 2
+                    onClicked: { pressEffect.start(); readStatusClicked(); }
+                }
+            }
+            Icon {
+                x: 2*(messageContents.width / 4)-(messageContents.width / 8)-(width/2)
                 source: Qt.resolvedUrl("../images/upvote.png")
                 width: units.gu(2)
                 height: units.gu(2)
@@ -99,7 +115,7 @@ Rectangle {
                 }
             }
             Icon {
-                x: 2*(messageContents.width / 3)-(messageContents.width / 6)-(width/2)
+                x: 3*(messageContents.width / 4)-(messageContents.width / 8)-(width/2)
                 source: Qt.resolvedUrl("../images/downvote.png")
                 width: units.gu(2)
                 height: units.gu(2)
@@ -113,7 +129,7 @@ Rectangle {
                 }
             }
             Icon {
-                x: 3*(messageContents.width / 3)-(messageContents.width / 6)-(width/2)
+                x: 4*(messageContents.width / 4)-(messageContents.width / 8)-(width/2)
                 //source: Qt.resolvedUrl('../images/comment_16.png')
                 name: "new-message"
                 width: units.gu(2)

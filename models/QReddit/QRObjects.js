@@ -601,6 +601,22 @@ var MessageObj = function(reddit, message) {
     this.toString = function() {
         return "[object MessageObj]"
     }
+
+    this.mark_read = function() {
+        var markConnObj = reddit.getAPIConnection("read_message", {id: this.data.name});
+        markConnObj.onConnection.connect(function(response){
+           markConnObj.success();
+        });
+        return markConnObj;
+    }
+
+    this.mark_unread = function() {
+        var markConnObj = reddit.getAPIConnection("unread_message", {id: this.data.name});
+        markConnObj.onConnection.connect(function(response){
+           markConnObj.success();
+        });
+        return markConnObj;
+    }
 }
 var UserObj = function(reddit, username) {
 

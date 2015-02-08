@@ -7,6 +7,7 @@ ListModel {
     property string subreddit
     property string filter
 
+    property bool autoLoad: true
     property bool loaded
     signal loadFinished
 
@@ -26,7 +27,7 @@ ListModel {
         load();
     }
 
-    Component.onCompleted: load()
+    Component.onCompleted: if (autoLoad) { load(); }
 
     function load() {
         var connObj = subredditObj.getPostsListing(filter, {})

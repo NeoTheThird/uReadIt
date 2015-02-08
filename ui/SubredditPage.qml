@@ -101,7 +101,7 @@ Page {
         anchors.left: parent.left
         height: units.gu(2)
 
-        property real loadMoreLength: units.gu(10)
+        property real loadMoreLength: units.gu(0)
         property real overflow: 0
         property variant spaceRect: null
 

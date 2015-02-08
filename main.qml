@@ -63,8 +63,8 @@ MainView {
                 }
             })
         } else {
-
             mainStack.push(frontpage);
+            frontpage.reload();
             console.log('args.values: '+args.values)
             console.log('args.values.url: '+args.values.url)
             if (args.values.url) {
@@ -83,6 +83,7 @@ MainView {
         subreddit: ''
         StateSaver.properties: "subreddit"
         visible: false
+        autoLoad: false
     }
 
     function checkForMessages() {
@@ -124,7 +125,7 @@ MainView {
         }
     }
 
-    readonly property var baseRedditUrlRegEx: /https?:\/\/(?:www\.)?reddit\.com\//
+    readonly property var baseRedditUrlRegEx: /https?:\/\/(?:www\.)?reddit\.com\/r\//
     readonly property var subredditThreadUrlRegEx: /https?:\/\/(?:www\.)?reddit\.com\/r\/(\w+)\/?/
     readonly property var commentThreadUrlRegEx:   /https?:\/\/(?:www\.)?reddit\.com\/r\/(\w+)\/comments\/(\w+)\/(\w+)\/?/
     readonly property var singleCommentUrlRegEx:   /https?:\/\/(?:www\.)?reddit\.com\/r\/(\w+)\/comments\/(\w+)\/(\w+)\/(\w+)\/?/

@@ -1,13 +1,12 @@
 import QtQuick 2.0
 import Ubuntu.Components 1.1
-import "../utils/Autolinker.js" as AutoLinkText
 
 Item {
     id: commentitemroot
     property var postObj
     property var commentObj
     property color color
-    property string score
+    property string score: commentObj.data.score
     property var likes
 
     width: parent.width
