@@ -155,6 +155,12 @@ Page {
         postsModel.load()
     }
 
+    PullToRefresh {
+        anchors.horizontalCenter: parent.horizontalCenter
+        refreshing: postsList.isLoading
+        onRefresh: reload()
+        target: postsList
+    }
     MultiColumnListView {
         id: postsList
         anchors.fill: parent
@@ -167,7 +173,6 @@ Page {
         colSpacing: units.gu(1)
 
         balanced: true
-
 
         model: SubredditListModel {
             id: postsModel
@@ -260,13 +265,16 @@ Page {
     }
 
     onStateChanged: {
-        if (state == "change_subreddit" && uReadIt.qreddit.notifier.isLoggedIn) {
+        if (state == "change_subreddit" ){//&& uReadIt.qreddit.notifier.isLoggedIn) {
             if (subscriptionsList.model == null ) {
-                console.log('Updating subcription list')
-                var updateConnObj = uReadIt.qreddit.updateSubscribedArray()
-                updateConnObj.onSuccess.connect(function() {
-                    subscriptionsList.model = uReadIt.qreddit.getSubscribedArray()
-                })
+                subscriptionsList.model = uReadIt.qreddit.getSubscribedArray()
+                if (subscriptionsList.model == null ) {
+                    console.log('Updating subcription list')
+                    var updateConnObj = uReadIt.qreddit.updateSubscribedArray()
+                    updateConnObj.onSuccess.connect(function() {
+                        subscriptionsList.model = uReadIt.qreddit.getSubscribedArray()
+                    })
+                }
             }
             subscriptionsPanel.open()
         } else {
@@ -305,7 +313,7 @@ Page {
 
             color: uReadIt.theme.panelColor
 
-            ListView {
+            UbuntuListView {
                 id: subscriptionsList
                 anchors.fill: parent
 
@@ -320,6 +328,17 @@ Page {
                         frontpage.state = "default"
                     }
                 }
+                pullToRefresh {
+                    enabled: true
+                    refreshing: uReadIt.qreddit.notifier.subscribedLoading
+                    onRefresh: {
+                        console.log('Updating subcription list')
+                        var updateConnObj = uReadIt.qreddit.updateSubscribedArray()
+                        updateConnObj.onSuccess.connect(function() {
+                            subscriptionsList.model = uReadIt.qreddit.getSubscribedArray()
+                        })
+                    }
+                }
             }
             Scrollbar {
                 flickableItem: subscriptionsList
@@ -328,5 +347,5 @@ Page {
         }
     }
 
-    flickable: subscriptionsPanel.visible ? subscriptionList : postsList
+    flickable: subscriptionsPanel.visible ? subscriptionsList : postsList
 }
