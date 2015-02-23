@@ -22,6 +22,7 @@ QtObject {
     // MainView
     property color backgroundColor
     property color panelColor
+    property color panelOverlay
 
     // Base Text
     property color baseFontColor

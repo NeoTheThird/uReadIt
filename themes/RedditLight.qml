@@ -5,7 +5,8 @@ import Ubuntu.Components.Themes.Ambiance 0.1
 QtObject {
     // MainView
     property color backgroundColor: '#c0ddf7'
-    property color panelColor: Qt.darker(Theme.palette.normal.background, 1.2)
+    property color panelColor: '#FFFFFF'
+    property color panelOverlay: '#EDEDED'
 
     // Base Text
     property color baseFontColor: '#5d5d5d'

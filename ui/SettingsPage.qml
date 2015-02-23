@@ -46,6 +46,8 @@ Page {
 
         OptionSelector {
             id: previewOptions
+            width: parent.width - units.gu(4)
+            anchors.horizontalCenter: parent.horizontalCenter
             selectedIndex: uReadIt.settings.showPreviews
             model: ListModel {
                 ListElement { value: 0; name: "Don't show images" }
@@ -63,6 +65,8 @@ Page {
 
         OptionSelector {
             id: themeOptions
+            width: parent.width - units.gu(4)
+            anchors.horizontalCenter: parent.horizontalCenter
             selectedIndex: {
                 if (uReadIt.theme.name == "RedditDark.qml") {
                     return 0;

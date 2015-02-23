@@ -131,7 +131,7 @@ Page {
                 placeholderText: "Frontpage"
                 width: parent.width - units.gu(2)
                 text: subreddit
-                visible : frontpage.state == "change_subreddit"
+                visible : frontpage.state === "change_subreddit"
                 inputMethodHints: Qt.ImhNoPredictiveText | Qt.ImhNoAutoUppercase
                 onAccepted: confirmChangeAction.triggered(subredditField)
             }
@@ -280,14 +280,22 @@ Page {
             left: parent.left
             bottom: parent.bottom
         }
-        width: units.gu(30)
+        width: parent.width
         height: parent.height
 
         align: Qt.AlignLeft
         animate: true
+        visible: opened || animating
 
         Rectangle {
             anchors.fill: parent
+            color: Qt.rgba(uReadIt.theme.panelOverlay.r, uReadIt.theme.panelOverlay.g, uReadIt.theme.panelOverlay.b, 0.8)
+            visible: !subscriptionsPanel.animating
+        }
+
+        Rectangle {
+            width: units.gu(30)
+            height: parent.height
             anchors.topMargin: units.gu(10) // Account for the page header
 
             color: uReadIt.theme.panelColor

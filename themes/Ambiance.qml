@@ -6,6 +6,7 @@ QtObject {
     // MainView
     property color backgroundColor: '#EDEDED'
     property color panelColor: Qt.darker(Theme.palette.normal.background, 1.2)
+    property color panelOverlay: '#EDEDED'
 
     // Base Text
     property color baseFontColor: UbuntuColors.darkGrey
