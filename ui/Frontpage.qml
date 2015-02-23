@@ -291,6 +291,11 @@ Page {
             anchors.fill: parent
             color: Qt.rgba(uReadIt.theme.panelOverlay.r, uReadIt.theme.panelOverlay.g, uReadIt.theme.panelOverlay.b, 0.8)
             visible: !subscriptionsPanel.animating
+
+            MouseArea {
+                anchors.fill: parent
+            }
+
         }
 
         Rectangle {
@@ -322,4 +327,6 @@ Page {
             }
         }
     }
+
+    flickable: subscriptionsPanel.visible ? subscriptionList : postsList
 }
