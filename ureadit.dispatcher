@@ -1,0 +1,10 @@
+[
+        {
+                "protocol": "http",
+                "domain-suffix": "reddit.com"
+        },
+        {
+                "protocol": "https",
+                "domain-suffix": "reddit.com"
+        }
+]

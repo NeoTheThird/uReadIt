@@ -13,6 +13,7 @@ QtObject {
     // Posts
     property color postItemBackgroundColor: "#222222"
     property color postItemBorderColor: "#111111"
+    property color postItemHeaderColor: baseFontColor
     property color postItemFontColor: baseFontColor
 
     // Comments
@@ -25,5 +26,9 @@ QtObject {
     property color messageBackgroundColor: commentBackgroundColorOdd
     property color messageFontColor: baseFontColor
     property color messageLinkColor: baseLinkColor
+
+    // Sharing
+    property color shareBackgroundColor: Qt.darker(backgroundColor)
+
 }
 

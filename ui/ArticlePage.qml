@@ -3,6 +3,7 @@ import Ubuntu.Components 1.1
 import Ubuntu.Components.ListItems 1.0
 import Ubuntu.Web 0.2
 import Ubuntu.Content 0.1
+import Ubuntu.DownloadManager 0.1
 import "../components"
 
 Page {
@@ -85,9 +86,17 @@ Page {
                 onTriggered: Qt.openUrlExternally(articleWebView.contextualData.img)
             }
             Action {
-                text: i18n.tr("Share image")
+                text: i18n.tr("Share image link")
                 enabled: articleWebView.contextualData.img.toString() != ""
                 onTriggered: mainStack.push(Qt.resolvedUrl("ShareLinkPage.qml"), {'link': articleWebView.contextualData.img, 'contentType': ContentType.Pictures})
+            }
+            Action {
+                text: i18n.tr("Share image")
+                enabled: articleWebView.contextualData.img.toString() != ""
+                onTriggered: {
+                    console.log('Downloading image: '+articleWebView.contextualData.img)
+                    imageDownloader.download(articleWebView.contextualData.img)
+                }
             }
         }
     }
@@ -103,5 +112,13 @@ Page {
         height: units.gu(2)
     }
 
+    SingleDownload {
+        id: imageDownloader
+        autoStart: true
 
+        onFinished: {
+            console.log('Downloaded to: '+path)
+            mainStack.push(Qt.resolvedUrl("ShareImagePage.qml"), {'link': path, 'contentType': ContentType.Pictures})
+        }
+    }
 }

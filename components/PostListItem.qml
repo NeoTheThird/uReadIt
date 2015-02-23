@@ -70,18 +70,28 @@ Item {
 
         source: {
             //console.log('Link: '+url)
-            if (NetworkingStatus.limitedBandwith) {
-                console.log('Using low-res image to conserve bandwidth')
-                return "SmallImagePostItem.qml";
+            if (uReadIt.settings.showPreviews == uReadIt.settings.previewByConnectivity) {
+                if (NetworkingStatus.limitedBandwith) {
+                    console.log('Using low-res image to conserve bandwidth')
+                    return "SmallImagePostItem.qml";
+                }
             }
 
             var ext = url.substring(url.length - 4)
-            if (thumbnail && (ext == '.gif' || ext == '.jpg')) {
-                return "LargeImagePostItem.qml";
-            } else {
+            if (uReadIt.settings.showPreviews == uReadIt.settings.previewLargeImages) {
+                if (thumbnail && (ext == '.gif' || ext == '.jpg')) {
+                    return "LargeImagePostItem.qml";
+                } else {
+                    return "SmallImagePostItem.qml";
+                }
+            } else if (uReadIt.settings.showPreviews == uReadIt.settings.previewThumbnailsOnly) {
                 return "SmallImagePostItem.qml";
+            } else if (uReadIt.settings.showPreviews == uReadIt.settings.previewNone) {
+                parent.thumbnail = '';
+                return "SmallImagePostItem.qml";
+            } else {
+                //return "SmallImagePostItem.qml";
             }
-
         }
     }
 

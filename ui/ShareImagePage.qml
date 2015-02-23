@@ -6,7 +6,7 @@ import Ubuntu.Content 0.1
 
 Page {
     id: sharePage
-    title: "Share Link to..."
+    title: "Share Image to..."
 
     property string link
     property string title
@@ -23,7 +23,7 @@ Page {
 
     ContentPeerPicker {
         id: sourcePicker
-        contentType: ContentType.Links
+        contentType: ContentType.Pictures
         handler: ContentHandler.Share
 
         showTitle: false

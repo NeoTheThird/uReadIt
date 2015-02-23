@@ -16,7 +16,7 @@ MainView {
     objectName: "mainView"
 
     // Note! applicationName needs to match the "name" field of the click manifest
-    //applicationName: "dev.mhall119.ureadit"
+    //applicationName: "com.ubuntu.developer.mhall119.ureadit"
     applicationName: "com.ubuntu.developer.mhall119.ureadit-dev"
 
     /*
@@ -34,8 +34,9 @@ MainView {
     width: units.gu(100)
     height: units.gu(75)
 
-    property var theme: Themes.RedditDark {
+    property var theme: Themes.ThemeManager {
         id: theme
+        name: settings.themeName
     }
 
     //headerColor: "#333333"
@@ -47,7 +48,13 @@ MainView {
     property var settings: Settings {
         property bool autoLogin: true
         property bool useInternalBrowser: true
-        property string themeName: "RedditDark"
+        property string themeName: "RedditDark.qml"
+
+        readonly property int previewNone: 0
+        readonly property int previewLargeImages: 1
+        readonly property int previewThumbnailsOnly: 2
+        readonly property int previewByConnectivity: 3
+        property int showPreviews: previewLargeImages
     }
 
     Component.onCompleted: {
@@ -192,5 +199,6 @@ MainView {
             }
         }
     }
+
 }
 

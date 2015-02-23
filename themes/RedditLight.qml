@@ -4,21 +4,21 @@ import Ubuntu.Components.Themes.Ambiance 0.1
 
 QtObject {
     // MainView
-    property color backgroundColor: '#EDEDED'
+    property color backgroundColor: '#c0ddf7'
     property color panelColor: Qt.darker(Theme.palette.normal.background, 1.2)
 
     // Base Text
-    property color baseFontColor: UbuntuColors.darkGrey
-    property color baseLinkColor: UbuntuColors.blue
+    property color baseFontColor: '#5d5d5d'
+    property color baseLinkColor: '#5d38ff'
 
     // Posts
     property color postItemBackgroundColor: Qt.lighter(backgroundColor, 1.5)
-    property color postItemBorderColor:  Qt.darker(backgroundColor, 1.2)
-    property color postItemHeaderColor: baseFontColor
+    property color postItemBorderColor:  Qt.darker(backgroundColor, 1.5)
+    property color postItemHeaderColor: baseLinkColor
     property color postItemFontColor: baseFontColor
 
     // Comments
-    property color commentBackgroundColorEven: Qt.lighter(backgroundColor, 1.05)
+    property color commentBackgroundColorEven: Qt.lighter('#EDEDED', 1.05)
     property color commentBackgroundColorOdd: Qt.darker(commentBackgroundColorEven, 1.05)
     property color commentFontColor: baseFontColor
     property color commentLinkColor: baseLinkColor
@@ -29,5 +29,5 @@ QtObject {
     property color messageLinkColor: baseLinkColor
 
     // Sharing
-    property color shareBackgroundColor: Qt.lighter(backgroundColor)
+    property color shareBackgroundColor: commentBackgroundColorEven
 }

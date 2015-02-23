@@ -45,7 +45,7 @@ Item {
 
             fontSize: "medium"
             font.weight: Font.DemiBold
-            color: uReadIt.theme.postItemFontColor
+            color: uReadIt.theme.postItemHeaderColor
 
             maximumLineCount: 3
             elide: Text.ElideRight
