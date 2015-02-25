@@ -11,7 +11,7 @@ Rectangle {
     width: parent.width
     height: childrenRect.height + units.gu(2)
     anchors.horizontalCenter: parent.horizontalCenter
-    color: UbuntuColors.lightGrey
+    color: uReadIt.theme.commentBackgroundColorEven
     anchors.leftMargin: units.gu(5)
 
     HapticsEffect {

@@ -43,7 +43,7 @@ Rectangle {
             id: title
             anchors.left: parent.left
             anchors.topMargin: units.gu(1)
-            color: 'lightblue'
+            color: uReadIt.theme.postItemHeaderColor
             fontSize: "medium"
             font.weight: userMessageItem.read ? Font.Normal : Font.Bold
             text: messageObj && messageObj.data.link_title ? messageObj.data.link_title : ""
@@ -58,7 +58,7 @@ Rectangle {
             id: name
             anchors.left: parent.left
             anchors.topMargin: units.gu(1)
-            color: Qt.darker(UbuntuColors.warmGrey, 1.5)
+            color: uReadIt.theme.postItemFontColor
             fontSize: "small"
             text: messageObj ? messageObj.data.author : ""
             visible: messageObj ? (messageObj.kind === "t1" || messageObj.kind === "t3") : false
@@ -70,8 +70,8 @@ Rectangle {
             wrapMode: Text.WordWrap
             anchors.left: parent.left
             anchors.right: parent.right
-            color: UbuntuColors.warmGrey
-            linkColor: 'lightblue'
+            color: uReadIt.theme.postItemFontColor
+            linkColor: uReadIt.theme.baseLinkColor
             fontSize: "medium"
             textFormat: Text.StyledText
 
@@ -91,7 +91,7 @@ Rectangle {
                 source: Qt.resolvedUrl("../images/email.svg")
                 width: units.gu(2.25)
                 height: units.gu(2)
-                color: userMessageItem.read ? UbuntuColors.warmGrey : UbuntuColors.orange
+                color: userMessageItem.read ? uReadIt.theme.postItemFontColor : UbuntuColors.orange
 
                 MouseArea {
                     anchors.centerIn: parent
@@ -105,7 +105,7 @@ Rectangle {
                 source: Qt.resolvedUrl("../images/upvote.png")
                 width: units.gu(2)
                 height: units.gu(2)
-                color: userMessageItem.likes === true ? UbuntuColors.orange : UbuntuColors.warmGrey
+                color: userMessageItem.likes === true ? UbuntuColors.orange : uReadIt.theme.postItemFontColor
 
                 MouseArea {
                     anchors.centerIn: parent
@@ -119,7 +119,7 @@ Rectangle {
                 source: Qt.resolvedUrl("../images/downvote.png")
                 width: units.gu(2)
                 height: units.gu(2)
-                color: userMessageItem.likes === false ? UbuntuColors.blue : UbuntuColors.warmGrey
+                color: userMessageItem.likes === false ? UbuntuColors.blue : uReadIt.theme.postItemFontColor
 
                 MouseArea {
                     anchors.centerIn: parent
@@ -134,7 +134,7 @@ Rectangle {
                 name: "new-message"
                 width: units.gu(2)
                 height: units.gu(2.5)
-                color: UbuntuColors.warmGrey
+                color: uReadIt.theme.postItemFontColor
 
                 MouseArea {
                     anchors.centerIn: parent

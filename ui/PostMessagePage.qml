@@ -65,7 +65,7 @@ Page {
                 id: replyTo
                 postObj: postMessagePage.replyToObj
                 width: parent.width
-                color: '#262626'
+                color: uReadIt.theme.commentBackgroundColorOdd
                 onLinkActivated: uReadIt.openUrl(link);
             }
 
@@ -75,14 +75,6 @@ Page {
                 height: units.gu(20)
             }
 
-            Button {
-                id: sendButton
-                text: "Send"
-                gradient: UbuntuColors.orangeGradient
-                anchors.right: parent.right
-                visible: false
-                onClicked: sendAction.trigger()
-            }
         }
     }
 }

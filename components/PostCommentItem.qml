@@ -67,14 +67,14 @@ Rectangle {
                 id: scoreLabel
                 text: (postCommentItem.score > 0 ? "+" : "")+postCommentItem.score
                 x: 1*(commentContents.width / 4)-(commentContents.width / 8)-(width/2)
-                color: postCommentItem.score > 100 ? "#55AA55" : postCommentItem.score > 10 ? "#5555AA" : UbuntuColors.warmGrey
+                color: postCommentItem.score > 100 ? "#55AA55" : postCommentItem.score > 10 ? "#5555AA" : uReadIt.theme.commentFontColor
             }
             Icon {
                 x: 2*(commentContents.width / 4)-(commentContents.width / 8)-(width/2)
                 source: Qt.resolvedUrl("../images/upvote.png")
                 width: units.gu(2)
                 height: units.gu(2)
-                color: postCommentItem.likes === true ? UbuntuColors.orange : UbuntuColors.warmGrey
+                color: postCommentItem.likes === true ? UbuntuColors.orange : uReadIt.theme.commentFontColor
 
                 MouseArea {
                     anchors.centerIn: parent
@@ -88,7 +88,7 @@ Rectangle {
                 source: Qt.resolvedUrl("../images/downvote.png")
                 width: units.gu(2)
                 height: units.gu(2)
-                color: postCommentItem.likes === false ? UbuntuColors.blue : UbuntuColors.warmGrey
+                color: postCommentItem.likes === false ? UbuntuColors.blue : uReadIt.theme.commentFontColor
 
                 MouseArea {
                     anchors.centerIn: parent
@@ -103,7 +103,7 @@ Rectangle {
                 name: "new-message"
                 width: units.gu(2)
                 height: units.gu(2.5)
-                color: UbuntuColors.warmGrey
+                color: uReadIt.theme.commentFontColor
 
                 MouseArea {
                     anchors.centerIn: parent
