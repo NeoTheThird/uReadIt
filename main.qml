@@ -34,14 +34,21 @@ MainView {
     width: units.gu(100)
     height: units.gu(75)
 
-    property var theme: Themes.ThemeManager {
-        id: theme
-        name: settings.themeName
+    Themes.ThemeManager {
+        id: themeManager
+        themes: [
+            {name: 'uReadIt (Dark)',   source: Qt.resolvedUrl('themes/RedditDark.qml')},
+            {name: 'Ambiance (Light)', source: Qt.resolvedUrl('themes/Ambiance.qml')},
+            {name: 'Reddit (Blue)',    source: Qt.resolvedUrl('themes/RedditLight.qml')}
+        ]
+        source: settings.themeName
     }
+    property alias theme: themeManager.theme
+    property var themeManager: themeManager
 
-    //headerColor: "#333333"
+    headerColor: theme.backgroundHeaderColor
     backgroundColor: theme.backgroundColor
-    //footerColor: "#555555"
+    footerColor: theme.backgroundFooterColor
 
     property var qreddit: new QReddit.QReddit("uReadIt", "ureadit");
 

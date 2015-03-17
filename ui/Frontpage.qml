@@ -26,6 +26,7 @@ Page {
 
     states: [
         PageHeadState {
+            id: defaultPageState
             name: "default"
 
             head: frontpage.head
@@ -102,6 +103,20 @@ Page {
             ]
         },
         PageHeadState {
+            name: "scrolled"
+
+            head: frontpage.head
+            backAction: Action {
+                id: scrollToTopAction
+                text: "Top"
+                iconName: "up"
+                onTriggered: {
+                    postsList.contentY = frontpage.header.height * -1
+                }
+            }
+            actions: defaultPageState.actions
+        },
+        PageHeadState {
             id: changeState
             name: "change_subreddit"
             head: frontpage.head
@@ -173,6 +188,10 @@ Page {
         colSpacing: units.gu(1)
 
         balanced: true
+
+        Behavior on contentY {
+                SmoothedAnimation { velocity: 5000 }
+        }
 
         model: SubredditListModel {
             id: postsModel
@@ -246,9 +265,19 @@ Page {
         Connections {
             target: postsList
 
-            onContentYChanged: {
+            onAtYBeginningChanged: {
                 var pf = postsList
-                if(pf.atYEnd && !pf.atYBeginning && (pf.contentHeight >= parent.height)) {
+                if (pf.atYBeginning) {
+                    frontpage.state = "default"
+                } else {
+                    frontpage.state = "scrolled"
+                }
+            }
+
+            onAtYEndChanged: {
+                var pf = postsList
+
+                if(pf.atYEnd && !pf.atYBeginning) {
                     moreLoaderItem.overflow = pf.contentY - pf.contentHeight + pf.height
                     if ((moreLoaderItem.overflow > moreLoaderItem.loadMoreLength) && !moreLoaderItem.spaceRect) {
                         moreLoaderItem.spaceRect = Qt.createQmlObject("import QtQuick 2.0; Item{width: 1; height: " + moreLoaderItem.loadMoreLength + "}", frontpage)
@@ -265,7 +294,7 @@ Page {
     }
 
     onStateChanged: {
-        if (state == "change_subreddit" ){//&& uReadIt.qreddit.notifier.isLoggedIn) {
+        if (state == "change_subreddit" && uReadIt.qreddit.notifier.isLoggedIn) {
             if (subscriptionsList.model == null ) {
                 subscriptionsList.model = uReadIt.qreddit.getSubscribedArray()
                 if (subscriptionsList.model == null ) {
@@ -319,6 +348,15 @@ Page {
 
                 model: null
 
+                header: ListItems.Standard {
+                    text: "Frontpage"
+                    onClicked: {
+                        postsList.clear();
+                        subredditField.text = ""
+                        subreddit = ""
+                        frontpage.state = "default"
+                    }
+                }
                 delegate: ListItems.Standard {
                     text: modelData
                     onClicked: {

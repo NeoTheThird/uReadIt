@@ -67,26 +67,16 @@ Page {
             id: themeOptions
             width: parent.width - units.gu(4)
             anchors.horizontalCenter: parent.horizontalCenter
-            selectedIndex: {
-                if (uReadIt.theme.name == "RedditDark.qml") {
-                    return 0;
-                } else if (uReadIt.theme.name == "Ambiance.qml") {
-                    return 1;
-                } else if (uReadIt.theme.name == "RedditLight.qml") {
-                    return 2;
-                }
-            }
 
-            model: ListModel {
-                ListElement { theme: "RedditDark.qml"; name: "uReadIt (Dark)" }
-                ListElement { theme: "Ambiance.qml"; name: "Ambiance (Light)" }
-                ListElement { theme: "RedditLight.qml"; name: "Reddit (Blue)" }
-            }
-            delegate: OptionSelectorDelegate { text: name }
+            selectedIndex: uReadIt.themeManager.currentThemeIndex
+            model: uReadIt.themeManager.themes
+
+            delegate: OptionSelectorDelegate { text: modelData.name }
             onDelegateClicked: {
-                var themeElement = themeOptions.model.get(index)
-                uReadIt.settings.themeName = themeElement.theme
-                uReadIt.theme.name = themeElement.theme
+                var themeElement = uReadIt.themeManager.themes[index]
+                console.log("Changing theme to "+themeElement.name)
+                uReadIt.settings.themeName = themeElement.source
+                uReadIt.themeManager.currentThemeIndex = index
             }
         }
     }

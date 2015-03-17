@@ -4,6 +4,8 @@ import Ubuntu.Components 1.1
 QtObject {
     // MainView
     property color backgroundColor: UbuntuColors.coolGrey
+    property color backgroundHeaderColor: UbuntuColors.coolGrey
+    property color backgroundFooterColor: UbuntuColors.coolGrey
     property color panelColor: Qt.darker('#333333')
     property color panelOverlay: '#000000'
 

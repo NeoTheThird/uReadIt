@@ -4,13 +4,15 @@ import Ubuntu.Components.Themes.Ambiance 0.1
 
 QtObject {
     // MainView
-    property color backgroundColor: '#c0ddf7'
+    property color backgroundColor: '#EDEDED'
+    property color backgroundHeaderColor: '#cee3f8'
+    property color backgroundFooterColor: '#EDEDED'
     property color panelColor: '#FFFFFF'
     property color panelOverlay: '#EDEDED'
 
     // Base Text
     property color baseFontColor: '#5d5d5d'
-    property color baseLinkColor: '#5d38ff'
+    property color baseLinkColor: 'blue'
 
     // Posts
     property color postItemBackgroundColor: Qt.lighter(backgroundColor, 1.5)

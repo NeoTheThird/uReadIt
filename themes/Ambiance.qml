@@ -5,6 +5,8 @@ import Ubuntu.Components.Themes.Ambiance 0.1
 QtObject {
     // MainView
     property color backgroundColor: '#EDEDED'
+    property color backgroundHeaderColor: backgroundColor
+    property color backgroundFooterColor: backgroundColor
     property color panelColor: Qt.darker(Theme.palette.normal.background, 1.2)
     property color panelOverlay: '#EDEDED'
 
