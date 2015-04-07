@@ -14,6 +14,8 @@ ListModel {
     property var redditObj: new QReddit.QReddit("QReddit", "qreddit")
     property var subredditObj: redditObj.getSubredditObj(subreddit)
 
+    property string startAfter: ""
+
     onSubredditChanged: {
         //console.log('Subreddit changed to '+subreddit)
         clear();
@@ -30,7 +32,7 @@ ListModel {
     Component.onCompleted: if (autoLoad) { load(); }
 
     function load() {
-        var connObj = subredditObj.getPostsListing(filter, {})
+        var connObj = subredditObj.getPostsListing(filter, {'after': startAfter})
         connObj.onSuccess.connect(function(response) {
             for (var i = 0; i < connObj.response.length; i++) {
                 var postObj = connObj.response[i];
@@ -39,7 +41,6 @@ ListModel {
 
             loadFinished();
             loaded = true;
-
         });
     }
 
@@ -48,6 +49,7 @@ ListModel {
             return;
         }
 
+        startAfter = subredditObj.data.after
         var moreConnObj = subredditObj.getMoreListing()
         moreConnObj.onSuccess.connect(function(){
             for (var i = 0; i < moreConnObj.response.length; i++) {

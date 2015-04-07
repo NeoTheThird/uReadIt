@@ -95,7 +95,7 @@ MainView {
     Frontpage {
         id: frontpage
         subreddit: ''
-        StateSaver.properties: "subreddit"
+        StateSaver.properties: "subreddit, lastPageAfter"
         visible: false
         autoLoad: false
     }

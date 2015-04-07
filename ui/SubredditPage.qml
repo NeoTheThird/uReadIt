@@ -22,6 +22,30 @@ Page {
         }
     }
 
+    head.contents: Label {
+        LayoutMirroring.enabled: Qt.application.layoutDirection == Qt.RightToLeft
+        visible: frontpage.state === "default"
+        anchors {
+            left: parent.left
+            right: parent.right
+            verticalCenter: parent.verticalCenter
+        }
+        font.weight: Font.Light
+        fontSize: "x-large"
+        //color: styledItem.config.foregroundColor
+        elide: Text.ElideRight
+
+        text: subredditpage.title
+        MouseArea {
+            width: parent.width
+            height: parent.height
+
+            onClicked: {
+                postsList.contentY = frontpage.header.height * -1
+            }
+        }
+    }
+
     MultiColumnListView {
         id: postsList
         anchors.fill: parent
@@ -35,7 +59,9 @@ Page {
 
         balanced: true
 
-
+        Behavior on contentY {
+                SmoothedAnimation { velocity: 25000 }
+        }
         model: SubredditListModel {
             id: postsModel
             redditObj: uReadIt.qreddit

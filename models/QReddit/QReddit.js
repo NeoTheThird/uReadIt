@@ -432,6 +432,15 @@ var QReddit = function(userAgent, applicationName) {
         return isActiveUser;
     }
 
+    this.getDefaultSubreddits = function() {
+        // Returns a connection object which will return the current default subreddits
+        var subsrConnObj = that.getAPIConnection("subreddits_default");
+        subsrConnObj.onConnection.connect(function(response){
+            subsrConnObj.response = response.data.children
+            subsrConnObj.success()
+        });
+        return subsrConnObj;
+    }
 
     this.getSubredditObj = function(srName) {
         //Returns a Subreddit Object. If srName is omitted, the Subreddit Object will correspond to the Reddit Frontpage.

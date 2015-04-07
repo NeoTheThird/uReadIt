@@ -13,14 +13,60 @@ Page {
 
     property alias autoLoad: postsModel.autoLoad
 
+    property alias lastPageAfter: postsModel.startAfter
+
     title: subreddit === "" ? "Frontpage" : "/r/"+subreddit
 
     state: "default"
 
-    head.sections {
+    PageHeadSections {
+        id: defaultStateSections
         model: ["Hot", "New", "Top", "Controversial", "Rising"]
+        selectedIndex: 0
         onSelectedIndexChanged: {
             subredditFilter = head.sections.model[head.sections.selectedIndex].toLowerCase()
+        }
+    }
+
+    PageHeadSections {
+        id: changeSubredditStateSections
+        model: uReadIt.qreddit.notifier.isLoggedIn ? ["Defaults", "Search", "My Subscriptions"] : ["Defaults", "Search"]
+        selectedIndex: uReadIt.qreddit.notifier.isLoggedIn ? 2 : 0
+        property var subreddit_sources: ["subreddits_default", "subreddits_search", "subreddits_mine subscriber"]
+        onSelectedIndexChanged: {
+            subredditsList.subredditSource = subreddit_sources[selectedIndex]
+        }
+    }
+
+    head.sections {
+        model: defaultStateSections.model
+        selectedIndex: defaultStateSections.selectedIndex
+        onSelectedIndexChanged: {
+            if (frontpage.state === "default") {
+                defaultStateSections.selectedIndex = head.sections.selectedIndex
+            } else if (frontpage.state === "change_subreddit") {
+                changeSubredditStateSections.selectedIndex = head.sections.selectedIndex
+            }
+        }
+    }
+
+    onStateChanged: {
+        if (state === "default") {
+            frontpage.head.sections.model = defaultStateSections.model
+            frontpage.head.sections.selectedIndex = defaultStateSections.selectedIndex
+        } else if (state === "change_subreddit") {
+            frontpage.head.sections.model = changeSubredditStateSections.model
+            frontpage.head.sections.selectedIndex = changeSubredditStateSections.selectedIndex
+        }
+
+        if (state == "change_subreddit") {
+            if (subredditsList.subredditSource === "" || !uReadIt.qreddit.notifier.isLoggedIn) {
+                subredditsList.subredditSource = uReadIt.qreddit.notifier.isLoggedIn ? "subreddits_mine subscriber" : "subreddits_default"
+            }
+
+            subscriptionsPanel.open()
+        } else {
+            subscriptionsPanel.close()
         }
     }
 
@@ -30,6 +76,31 @@ Page {
             name: "default"
 
             head: frontpage.head
+
+            contents: Label {
+                LayoutMirroring.enabled: Qt.application.layoutDirection == Qt.RightToLeft
+                visible: frontpage.state === "default"
+                anchors {
+                    left: parent.left
+                    right: parent.right
+                    verticalCenter: parent.verticalCenter
+                }
+                font.weight: Font.Light
+                fontSize: "x-large"
+                //color: styledItem.config.foregroundColor
+                elide: Text.ElideRight
+
+                text: frontpage.title
+                MouseArea {
+                    width: parent.width
+                    height: parent.height
+
+                    onClicked: {
+                        postsList.contentY = frontpage.header.height * -1
+                    }
+                }
+            }
+
             backAction: Action {
                 id: subredditAction
                 objectName: "changeSubredditAction"
@@ -103,23 +174,16 @@ Page {
             ]
         },
         PageHeadState {
-            name: "scrolled"
-
-            head: frontpage.head
-            backAction: Action {
-                id: scrollToTopAction
-                text: "Top"
-                iconName: "up"
-                onTriggered: {
-                    postsList.contentY = frontpage.header.height * -1
-                }
-            }
-            actions: defaultPageState.actions
-        },
-        PageHeadState {
             id: changeState
             name: "change_subreddit"
             head: frontpage.head
+//            sections {
+//                model: ["My Subscriptions", "Defaults", "All"]
+//                selectedIndex: 0
+//                onSelectedIndexChanged: {
+//                    console.log("Change subreddit list to: "+selectedIndex)
+//                }
+//            }
             backAction: Action {
                 id: cancelChangeAction
                 text: "back"
@@ -149,6 +213,9 @@ Page {
                 visible : frontpage.state === "change_subreddit"
                 inputMethodHints: Qt.ImhNoPredictiveText | Qt.ImhNoAutoUppercase
                 onAccepted: confirmChangeAction.triggered(subredditField)
+                onTextChanged: {
+                    subredditsList.subredditSearch = text;
+                }
             }
         }
     ]
@@ -158,8 +225,9 @@ Page {
 
         onIsLoggedInChanged: {
             if (postsModel.loaded) {
-                reload();
+                reload()
             }
+            changeSubredditStateSections.selectedIndex = uReadIt.qreddit.notifier.isLoggedIn ? 2 : 0
         }
 
     }
@@ -167,13 +235,19 @@ Page {
     function reload() {
         postsList.clear();
         postsModel.clear();
-        postsModel.load()
+        postsModel.load();
+    }
+
+    function refresh() {
+        console.log("resetting postsModel")
+        postsModel.startAfter = "";
+        reload();
     }
 
     PullToRefresh {
         anchors.horizontalCenter: parent.horizontalCenter
         refreshing: postsList.isLoading
-        onRefresh: reload()
+        onRefresh: frontpage.refresh()
         target: postsList
     }
     MultiColumnListView {
@@ -190,7 +264,7 @@ Page {
         balanced: true
 
         Behavior on contentY {
-                SmoothedAnimation { velocity: 5000 }
+                SmoothedAnimation { velocity: 25000 }
         }
 
         model: SubredditListModel {
@@ -265,19 +339,9 @@ Page {
         Connections {
             target: postsList
 
-            onAtYBeginningChanged: {
-                var pf = postsList
-                if (pf.atYBeginning) {
-                    frontpage.state = "default"
-                } else {
-                    frontpage.state = "scrolled"
-                }
-            }
-
             onAtYEndChanged: {
                 var pf = postsList
-
-                if(pf.atYEnd && !pf.atYBeginning) {
+                if(pf.atYEnd && !pf.atYBeginning && (pf.contentHeight >= parent.height)) {
                     moreLoaderItem.overflow = pf.contentY - pf.contentHeight + pf.height
                     if ((moreLoaderItem.overflow > moreLoaderItem.loadMoreLength) && !moreLoaderItem.spaceRect) {
                         moreLoaderItem.spaceRect = Qt.createQmlObject("import QtQuick 2.0; Item{width: 1; height: " + moreLoaderItem.loadMoreLength + "}", frontpage)
@@ -293,26 +357,10 @@ Page {
 
     }
 
-    onStateChanged: {
-        if (state == "change_subreddit" && uReadIt.qreddit.notifier.isLoggedIn) {
-            if (subscriptionsList.model == null ) {
-                subscriptionsList.model = uReadIt.qreddit.getSubscribedArray()
-                if (subscriptionsList.model == null ) {
-                    console.log('Updating subcription list')
-                    var updateConnObj = uReadIt.qreddit.updateSubscribedArray()
-                    updateConnObj.onSuccess.connect(function() {
-                        subscriptionsList.model = uReadIt.qreddit.getSubscribedArray()
-                    })
-                }
-            }
-            subscriptionsPanel.open()
-        } else {
-            subscriptionsPanel.close()
-        }
-    }
 
     Panel {
         id: subscriptionsPanel
+        property int sectionIndex: 0
         anchors {
             left: parent.left
             bottom: parent.bottom
@@ -343,47 +391,62 @@ Page {
             color: uReadIt.theme.panelColor
 
             UbuntuListView {
-                id: subscriptionsList
+                id: subredditsList
                 anchors.fill: parent
-
-                model: null
+                property string subredditSource: ""
+                property string subredditSearch: subredditField.text
 
                 header: ListItems.Standard {
-                    text: "Frontpage"
+                    text: subredditsList.subredditSource == "subreddits_search" ? subredditsList.subredditSearch : (subredditsList.subredditSource == "subreddits_mine subscriber" ? "Frontpage" : "All")
                     onClicked: {
                         postsList.clear();
-                        subredditField.text = ""
-                        subreddit = ""
+                        subredditField.text = subredditsList.subredditSource == "subreddits_search" ? subredditsList.subredditSearch : (subredditsList.subredditSource == "subreddits_mine subscriber" ? "" : "All")
+                        subreddit = subredditsList.subredditSource == "subreddits_search" ? subredditsList.subredditSearch : (subredditsList.subredditSource == "subreddits_mine subscriber" ? "" : "All")
                         frontpage.state = "default"
                     }
                 }
+
+                model: null
+                onSubredditSourceChanged: {
+                    subredditsList.model = null
+                    if (subredditsList.subredditSource == "subreddits_search") {
+                        var subsrConnObj = uReadIt.qreddit.getAPIConnection(subredditsList.subredditSource, {q: subredditsList.subredditSearch});
+                        subsrConnObj.onConnection.connect(function(response){
+                            subredditsList.model = response.data.children
+                        });
+                    } else {
+                        var subsrConnObj = uReadIt.qreddit.getAPIConnection(subredditsList.subredditSource);
+                        subsrConnObj.onConnection.connect(function(response){
+                            subredditsList.model = response.data.children
+                        });
+                    }
+                }
+                onSubredditSearchChanged: {
+                    if (subredditsList.subredditSource == "subreddits_search") {
+                        var subsrConnObj = uReadIt.qreddit.getAPIConnection(subredditsList.subredditSource, {q: subredditsList.subredditSearch});
+                        subsrConnObj.onConnection.connect(function(response){
+                            subredditsList.model = response.data.children
+                        });
+                    }
+                }
+
                 delegate: ListItems.Standard {
-                    text: modelData
+                    text: modelData.data['display_name']
                     onClicked: {
                         postsList.clear();
-                        subredditField.text = modelData
-                        subreddit = modelData
+                        subredditField.text = subredditsList.subredditSource == "subreddits_search" ? subredditsList.subredditSearch : modelData.data['display_name']
+                        subreddit = modelData.data['display_name']
                         frontpage.state = "default"
-                    }
-                }
-                pullToRefresh {
-                    enabled: true
-                    refreshing: uReadIt.qreddit.notifier.subscribedLoading
-                    onRefresh: {
-                        console.log('Updating subcription list')
-                        var updateConnObj = uReadIt.qreddit.updateSubscribedArray()
-                        updateConnObj.onSuccess.connect(function() {
-                            subscriptionsList.model = uReadIt.qreddit.getSubscribedArray()
-                        })
                     }
                 }
             }
             Scrollbar {
-                flickableItem: subscriptionsList
+                flickableItem: subredditsList
                 align: Qt.AlignTrailing
             }
         }
     }
 
-    flickable: subscriptionsPanel.visible ? subscriptionsList : postsList
+    flickable: subscriptionsPanel.visible ? subredditsList : postsList
+
 }
