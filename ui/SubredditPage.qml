@@ -151,5 +151,7 @@ Page {
         }
 
     }
+    flickable: uReadIt.height < units.gu(70) ? postsList : null
+    clip: true
 
 }

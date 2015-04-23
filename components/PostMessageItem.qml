@@ -11,7 +11,7 @@ Rectangle {
     width: parent.width
     height: childrenRect.height + units.gu(2)
     anchors.horizontalCenter: parent.horizontalCenter
-    color: uReadIt.theme.commentBackgroundColorEven
+    color: uReadIt.currentTheme.commentBackgroundColorEven
     anchors.leftMargin: units.gu(5)
 
     HapticsEffect {
@@ -30,7 +30,7 @@ Rectangle {
         anchors.leftMargin: units.gu(1)
         anchors.top: parent.top
         anchors.topMargin: units.gu(1)
-        color: uReadIt.theme.messageFontColor
+        color: uReadIt.currentTheme.messageFontColor
         fontSize: "small"
         font.weight: Font.DemiBold
         text: postObj.data.author
@@ -43,8 +43,8 @@ Rectangle {
         anchors.left: parent.left
         anchors.leftMargin: units.gu(1)
         anchors.top: name.bottom
-        color: uReadIt.theme.messageFontColor
-        linkColor: uReadIt.theme.messageLinkColor
+        color: uReadIt.currentTheme.messageFontColor
+        linkColor: uReadIt.currentTheme.messageLinkColor
         fontSize: "medium"
         textFormat: Text.StyledText
 

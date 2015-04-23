@@ -34,7 +34,7 @@ Rectangle {
             id: name
             anchors.left: parent.left
             anchors.topMargin: units.gu(1)
-            color: uReadIt.theme.commentFontColor
+            color: uReadIt.currentTheme.commentFontColor
             fontSize: "small"
             font.weight: Font.DemiBold
             text: commentObj ? commentObj.data.author : ""
@@ -47,8 +47,8 @@ Rectangle {
             wrapMode: Text.WordWrap
             anchors.left: parent.left
             anchors.right: parent.right
-            color: uReadIt.theme.commentFontColor
-            linkColor: uReadIt.theme.commentLinkColor
+            color: uReadIt.currentTheme.commentFontColor
+            linkColor: uReadIt.currentTheme.commentLinkColor
             fontSize: "medium"
             textFormat: Text.StyledText
 
@@ -67,14 +67,14 @@ Rectangle {
                 id: scoreLabel
                 text: (postCommentItem.score > 0 ? "+" : "")+postCommentItem.score
                 x: 1*(commentContents.width / 4)-(commentContents.width / 8)-(width/2)
-                color: postCommentItem.score > 100 ? "#55AA55" : postCommentItem.score > 10 ? "#5555AA" : uReadIt.theme.commentFontColor
+                color: postCommentItem.score > 100 ? "#55AA55" : postCommentItem.score > 10 ? "#5555AA" : uReadIt.currentTheme.commentFontColor
             }
             Icon {
                 x: 2*(commentContents.width / 4)-(commentContents.width / 8)-(width/2)
                 source: Qt.resolvedUrl("../images/upvote.png")
                 width: units.gu(2)
                 height: units.gu(2)
-                color: postCommentItem.likes === true ? UbuntuColors.orange : uReadIt.theme.commentFontColor
+                color: postCommentItem.likes === true ? UbuntuColors.orange : uReadIt.currentTheme.commentFontColor
 
                 MouseArea {
                     anchors.centerIn: parent
@@ -88,7 +88,7 @@ Rectangle {
                 source: Qt.resolvedUrl("../images/downvote.png")
                 width: units.gu(2)
                 height: units.gu(2)
-                color: postCommentItem.likes === false ? UbuntuColors.blue : uReadIt.theme.commentFontColor
+                color: postCommentItem.likes === false ? UbuntuColors.blue : uReadIt.currentTheme.commentFontColor
 
                 MouseArea {
                     anchors.centerIn: parent
@@ -103,7 +103,7 @@ Rectangle {
                 name: "new-message"
                 width: units.gu(2)
                 height: units.gu(2.5)
-                color: uReadIt.theme.commentFontColor
+                color: uReadIt.currentTheme.commentFontColor
 
                 MouseArea {
                     anchors.centerIn: parent

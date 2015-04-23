@@ -1,6 +1,7 @@
 import QtQuick 2.0
 import Ubuntu.Components 1.1
 import Ubuntu.Components.ListItems 1.0 as ListItems
+import Ubuntu.Components.Popups 1.0 as Popups
 import Ubuntu.Content 0.1
 
 
@@ -16,6 +17,15 @@ Page {
     property list<ContentItem> importItems
     property var activeTransfer
 
+    head.actions: [
+        Action {
+            id: showUrlAction
+            iconName: "edit-copy"
+            text: "Copy Link"
+            onTriggered: PopupUtils.open(showLinkComponent)
+        }
+
+    ]
     Component {
         id: itemTemplate
         ContentItem {}
@@ -48,8 +58,8 @@ Page {
 
         Component.onCompleted: {
             // HACK! Hackity hack hack. Bad!
-            sourcePicker.children[0].color = uReadIt.theme.backgroundColor
-            sourcePicker.children[4].color = uReadIt.theme.shareBackgroundColor
+            sourcePicker.children[0].color = uReadIt.currentTheme.backgroundColor
+            sourcePicker.children[4].color = uReadIt.currentTheme.shareBackgroundColor
         }
     }
 
@@ -59,6 +69,22 @@ Page {
         activeTransfer: sharePage.activeTransfer
     }
 
+    Component {
+        id: showLinkComponent
+
+        Popups.Popover {
+            id: showLinkPopover
+
+            TextField {
+                id: url
+                width: parent.width
+                hasClearButton: false
+                readOnly: true
+                text: sharePage.link
+            }
+
+        }
+    }
 
 
 }

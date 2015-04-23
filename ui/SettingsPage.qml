@@ -5,17 +5,17 @@ import Ubuntu.Components.Popups 1.0
 
 Page {
     id: settingsPage
-    title: "Settings"
+    title: i18n.tr("Settings")
 
     Column {
         id: accountsList
         anchors.fill: parent
 
         ListItems.Header {
-            text: "Startup"
+            text: i18n.tr("Startup")
         }
         ListItems.Standard {
-            text: "Login automatically at startup"
+            text: i18n.tr("Login automatically at startup")
             control: Switch {
                 id: autoLoginCheckbox
                 checked: uReadIt.settings.autoLogin
@@ -26,11 +26,11 @@ Page {
         }
 
         ListItems.Header {
-            text: "Internal Browser"
+            text: i18n.tr("Internal Browser")
         }
 
         ListItems.Standard {
-            text: "Open links internally"
+            text: i18n.tr("Open links internally")
             control: Switch {
                 id: useInternalBrowserCheckbox
                 checked: uReadIt.settings.useInternalBrowser
@@ -41,7 +41,7 @@ Page {
         }
 
         ListItems.Header {
-            text: "Image Previews"
+            text: i18n.tr("Image Previews")
         }
 
         OptionSelector {
@@ -50,9 +50,9 @@ Page {
             anchors.horizontalCenter: parent.horizontalCenter
             selectedIndex: uReadIt.settings.showPreviews
             model: ListModel {
-                ListElement { value: 0; name: "Don't show images" }
-                ListElement { value: 1; name: "Show large previews" }
-                ListElement { value: 2; name: "Show thumbnail previews" }
+                ListElement { value: 0; name: i18n.tr("Don't show images") }
+                ListElement { value: 1; name: i18n.tr("Show large previews") }
+                ListElement { value: 2; name: i18n.tr("Show thumbnail previews") }
             }
             delegate: OptionSelectorDelegate { text: name }
             onDelegateClicked: {
@@ -60,7 +60,7 @@ Page {
             }
         }
         ListItems.Header {
-            text: "Theme"
+            text: i18n.tr("Theme")
         }
 
         OptionSelector {
@@ -74,7 +74,6 @@ Page {
             delegate: OptionSelectorDelegate { text: modelData.name }
             onDelegateClicked: {
                 var themeElement = uReadIt.themeManager.themes[index]
-                console.log("Changing theme to "+themeElement.name)
                 uReadIt.settings.themeName = themeElement.source
                 uReadIt.themeManager.currentThemeIndex = index
             }

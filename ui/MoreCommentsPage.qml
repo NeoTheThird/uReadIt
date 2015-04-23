@@ -43,8 +43,10 @@ Page {
         delegate: CommentListItem {
             postObj: commentsPage.postObj
             commentObj: model
-            color: (index % 2 == 0) ? uReadIt.theme.commentBackgroundColorEven : uReadIt.theme.commentBackgroundColorOdd
+            color: (index % 2 == 0) ? uReadIt.currentTheme.commentBackgroundColorEven : uReadIt.currentTheme.commentBackgroundColorOdd
             onLinkActivated: uReadIt.openUrl(link);
         }
     }
+    flickable: uReadIt.height < units.gu(70) ? commentsList : null
+    clip: true
 }

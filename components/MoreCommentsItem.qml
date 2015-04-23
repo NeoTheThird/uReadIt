@@ -20,7 +20,7 @@ Rectangle {
         anchors.left: parent.left
         anchors.leftMargin: units.gu(depth+1)
         anchors.verticalCenter: parent.verticalCenter
-        color: uReadIt.theme.commentLinkColor
+        color: uReadIt.currentTheme.commentLinkColor
         fontSize: "medium"
         font.weight: Font.DemiBold
         textFormat: Text.StyledText

@@ -31,7 +31,9 @@ Page {
             id: sendAction
             text: "Send"
             iconName: "chevron"
+            enabled: message.text != ""
             onTriggered: {
+                Qt.inputMethiod.comit()
                 var msgConnObj = replyToObj.comment(message.text);
                 msgConnObj.onSuccess.connect(function(response){
                     mainStack.pop()
@@ -65,7 +67,7 @@ Page {
                 id: replyTo
                 postObj: postMessagePage.replyToObj
                 width: parent.width
-                color: uReadIt.theme.commentBackgroundColorOdd
+                color: uReadIt.currentTheme.commentBackgroundColorOdd
                 onLinkActivated: uReadIt.openUrl(link);
             }
 

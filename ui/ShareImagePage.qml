@@ -48,8 +48,8 @@ Page {
 
         Component.onCompleted: {
             // HACK! Hackity hack hack. Bad!
-            sourcePicker.children[0].color = uReadIt.theme.backgroundColor
-            sourcePicker.children[4].color = uReadIt.theme.shareBackgroundColor
+            sourcePicker.children[0].color = uReadIt.currentTheme.backgroundColor
+            sourcePicker.children[4].color = uReadIt.currentTheme.shareBackgroundColor
         }
     }
 

@@ -30,7 +30,7 @@ Page {
 
         delegate: UserMessageItem {
             messageObj: new QReddit.MessageObj(uReadIt.qreddit, model);
-            color: (index % 2 == 0) ? uReadIt.theme.commentBackgroundColorEven : uReadIt.theme.commentBackgroundColorOdd
+            color: (index % 2 == 0) ? uReadIt.currentTheme.commentBackgroundColorEven : uReadIt.currentTheme.commentBackgroundColorOdd
             score: model.data.score
             likes: model.data.likes
 
@@ -105,4 +105,6 @@ Page {
             }
         }
     }
+    flickable: uReadIt.height < units.gu(70) ? messagesList : null
+    clip: true
 }

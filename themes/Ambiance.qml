@@ -11,7 +11,7 @@ QtObject {
     property color panelOverlay: '#EDEDED'
 
     // Base Text
-    property color baseFontColor: UbuntuColors.darkGrey
+    property color baseFontColor: Qt.darker(UbuntuColors.darkGrey, 1.2)
     property color baseLinkColor: UbuntuColors.blue
 
     // Posts

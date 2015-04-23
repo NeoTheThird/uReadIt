@@ -37,18 +37,18 @@ MainView {
     Themes.ThemeManager {
         id: themeManager
         themes: [
-            {name: 'uReadIt (Dark)',   source: Qt.resolvedUrl('themes/RedditDark.qml')},
-            {name: 'Ambiance (Light)', source: Qt.resolvedUrl('themes/Ambiance.qml')},
-            {name: 'Reddit (Blue)',    source: Qt.resolvedUrl('themes/RedditLight.qml')}
+            {name: i18n.tr('uReadIt (Dark)'),   source: Qt.resolvedUrl('themes/RedditDark.qml')},
+            {name: i18n.tr('Ambiance (Light)'), source: Qt.resolvedUrl('themes/Ambiance.qml')},
+            {name: i18n.tr('Reddit (Blue)'),    source: Qt.resolvedUrl('themes/RedditLight.qml')}
         ]
         source: settings.themeName
     }
-    property alias theme: themeManager.theme
+    property alias currentTheme: themeManager.theme
     property var themeManager: themeManager
 
-    headerColor: theme.backgroundHeaderColor
-    backgroundColor: theme.backgroundColor
-    footerColor: theme.backgroundFooterColor
+    headerColor: currentTheme.backgroundHeaderColor
+    backgroundColor: currentTheme.backgroundColor
+    footerColor: currentTheme.backgroundFooterColor
 
     property var qreddit: new QReddit.QReddit("uReadIt", "ureadit");
 
@@ -68,10 +68,8 @@ MainView {
         if (settings.autoLogin && qreddit.notifier.activeUser != "") {
             var connObj = qreddit.loginActiveUser();
             connObj.onSuccess.connect(function() {
-                frontpage.reload();
                 mainStack.push(frontpage);
-                console.log('args.values: '+args.values)
-                console.log('args.values.url: '+args.values.url)
+                frontpage.reload();
                 if (args.values.url) {
                     openRedditUrl(args.values.url)
                 }
@@ -79,8 +77,6 @@ MainView {
         } else {
             mainStack.push(frontpage);
             frontpage.reload();
-            console.log('args.values: '+args.values)
-            console.log('args.values.url: '+args.values.url)
             if (args.values.url) {
                 openRedditUrl(args.values.url)
             }
@@ -90,6 +86,11 @@ MainView {
     PageStack {
         id: mainStack
         anchors.fill: parent
+
+        Keys.onPressed: { if (mainStack.depth > 1 && event.key == Qt.Key_Escape) pop(); }
+        onCurrentPageChanged: {
+            currentPage.forceActiveFocus();
+        }
     }
 
     Frontpage {
@@ -133,7 +134,7 @@ MainView {
 
         Argument {
             name: "url"
-            help: "Link to a Reddit thread"
+            help: i18n.tr("Link to a Reddit thread")
             required: false
             valueNames: ["URL"]
         }
@@ -158,16 +159,12 @@ MainView {
     }
 
     function openRedditUrl(url) {
-        console.log('Open URL: '+url);
 
         var singleCommentMatch = url.match(singleCommentUrlRegEx);
         if (singleCommentMatch) {
-            console.log('Comment Thread match: '+singleCommentMatch[2]);
             var commentConn = qreddit.getCommentData(singleCommentMatch[2], singleCommentMatch[4]);
             commentConn .onSuccess.connect(function() {
-                console.log('comment data: '+commentConn .response)
                 var commentObj = new QReddit.CommentObj(qreddit, {'data': commentConn.response})
-                console.log('commentObj: '+commentObj)
                 mainStack.push(Qt.resolvedUrl("./ui/PostMessagePage.qml"), {'replyToObj': commentObj});
             })
             return;
@@ -175,13 +172,9 @@ MainView {
 
         var commentThreadMatch = url.match(commentThreadUrlRegEx);
         if (commentThreadMatch) {
-            console.log('Comment Thread match: '+commentThreadMatch[2]);
             var postConn = qreddit.getPostData(commentThreadMatch[2]);
             postConn.onSuccess.connect(function() {
-                console.log('post data: '+postConn.response)
                 var postObj = new QReddit.PostObj(qreddit, {'data': postConn.response})
-                console.log('postObj: '+postObj)
-                console.log('postObj.data.title: '+postObj.data.title)
                 mainStack.push(Qt.resolvedUrl("./ui/CommentsPage.qml"), {'postObj': postObj});
             })
             return;
@@ -189,7 +182,6 @@ MainView {
 
         var subredditThreadMatch = url.match(subredditThreadUrlRegEx);
         if (subredditThreadMatch) {
-            console.log('Subreddit match: '+subredditThreadMatch[1]);
             mainStack.push(Qt.resolvedUrl("./ui/SubredditPage.qml"), {'subreddit': subredditThreadMatch[1]});
             return;
         }

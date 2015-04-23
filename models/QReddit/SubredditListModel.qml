@@ -8,7 +8,7 @@ ListModel {
     property string filter
 
     property bool autoLoad: true
-    property bool loaded
+    property bool loaded: false
     signal loadFinished
 
     property var redditObj: new QReddit.QReddit("QReddit", "qreddit")
@@ -19,6 +19,8 @@ ListModel {
     onSubredditChanged: {
         //console.log('Subreddit changed to '+subreddit)
         clear();
+        if (loaded) { startAfter = ""; }
+        loaded = false;
         subredditObj = redditObj.getSubredditObj(subreddit);
         load();
     }
@@ -26,10 +28,12 @@ ListModel {
     onFilterChanged: {
         //console.log('Filter changed to '+filter)
         clear();
+        if (loaded) { startAfter = ""; }
+        loaded = false;
         load();
     }
 
-    Component.onCompleted: if (autoLoad) { load(); }
+    Component.onCompleted: if (autoLoad && !loaded) { load(); }
 
     function load() {
         var connObj = subredditObj.getPostsListing(filter, {'after': startAfter})

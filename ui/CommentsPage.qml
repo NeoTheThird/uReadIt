@@ -41,10 +41,32 @@ Page {
 
     ]
 
+    Keys.onPressed: {
+        if (event.key == Qt.Key_Home) { commentsList.contentY = 0; return; }
 
-    ListView {
+        if (event.key == Qt.Key_PageDown && !commentsList.atYEnd) {
+            var nextY = commentsList.contentY + commentsList.height - units.gu(10);
+            commentsList.contentY = nextY
+            return;
+        }
+        if (event.key == Qt.Key_PageUp && !commentsList.atYBeginning) {
+            var prevY = commentsList.contentY - commentsList.height + units.gu(10);
+            if (prevY < 0) {
+                prevY = 0;
+            }
+            commentsList.contentY = prevY
+            return;
+        }
+
+    }
+
+    UbuntuListView {
         id: commentsList
         anchors.fill: parent
+
+        Behavior on contentY {
+                SmoothedAnimation { duration: 500 }
+        }
 
         model: PostCommentsListModel {
             id: commentsModel
@@ -53,14 +75,14 @@ Page {
 
         header:  PostMessageItem {
             postObj: commentsPage.postObj
-            color: uReadIt.theme.commentBackgroundColorOdd
+            color: uReadIt.currentTheme.commentBackgroundColorOdd
             onLinkActivated: uReadIt.openUrl(link);
         }
 
         delegate: CommentListItem {
             postObj: commentsPage.postObj
             commentObj: new QReddit.CommentObj(uReadIt.qreddit, model);
-            color: (index % 2 == 0) ? uReadIt.theme.commentBackgroundColorEven : uReadIt.theme.commentBackgroundColorOdd
+            color: (index % 2 == 0) ? uReadIt.currentTheme.commentBackgroundColorEven : uReadIt.currentTheme.commentBackgroundColorOdd
             score: model.data.score
             likes: model.data.likes
 
@@ -101,4 +123,7 @@ Page {
             }
         }
     }
+
+    flickable: uReadIt.height < units.gu(70) ? commentsList : null
+    clip: uReadIt.height < units.gu(70) ? false : true
 }
