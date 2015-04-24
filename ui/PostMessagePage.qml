@@ -33,7 +33,7 @@ Page {
             iconName: "chevron"
             enabled: message.text != ""
             onTriggered: {
-                Qt.inputMethiod.comit()
+                Qt.inputMethod.commit();
                 var msgConnObj = replyToObj.comment(message.text);
                 msgConnObj.onSuccess.connect(function(response){
                     mainStack.pop()
