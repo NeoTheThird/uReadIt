@@ -133,15 +133,15 @@ msgstr "Obre els enllaços internament"
 msgid "Image Previews"
 msgstr "Previsualitzacions d'imatges"
 
-#: ui/SettingsPage.qml:53
+#: ui/SettingsPage.qml:52
 msgid "Don't show images"
 msgstr "No mostris les imatges"
 
-#: ui/SettingsPage.qml:54
+#: ui/SettingsPage.qml:52
 msgid "Show large previews"
 msgstr ""
 
-#: ui/SettingsPage.qml:55
+#: ui/SettingsPage.qml:52
 msgid "Show thumbnail previews"
 msgstr ""
 

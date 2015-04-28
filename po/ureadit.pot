@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2015-04-23 11:14+0100\n"
+"POT-Creation-Date: 2015-04-28 17:06-0400\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -17,23 +17,19 @@ msgstr ""
 "Content-Type: text/plain; charset=CHARSET\n"
 "Content-Transfer-Encoding: 8bit\n"
 
-#: ui/ArticlePage.qml:79 ui/InternalBrowserPage.qml:70
+#: ui/InternalBrowserPage.qml:70 ui/ArticlePage.qml:79
 msgid "Open link in browser"
 msgstr ""
 
-#: ui/ArticlePage.qml:84 ui/InternalBrowserPage.qml:75
+#: ui/InternalBrowserPage.qml:75 ui/ArticlePage.qml:84
 msgid "Open image in browser"
 msgstr ""
 
-#: ui/ArticlePage.qml:89
-msgid "Share image link"
-msgstr ""
-
-#: ui/ArticlePage.qml:94 ui/InternalBrowserPage.qml:80
+#: ui/InternalBrowserPage.qml:80 ui/ArticlePage.qml:94
 msgid "Share image"
 msgstr ""
 
-#: main.qml:137
+#: Main.qml:137
 msgid "Link to a Reddit thread"
 msgstr ""
 
@@ -133,18 +129,22 @@ msgstr ""
 msgid "Image Previews"
 msgstr ""
 
-#: ui/SettingsPage.qml:53
+#: ui/SettingsPage.qml:52
 msgid "Don't show images"
 msgstr ""
 
-#: ui/SettingsPage.qml:54
+#: ui/SettingsPage.qml:52
 msgid "Show large previews"
 msgstr ""
 
-#: ui/SettingsPage.qml:55
+#: ui/SettingsPage.qml:52
 msgid "Show thumbnail previews"
 msgstr ""
 
-#: ui/SettingsPage.qml:63
+#: ui/SettingsPage.qml:60
 msgid "Theme"
+msgstr ""
+
+#: ui/ArticlePage.qml:89
+msgid "Share image link"
 msgstr ""

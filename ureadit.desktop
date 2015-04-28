@@ -1,6 +1,6 @@
 [Desktop Entry]
 Name=uReadIt
-Exec=qmlscene $@ main.qml --url=%u
+Exec=qmlscene $@ Main.qml --url=%u
 Icon=images/Reddit-dev.png
 Terminal=false
 Type=Application

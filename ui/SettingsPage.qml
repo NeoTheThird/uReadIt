@@ -49,12 +49,9 @@ Page {
             width: parent.width - units.gu(4)
             anchors.horizontalCenter: parent.horizontalCenter
             selectedIndex: uReadIt.settings.showPreviews
-            model: ListModel {
-                ListElement { value: 0; name: i18n.tr("Don't show images") }
-                ListElement { value: 1; name: i18n.tr("Show large previews") }
-                ListElement { value: 2; name: i18n.tr("Show thumbnail previews") }
-            }
-            delegate: OptionSelectorDelegate { text: name }
+            property var previewTexts: [i18n.tr("Don't show images"), i18n.tr("Show large previews"), i18n.tr("Show thumbnail previews")]
+            model: previewTexts
+            delegate: OptionSelectorDelegate { text: previewOptions.previewTexts[index] }
             onDelegateClicked: {
                 uReadIt.settings.showPreviews = index;
             }
