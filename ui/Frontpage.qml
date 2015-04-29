@@ -513,8 +513,8 @@ Page {
         }
     }
 
-    flickable: uReadIt.height < units.gu(70) ? postsList : null
-    clip: uReadIt.height < units.gu(70) ? false : true
+    flickable: subscriptionsPanel.visible ? subscriptionsList : postsList//uReadIt.height < units.gu(70) ? postsList : null
+    clip: false//uReadIt.height < units.gu(70) ? false : true
 
     ActivityIndicator {
         id: loadingIndicator

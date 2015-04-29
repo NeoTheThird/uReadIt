@@ -20,15 +20,19 @@
 #################################################################
 
 #APP_ID needs to match the "name" field of the click manifest
-APP_ID=ureadit-dev.mhall119
+APP_ID=com.ubuntu.developer.mhall119.ureadit-dev
 
 #provides a way for the IDE to set a specific target folder for the translations
 TRANSLATION_ROOT=.
 
 MO_FILES=$(shell for infile in `find po -name "*.po"`; do basename -s .po $$infile | awk '{print "$(TRANSLATION_ROOT)/share/locale/" $$0 "/LC_MESSAGES/$(APP_ID).mo";}' ; done)
 QMLJS_FILES=$(shell find . -name "*.qml" -o -name "*.js" | grep -v ./tests)
+CURDATE=$(shell date)
 
 all: po/template.pot
+	echo 'var appData = ' > manifest.js
+	cat manifest.json >> manifest.js
+	echo "var releaseDate = '${CURDATE}';" >> manifest.js
 
 autopilot:
 	chmod +x tests/autopilot/run

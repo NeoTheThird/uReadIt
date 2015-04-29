@@ -12,7 +12,7 @@ from testtools.matchers import Equals
 from ubuntuuitoolkit import base
 
 
-PACKAGE_ID = 'ureadit-dev.mhall119'
+PACKAGE_ID = 'com.ubuntu.developer.mhall119.ureadit-dev'
 
 
 def get_path_to_source_root():

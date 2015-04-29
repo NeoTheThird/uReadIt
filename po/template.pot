@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2015-04-28 20:10-0400\n"
+"POT-Creation-Date: 2015-04-29 10:34-0400\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -129,7 +129,7 @@ msgstr ""
 msgid "Users"
 msgstr ""
 
-#: ui/Frontpage.qml:218 ui/AboutPage.qml:7
+#: ui/Frontpage.qml:218 ui/AboutPage.qml:8
 msgid "About"
 msgstr ""
 
@@ -149,19 +149,19 @@ msgstr ""
 msgid "All"
 msgstr ""
 
-#: ui/AboutPage.qml:25
+#: ui/AboutPage.qml:26
 msgid "Name"
 msgstr ""
 
-#: ui/AboutPage.qml:29
+#: ui/AboutPage.qml:30
 msgid "Author"
 msgstr ""
 
-#: ui/AboutPage.qml:33
+#: ui/AboutPage.qml:34
 msgid "Version"
 msgstr ""
 
-#: ui/AboutPage.qml:37
+#: ui/AboutPage.qml:38
 msgid "Released"
 msgstr ""
 

@@ -10,7 +10,7 @@
         }
     },
     "maintainer": "Michael Hall <mhall119@ubuntu.com>",
-    "name": "ureadit-dev.mhall119",
+    "name": "com.ubuntu.developer.mhall119.ureadit-dev",
     "title": "uReadIt",
-    "version": "3.9"
+    "version": "3.9.4"
 }

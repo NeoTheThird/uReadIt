@@ -1,6 +1,7 @@
 import QtQuick 2.0
 import Ubuntu.Components 1.1
 import Ubuntu.Components.ListItems 1.0 as ListItems
+import "../manifest.js" as Manifest
 
 Page {
     id: aboutPage
@@ -23,19 +24,20 @@ Page {
 
         ListItems.SingleValue {
             text: i18n.tr("Name")
-            value: "ureadit-dev"
+            value: Manifest.appData.title
         }
         ListItems.SingleValue {
             text: i18n.tr("Author")
-            value: "Michael Hall (mhall119)"
+            value: Manifest.appData.maintainer
         }
         ListItems.SingleValue {
             text: i18n.tr("Version")
-            value: "3.9"
+            value: Manifest.appData.version
         }
         ListItems.SingleValue {
             text: i18n.tr("Released")
-            value: "2015-04-28"
+            value: Manifest.releaseDate
         }
     }
 }
+

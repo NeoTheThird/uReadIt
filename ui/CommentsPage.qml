@@ -124,8 +124,8 @@ Page {
         }
     }
 
-    flickable: uReadIt.height < units.gu(70) ? commentsList : null
-    clip: uReadIt.height < units.gu(70) ? false : true
+    flickable: commentsList//uReadIt.height < units.gu(70) ? commentsList : null
+    clip: false//uReadIt.height < units.gu(70) ? false : true
 
     ActivityIndicator {
         id: loadingIndicator
