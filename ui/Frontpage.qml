@@ -214,6 +214,14 @@ Page {
                     }
                 },
                 Action {
+                    id: aboutAction
+                    text: i18n.tr("About")
+                    iconName: "help"
+                    onTriggered: {
+                        mainStack.push(Qt.resolvedUrl("AboutPage.qml"));
+                    }
+                },
+                Action {
                     id: logoutAction
                     text: i18n.tr("Logout")
                     iconName: "system-log-out"
@@ -508,4 +516,9 @@ Page {
     flickable: uReadIt.height < units.gu(70) ? postsList : null
     clip: uReadIt.height < units.gu(70) ? false : true
 
+    ActivityIndicator {
+        id: loadingIndicator
+        anchors.centerIn: parent
+        running: postsModel.loading
+    }
 }

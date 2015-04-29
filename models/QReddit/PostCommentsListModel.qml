@@ -6,7 +6,8 @@ ListModel {
 
     property string post
 
-    property bool loaded
+    property bool loaded: false
+    property bool loading
     signal loadFinished
 
     property var redditObj: new QReddit.QReddit("QReddit", "qreddit")
@@ -23,10 +24,13 @@ ListModel {
             console.log('postObj is not defined, aborting comments load')
             return
         }
-
+        loading = true;
         var connObj = postObj.getComments('hot', {})
         connObj.onSuccess.connect(function(response) {
             addComments(connObj.response[1], 0);
+            loading = false;
+            loaded = true;
+            loadFinished();
         });
     }
 

@@ -103,13 +103,14 @@ Page {
 
     ProgressBar {
         id: loadProgressBar
-        anchors.bottom: articleWebView.top
+        anchors.top: articleWebView.top
         anchors.left: parent.left
         anchors.right: parent.right
         minimumValue: 0
         maximumValue: 100
         visible: false
-        height: units.gu(2)
+        height: units.gu(0.5)
+        showProgressPercentage: false
     }
 
     SingleDownload {

@@ -8,6 +8,7 @@ ListModel {
     property string filter
 
     property bool autoLoad: true
+    property bool loading: false
     property bool loaded: false
     signal loadFinished
 
@@ -36,6 +37,7 @@ ListModel {
     Component.onCompleted: if (autoLoad && !loaded) { load(); }
 
     function load() {
+        loading = true;
         var connObj = subredditObj.getPostsListing(filter, {'after': startAfter})
         connObj.onSuccess.connect(function(response) {
             for (var i = 0; i < connObj.response.length; i++) {
@@ -43,8 +45,9 @@ ListModel {
                 subredditListModel.append(postObj);
             }
 
-            loadFinished();
             loaded = true;
+            loading = false;
+            loadFinished();
         });
     }
 
@@ -53,6 +56,7 @@ ListModel {
             return;
         }
 
+        loading = true
         startAfter = subredditObj.data.after
         var moreConnObj = subredditObj.getMoreListing()
         moreConnObj.onSuccess.connect(function(){
@@ -60,6 +64,7 @@ ListModel {
                 var postObj = moreConnObj.response[i];
                 subredditListModel.append(postObj);
             }
+            loading = false
         })
 
     }

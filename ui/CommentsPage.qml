@@ -126,4 +126,10 @@ Page {
 
     flickable: uReadIt.height < units.gu(70) ? commentsList : null
     clip: uReadIt.height < units.gu(70) ? false : true
+
+    ActivityIndicator {
+        id: loadingIndicator
+        anchors.centerIn: parent
+        running: commentsModel.loading
+    }
 }
