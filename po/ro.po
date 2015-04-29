@@ -1,0 +1,150 @@
+# Romanian translation for ureadit
+# Copyright (c) 2015 Rosetta Contributors and Canonical Ltd 2015
+# This file is distributed under the same license as the ureadit package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, 2015.
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: ureadit\n"
+"Report-Msgid-Bugs-To: FULL NAME <EMAIL@ADDRESS>\n"
+"POT-Creation-Date: 2015-04-23 11:14+0100\n"
+"PO-Revision-Date: 2015-04-28 22:00+0000\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language-Team: Romanian <ro@li.org>\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"X-Launchpad-Export-Date: 2015-04-29 05:49+0000\n"
+"X-Generator: Launchpad (build 17453)\n"
+
+#: ui/ArticlePage.qml:79 ui/InternalBrowserPage.qml:70
+msgid "Open link in browser"
+msgstr ""
+
+#: ui/ArticlePage.qml:84 ui/InternalBrowserPage.qml:75
+msgid "Open image in browser"
+msgstr ""
+
+#: ui/ArticlePage.qml:89
+msgid "Share image link"
+msgstr ""
+
+#: ui/ArticlePage.qml:94 ui/InternalBrowserPage.qml:80
+msgid "Share image"
+msgstr ""
+
+#: main.qml:137
+msgid "Link to a Reddit thread"
+msgstr ""
+
+#: ui/Frontpage.qml:18 ui/Frontpage.qml:258 ui/Frontpage.qml:462
+msgid "Frontpage"
+msgstr ""
+
+#: ui/Frontpage.qml:77
+msgid "Hot"
+msgstr ""
+
+#: ui/Frontpage.qml:77
+msgid "New"
+msgstr ""
+
+#: ui/Frontpage.qml:77
+msgid "Top"
+msgstr ""
+
+#: ui/Frontpage.qml:77
+msgid "Controversial"
+msgstr ""
+
+#: ui/Frontpage.qml:77
+msgid "Rising"
+msgstr ""
+
+#: ui/Frontpage.qml:86
+msgid "Subscriptions"
+msgstr ""
+
+#: ui/Frontpage.qml:86
+msgid "Defaults"
+msgstr ""
+
+#: ui/Frontpage.qml:86
+msgid "Search"
+msgstr ""
+
+#: ui/Frontpage.qml:165
+msgid "Subreddit"
+msgstr ""
+
+#: ui/Frontpage.qml:174
+msgid "Login"
+msgstr ""
+
+#: ui/Frontpage.qml:183
+msgid "Inbox"
+msgstr ""
+
+#: ui/Frontpage.qml:192
+msgid "New Unread"
+msgstr ""
+
+#: ui/Frontpage.qml:201
+msgid "Users"
+msgstr ""
+
+#: ui/Frontpage.qml:210 ui/SettingsPage.qml:8
+msgid "Settings"
+msgstr ""
+
+#: ui/Frontpage.qml:218
+msgid "Logout"
+msgstr ""
+
+#: ui/Frontpage.qml:237
+msgid "Back"
+msgstr ""
+
+#: ui/Frontpage.qml:247
+msgid "Confirm"
+msgstr ""
+
+#: ui/Frontpage.qml:464
+msgid "All"
+msgstr ""
+
+#: ui/SettingsPage.qml:15
+msgid "Startup"
+msgstr ""
+
+#: ui/SettingsPage.qml:18
+msgid "Login automatically at startup"
+msgstr ""
+
+#: ui/SettingsPage.qml:29
+msgid "Internal Browser"
+msgstr ""
+
+#: ui/SettingsPage.qml:33
+msgid "Open links internally"
+msgstr ""
+
+#: ui/SettingsPage.qml:44
+msgid "Image Previews"
+msgstr ""
+
+#: ui/SettingsPage.qml:53
+msgid "Don't show images"
+msgstr ""
+
+#: ui/SettingsPage.qml:54
+msgid "Show large previews"
+msgstr ""
+
+#: ui/SettingsPage.qml:55
+msgid "Show thumbnail previews"
+msgstr ""
+
+#: ui/SettingsPage.qml:63
+msgid "Theme"
+msgstr ""
