@@ -1,4 +1,4 @@
-# English (United Kingdom) translation for ureadit
+# Hungarian translation for ureadit
 # Copyright (c) 2015 Rosetta Contributors and Canonical Ltd 2015
 # This file is distributed under the same license as the ureadit package.
 # FIRST AUTHOR <EMAIL@ADDRESS>, 2015.
@@ -8,9 +8,9 @@ msgstr ""
 "Project-Id-Version: ureadit\n"
 "Report-Msgid-Bugs-To: FULL NAME <EMAIL@ADDRESS>\n"
 "POT-Creation-Date: 2015-04-28 17:06-0400\n"
-"PO-Revision-Date: 2015-04-28 22:50+0000\n"
-"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
-"Language-Team: English (United Kingdom) <en_GB@li.org>\n"
+"PO-Revision-Date: 2015-04-29 07:06+0000\n"
+"Last-Translator: Richard Somlói <ricsipontaz@gmail.com>\n"
+"Language-Team: Hungarian <hu@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
@@ -19,132 +19,132 @@ msgstr ""
 
 #: ui/InternalBrowserPage.qml:70 ui/ArticlePage.qml:79
 msgid "Open link in browser"
-msgstr ""
+msgstr "Hivatkozás megnyitása böngészőben"
 
 #: ui/InternalBrowserPage.qml:75 ui/ArticlePage.qml:84
 msgid "Open image in browser"
-msgstr ""
+msgstr "Kép megnyitása böngészőben"
 
 #: ui/InternalBrowserPage.qml:80 ui/ArticlePage.qml:94
 msgid "Share image"
-msgstr ""
+msgstr "Kép megosztása"
 
 #: Main.qml:137
 msgid "Link to a Reddit thread"
-msgstr ""
+msgstr "Hivatkozás a Reddit témára"
 
 #: ui/Frontpage.qml:18 ui/Frontpage.qml:258 ui/Frontpage.qml:462
 msgid "Frontpage"
-msgstr ""
+msgstr "Kezdőlap"
 
 #: ui/Frontpage.qml:77
 msgid "Hot"
-msgstr ""
+msgstr "Friss"
 
 #: ui/Frontpage.qml:77
 msgid "New"
-msgstr ""
+msgstr "Új"
 
 #: ui/Frontpage.qml:77
 msgid "Top"
-msgstr ""
+msgstr "Legjobb"
 
 #: ui/Frontpage.qml:77
 msgid "Controversial"
-msgstr ""
+msgstr "Vitatott"
 
 #: ui/Frontpage.qml:77
 msgid "Rising"
-msgstr ""
+msgstr "Feltörekvő"
 
 #: ui/Frontpage.qml:86
 msgid "Subscriptions"
-msgstr ""
+msgstr "Feliratkozások"
 
 #: ui/Frontpage.qml:86
 msgid "Defaults"
-msgstr ""
+msgstr "Alapértelmezettek"
 
 #: ui/Frontpage.qml:86
 msgid "Search"
-msgstr ""
+msgstr "Keresés"
 
 #: ui/Frontpage.qml:165
 msgid "Subreddit"
-msgstr ""
+msgstr "Subreddit"
 
 #: ui/Frontpage.qml:174
 msgid "Login"
-msgstr ""
+msgstr "Bejelentkezés"
 
 #: ui/Frontpage.qml:183
 msgid "Inbox"
-msgstr ""
+msgstr "Beérkezett üzenetek"
 
 #: ui/Frontpage.qml:192
 msgid "New Unread"
-msgstr ""
+msgstr "Új olvasatlanok"
 
 #: ui/Frontpage.qml:201
 msgid "Users"
-msgstr ""
+msgstr "Felhasználók"
 
 #: ui/Frontpage.qml:210 ui/SettingsPage.qml:8
 msgid "Settings"
-msgstr ""
+msgstr "Beállítások"
 
 #: ui/Frontpage.qml:218
 msgid "Logout"
-msgstr ""
+msgstr "Kilépés"
 
 #: ui/Frontpage.qml:237
 msgid "Back"
-msgstr ""
+msgstr "Vissza"
 
 #: ui/Frontpage.qml:247
 msgid "Confirm"
-msgstr ""
+msgstr "Megerősítés"
 
 #: ui/Frontpage.qml:464
 msgid "All"
-msgstr ""
+msgstr "Összes"
 
 #: ui/SettingsPage.qml:15
 msgid "Startup"
-msgstr ""
+msgstr "Indítás"
 
 #: ui/SettingsPage.qml:18
 msgid "Login automatically at startup"
-msgstr ""
+msgstr "Indításkor jelentkezzen be"
 
 #: ui/SettingsPage.qml:29
 msgid "Internal Browser"
-msgstr ""
+msgstr "Belső böngésző"
 
 #: ui/SettingsPage.qml:33
 msgid "Open links internally"
-msgstr ""
+msgstr "Hivatkozások megnyitása az alkalmazásban"
 
 #: ui/SettingsPage.qml:44
 msgid "Image Previews"
-msgstr ""
+msgstr "Kép előnézetek"
 
 #: ui/SettingsPage.qml:52
 msgid "Don't show images"
-msgstr ""
+msgstr "Ne mutassa a képeket"
 
 #: ui/SettingsPage.qml:52
 msgid "Show large previews"
-msgstr ""
+msgstr "Nagy felbontású előnézetek"
 
 #: ui/SettingsPage.qml:52
 msgid "Show thumbnail previews"
-msgstr ""
+msgstr "Bélyegkép előnézetek"
 
 #: ui/SettingsPage.qml:60
 msgid "Theme"
-msgstr ""
+msgstr "Téma"
 
 #: ui/ArticlePage.qml:89
 msgid "Share image link"
-msgstr ""
+msgstr "Kép címének megosztása"
