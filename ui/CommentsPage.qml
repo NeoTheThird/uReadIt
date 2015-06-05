@@ -45,12 +45,12 @@ Page {
         if (event.key == Qt.Key_Home) { commentsList.contentY = 0; return; }
 
         if (event.key == Qt.Key_PageDown && !commentsList.atYEnd) {
-            var nextY = commentsList.contentY + commentsList.height - units.gu(10);
+            var nextY = commentsList.contentY + (commentsList.height/2);
             commentsList.contentY = nextY
             return;
         }
         if (event.key == Qt.Key_PageUp && !commentsList.atYBeginning) {
-            var prevY = commentsList.contentY - commentsList.height + units.gu(10);
+            var prevY = commentsList.contentY - (commentsList.height/2);
             if (prevY < 0) {
                 prevY = 0;
             }

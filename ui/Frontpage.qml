@@ -22,10 +22,10 @@ Page {
 
     Keys.onPressed: {
         if (event.key == Qt.Key_F5) { refresh(); return; }
-        if (event.key == Qt.Key_Home) { postsList.contentY = 0; return; }
+        if (event.key == Qt.Key_Home) { postsList.contentY = frontpage.clip ? 0 : 0-frontpage.header.height; return; }
 
         if (event.key == Qt.Key_PageDown) {
-            var nextY = postsList.contentY + postsList.height - units.gu(10);
+            var nextY = postsList.contentY + (postsList.height/1.5);
             if (nextY + postsList.height > postsList.contentHeight) {
                 //nextY = postsList.contentHeight - postsList.height + moreLoaderItem.height;
             }
@@ -33,7 +33,7 @@ Page {
             return;
         }
         if (event.key == Qt.Key_PageUp) {
-            var prevY = postsList.contentY - postsList.height + units.gu(10);
+            var prevY = postsList.contentY - (postsList.height/1.5);
             if (prevY < 0) {
                 prevY = 0;
             }
@@ -151,7 +151,7 @@ Page {
                     height: parent.height
 
                     onClicked: {
-                        postsList.contentY = 0;
+                        postsList.contentY = frontpage.clip ? 0 : 0-frontpage.header.height;
                     }
                 }
             }
@@ -513,8 +513,8 @@ Page {
         }
     }
 
-    flickable: subscriptionsPanel.visible ? subscriptionsList : postsList//uReadIt.height < units.gu(70) ? postsList : null
     clip: false//uReadIt.height < units.gu(70) ? false : true
+    flickable: frontpage.clip ? null : (subscriptionsPanel.visible ? subredditsList : postsList)//uReadIt.height < units.gu(70) ? postsList : null
 
     ActivityIndicator {
         id: loadingIndicator
