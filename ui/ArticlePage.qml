@@ -55,21 +55,17 @@ Page {
     ]
     state: 'default'
 
-    readonly property var imgurPageRegEx: /https?:\/\/(?:www\.)?imgur\.com\/(\w+)$/
+    readonly property var imgurRegEx: /https?:\/\/(?:www\.)?imgur\.com\//
     readonly property var imgurGalleryRegEx: /https?:\/\/(?:www\.)?imgur\.com\/gallery\//
 
     Component.onCompleted: {
-        var galleryMatch = postObj.data.url.match(imgurGalleryRegEx);
-        if (galleryMatch) {
+        var imgurMatch = postObj.data.url.match(imgurRegEx);
+        if (imgurMatch) {
             articleWebView.context.userAgent = 'Mozilla/5.0 (Windows NT 6.3; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/37.0.2049.0 Safari/537.36'
         }
 
-        var imgurMatch = postObj.data.url.match(imgurPageRegEx);
-        if (imgurMatch) {
-            articleWebView.url = "http://i.imgur.com/"+imgurMatch[1]+".gif"
-        } else {
-            articleWebView.url = postObj.data.url
-        }
+        articleWebView.url = postObj.data.url
+
         articlePage.header.animate=false
         articlePage.header.show();
         articlePage.header.animate=true
@@ -78,8 +74,7 @@ Page {
     WebView {
         id: articleWebView
         anchors.fill: parent
-        //incognito: true
-
+        incognito: true
 
         onLoadingChanged: {
             loadProgressBar.visible = loading

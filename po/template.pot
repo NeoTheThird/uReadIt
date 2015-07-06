@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2015-06-04 22:00-0400\n"
+"POT-Creation-Date: 2015-06-18 22:14-0400\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -17,15 +17,15 @@ msgstr ""
 "Content-Type: text/plain; charset=CHARSET\n"
 "Content-Transfer-Encoding: 8bit\n"
 
-#: ui/InternalBrowserPage.qml:70 ui/ArticlePage.qml:94
+#: ui/InternalBrowserPage.qml:70 ui/ArticlePage.qml:89
 msgid "Open link in browser"
 msgstr ""
 
-#: ui/InternalBrowserPage.qml:75 ui/ArticlePage.qml:99
+#: ui/InternalBrowserPage.qml:75 ui/ArticlePage.qml:94
 msgid "Open image in browser"
 msgstr ""
 
-#: ui/InternalBrowserPage.qml:80 ui/ArticlePage.qml:109
+#: ui/InternalBrowserPage.qml:80 ui/ArticlePage.qml:104
 msgid "Share image"
 msgstr ""
 
@@ -69,7 +69,7 @@ msgstr ""
 msgid "Theme"
 msgstr ""
 
-#: ui/ArticlePage.qml:104
+#: ui/ArticlePage.qml:99
 msgid "Share image link"
 msgstr ""
 
