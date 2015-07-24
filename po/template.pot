@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2015-06-18 22:14-0400\n"
+"POT-Creation-Date: 2015-07-07 22:59-0400\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -29,7 +29,7 @@ msgstr ""
 msgid "Share image"
 msgstr ""
 
-#: ui/SettingsPage.qml:8 ui/Frontpage.qml:210
+#: ui/SettingsPage.qml:8 ui/Frontpage.qml:219
 msgid "Settings"
 msgstr ""
 
@@ -73,7 +73,7 @@ msgstr ""
 msgid "Share image link"
 msgstr ""
 
-#: ui/Frontpage.qml:18 ui/Frontpage.qml:266 ui/Frontpage.qml:470
+#: ui/Frontpage.qml:18 ui/Frontpage.qml:275 ui/Frontpage.qml:479
 msgid "Frontpage"
 msgstr ""
 
@@ -126,26 +126,30 @@ msgid "New Unread"
 msgstr ""
 
 #: ui/Frontpage.qml:201
+msgid "View as Gallery"
+msgstr ""
+
+#: ui/Frontpage.qml:210
 msgid "Users"
 msgstr ""
 
-#: ui/Frontpage.qml:218 ui/AboutPage.qml:8
+#: ui/Frontpage.qml:227 ui/AboutPage.qml:8
 msgid "About"
 msgstr ""
 
-#: ui/Frontpage.qml:226
+#: ui/Frontpage.qml:235
 msgid "Logout"
 msgstr ""
 
-#: ui/Frontpage.qml:245
+#: ui/Frontpage.qml:254
 msgid "Back"
 msgstr ""
 
-#: ui/Frontpage.qml:255
+#: ui/Frontpage.qml:264
 msgid "Confirm"
 msgstr ""
 
-#: ui/Frontpage.qml:472
+#: ui/Frontpage.qml:481
 msgid "All"
 msgstr ""
 

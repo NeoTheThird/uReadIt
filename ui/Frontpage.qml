@@ -197,6 +197,15 @@ Page {
                     }
                 },
                 Action {
+                    id: galleryAction
+                    text: i18n.tr("View as Gallery")
+                    iconName: "stock_image"
+                    visible: subreddit != ""
+                    onTriggered: {
+                        mainStack.push(Qt.resolvedUrl("SubredditGalleryPage.qml"), {'subreddit': subreddit});
+                    }
+                },
+                Action {
                     id: userAction
                     text: i18n.tr("Users")
                     iconName: "contact"
