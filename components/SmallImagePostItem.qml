@@ -3,6 +3,7 @@ import Ubuntu.Components 1.1
 
 Item {
     id: postitemroot
+
     property string title: parent.title
     property string text: parent.text
     property string score: parent.score
@@ -20,6 +21,7 @@ Item {
         color: uReadIt.currentTheme.postItemBackgroundColor
         anchors.fill: parent
         border.color: uReadIt.currentTheme.postItemBorderColor
+
         PostImage {
             id: postThumbnail
             anchors.verticalCenter: parent.verticalCenter
@@ -38,10 +40,14 @@ Item {
 
         Label {
             id: titleLabel
-            anchors.left: postThumbnail.right
-            anchors.leftMargin: units.gu(1)
-            anchors.right: parent.right
-            y: parent.y
+
+            anchors {
+                top: parent.top
+                topMargin: units.gu(1)
+                left: postThumbnail.right
+                leftMargin: units.gu(1)
+                right: parent.right
+            }
 
             fontSize: "medium"
             font.weight: Font.DemiBold
@@ -52,6 +58,7 @@ Item {
             wrapMode: Text.WordWrap
 
             text: postitemroot.title
+
             MouseArea {
                 anchors.fill: parent
                 onClicked: postitemroot.parent.clicked()
@@ -60,10 +67,14 @@ Item {
 
         Label {
             id: authorLabel
-            anchors.left: postThumbnail.right
-            anchors.leftMargin: units.gu(1)
-            anchors.top: titleLabel.bottom
-            anchors.right: domainLabel.left
+
+            anchors {
+                top: titleLabel.bottom
+                topMargin: units.gu(1)
+                left: postThumbnail.right
+                leftMargin: units.gu(1)
+                right: domainLabel.left
+            }
 
             fontSize: "small"
             font.weight: Font.Light
@@ -75,9 +86,13 @@ Item {
 
         Label {
             id: domainLabel
-            anchors.right: parent.right
-            anchors.rightMargin: units.gu(1)
-            anchors.top: titleLabel.bottom
+
+            anchors {
+                right: parent.right
+                rightMargin: units.gu(1)
+                top: titleLabel.bottom
+                topMargin: units.gu(1)
+            }
 
             fontSize: "small"
             font.weight: Font.Light
@@ -87,11 +102,15 @@ Item {
 
         Label {
             id: selfTextLabel
-            anchors.left: postThumbnail.right
-            anchors.leftMargin: units.gu(1)
-            anchors.right: parent.right
-            anchors.top: authorLabel.bottom
-            anchors.bottom: actionsRow.top
+
+            anchors {
+                left: postThumbnail.right
+                leftMargin: units.gu(1)
+                right: parent.right
+                top: authorLabel.bottom
+                topMargin: units.gu(1)
+                bottom: actionsRow.top
+            }
 
             fontSize: "small"
             font.weight: Font.Light

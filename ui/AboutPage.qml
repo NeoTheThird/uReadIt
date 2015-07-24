@@ -7,36 +7,41 @@ Page {
     id: aboutPage
     title: i18n.tr("About")
 
-    Column {
-        id: detailsList
+    Flickable {
         anchors.fill: parent
+        contentHeight: detailsList.height
 
-        UbuntuShape {
-            anchors.horizontalCenter: parent.horizontalCenter
-            height: units.gu(25)
-            width: units.gu(25)
-            radius: "medium"
+        Column {
+            id: detailsList
+            width: parent.width
 
-            image: Image {
-                source: Qt.resolvedUrl("../images/Reddit.png")
+            UbuntuShape {
+                anchors.horizontalCenter: parent.horizontalCenter
+                height: units.gu(25)
+                width: units.gu(25)
+                radius: "medium"
+
+                image: Image {
+                    source: Qt.resolvedUrl("../images/Reddit.png")
+                }
             }
-        }
 
-        ListItems.SingleValue {
-            text: i18n.tr("Name")
-            value: Manifest.appData.title
-        }
-        ListItems.SingleValue {
-            text: i18n.tr("Author")
-            value: Manifest.appData.maintainer
-        }
-        ListItems.SingleValue {
-            text: i18n.tr("Version")
-            value: Manifest.appData.version
-        }
-        ListItems.SingleValue {
-            text: i18n.tr("Released")
-            value: Manifest.releaseDate
+            ListItems.SingleValue {
+                text: i18n.tr("Name")
+                value: Manifest.appData.title
+            }
+            ListItems.SingleValue {
+                text: i18n.tr("Author")
+                value: Manifest.appData.maintainer
+            }
+            ListItems.SingleValue {
+                text: i18n.tr("Version")
+                value: Manifest.appData.version
+            }
+            ListItems.SingleValue {
+                text: i18n.tr("Released")
+                value: Manifest.releaseDate
+            }
         }
     }
 }

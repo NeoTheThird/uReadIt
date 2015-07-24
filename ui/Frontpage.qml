@@ -76,8 +76,9 @@ Page {
         id: defaultStateSections
         model: [i18n.tr("Hot"), i18n.tr("New"), i18n.tr("Top"), i18n.tr("Controversial"), i18n.tr("Rising")]
         selectedIndex: 0
+        property var filters: ["hot", "new", "top", "controversial", "rising"]
         onSelectedIndexChanged: {
-            subredditFilter = head.sections.model[head.sections.selectedIndex].toLowerCase()
+            subredditFilter = filters[head.sections.selectedIndex]
         }
     }
 

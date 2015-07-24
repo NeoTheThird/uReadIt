@@ -17,8 +17,9 @@ Page {
 
     head.sections {
         model: ["Hot", "New", "Top", "Controversial", "Rising"]
+        property var filters: ["hot", "new", "top", "controversial", "rising"]
         onSelectedIndexChanged: {
-            subredditFilter = head.sections.model[head.sections.selectedIndex].toLowerCase()
+            subredditFilter = filters[head.sections.selectedIndex]
         }
     }
 

@@ -5,15 +5,20 @@ import "../utils/RedditLinker.js" as AutoLinkText
 
 Rectangle {
     id: userMessageItem
+
     property var messageObj
-    color: UbuntuColors.darkGrey
     property string score: parent.score
     property var likes: parent.likes
     property bool read: !messageObj.data.new
 
-    width: parent.width
+    color: UbuntuColors.darkGrey
     height: childrenRect.height
-    anchors.horizontalCenter: parent.horizontalCenter
+
+    anchors {
+        left: parent.left
+        right: parent.right
+        margins: units.gu(1)
+    }
 
     signal clicked
     signal linkActivated(var link)
@@ -34,18 +39,23 @@ Rectangle {
 
     Column {
         id: messageContents
-        anchors.topMargin: units.gu(1)
-        anchors.left: parent.left
-        anchors.leftMargin: units.gu(1)
-        anchors.right: parent.right
+
+        anchors {
+            top: parent.top
+            left: parent.left
+            right: parent.right
+            margins: units.gu(1)
+        }
+
         spacing: units.gu(1)
+
         Label {
             id: title
             anchors.left: parent.left
-            anchors.topMargin: units.gu(1)
             color: uReadIt.currentTheme.postItemHeaderColor
-            fontSize: "medium"
+            anchors.right: parent.right
             font.weight: userMessageItem.read ? Font.Normal : Font.Bold
+            wrapMode: Text.WordWrap
             text: messageObj && messageObj.data.link_title ? messageObj.data.link_title : ""
             visible: messageObj ? (messageObj.kind === "t1" || messageObj.kind === "t3") : false
             MouseArea {
@@ -57,7 +67,6 @@ Rectangle {
         Label {
             id: name
             anchors.left: parent.left
-            anchors.topMargin: units.gu(1)
             color: uReadIt.currentTheme.postItemFontColor
             fontSize: "small"
             text: messageObj ? messageObj.data.author : ""
@@ -66,7 +75,7 @@ Rectangle {
 
         Label {
             id: body
-            width: parent.width - units.gu(depth+2)
+            //width: parent.width - units.gu(depth+2)
             wrapMode: Text.WordWrap
             anchors.left: parent.left
             anchors.right: parent.right
@@ -84,7 +93,7 @@ Rectangle {
             id: actionsRow
             anchors.left: messageContents.left
             anchors.right: messageContents.right
-            height: units.gu(3)
+            height: units.gu(5)
 
             Icon {
                 x: 1*(messageContents.width / 4)-(messageContents.width / 8)-(width/2)
@@ -106,6 +115,7 @@ Rectangle {
                 width: units.gu(2)
                 height: units.gu(2)
                 color: userMessageItem.likes === true ? UbuntuColors.orange : uReadIt.currentTheme.postItemFontColor
+                anchors.verticalCenter: parent.verticalCenter
 
                 MouseArea {
                     anchors.centerIn: parent
@@ -120,6 +130,7 @@ Rectangle {
                 width: units.gu(2)
                 height: units.gu(2)
                 color: userMessageItem.likes === false ? UbuntuColors.blue : uReadIt.currentTheme.postItemFontColor
+                anchors.verticalCenter: parent.verticalCenter
 
                 MouseArea {
                     anchors.centerIn: parent
@@ -135,6 +146,7 @@ Rectangle {
                 width: units.gu(2)
                 height: units.gu(2.5)
                 color: uReadIt.currentTheme.postItemFontColor
+                anchors.verticalCenter: parent.verticalCenter
 
                 MouseArea {
                     anchors.centerIn: parent

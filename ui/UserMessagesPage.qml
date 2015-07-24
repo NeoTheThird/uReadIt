@@ -22,6 +22,7 @@ Page {
     ListView {
         id: messagesList
         anchors.fill: parent
+        spacing: units.gu(1)
 
         model: UserMessagesListModel {
             id: commentsModel
