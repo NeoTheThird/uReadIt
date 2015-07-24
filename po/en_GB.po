@@ -8,143 +8,143 @@ msgstr ""
 "Project-Id-Version: ureadit\n"
 "Report-Msgid-Bugs-To: FULL NAME <EMAIL@ADDRESS>\n"
 "POT-Creation-Date: 2015-04-28 17:06-0400\n"
-"PO-Revision-Date: 2015-04-28 22:50+0000\n"
-"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"PO-Revision-Date: 2015-07-14 19:45+0000\n"
+"Last-Translator: James Tait <Unknown>\n"
 "Language-Team: English (United Kingdom) <en_GB@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2015-04-30 05:34+0000\n"
-"X-Generator: Launchpad (build 17453)\n"
+"X-Launchpad-Export-Date: 2015-07-16 05:52+0000\n"
+"X-Generator: Launchpad (build 17628)\n"
 
 #: ui/InternalBrowserPage.qml:70 ui/ArticlePage.qml:79
 msgid "Open link in browser"
-msgstr ""
+msgstr "Open link in browser"
 
 #: ui/InternalBrowserPage.qml:75 ui/ArticlePage.qml:84
 msgid "Open image in browser"
-msgstr ""
+msgstr "Open image in browser"
 
 #: ui/InternalBrowserPage.qml:80 ui/ArticlePage.qml:94
 msgid "Share image"
-msgstr ""
+msgstr "Share image"
 
 #: Main.qml:137
 msgid "Link to a Reddit thread"
-msgstr ""
+msgstr "Link to a Reddit thread"
 
 #: ui/Frontpage.qml:18 ui/Frontpage.qml:258 ui/Frontpage.qml:462
 msgid "Frontpage"
-msgstr ""
+msgstr "Frontpage"
 
 #: ui/Frontpage.qml:77
 msgid "Hot"
-msgstr ""
+msgstr "Hot"
 
 #: ui/Frontpage.qml:77
 msgid "New"
-msgstr ""
+msgstr "New"
 
 #: ui/Frontpage.qml:77
 msgid "Top"
-msgstr ""
+msgstr "Top"
 
 #: ui/Frontpage.qml:77
 msgid "Controversial"
-msgstr ""
+msgstr "Controversial"
 
 #: ui/Frontpage.qml:77
 msgid "Rising"
-msgstr ""
+msgstr "Rising"
 
 #: ui/Frontpage.qml:86
 msgid "Subscriptions"
-msgstr ""
+msgstr "Subscriptions"
 
 #: ui/Frontpage.qml:86
 msgid "Defaults"
-msgstr ""
+msgstr "Defaults"
 
 #: ui/Frontpage.qml:86
 msgid "Search"
-msgstr ""
+msgstr "Search"
 
 #: ui/Frontpage.qml:165
 msgid "Subreddit"
-msgstr ""
+msgstr "Subreddit"
 
 #: ui/Frontpage.qml:174
 msgid "Login"
-msgstr ""
+msgstr "Login"
 
 #: ui/Frontpage.qml:183
 msgid "Inbox"
-msgstr ""
+msgstr "Inbox"
 
 #: ui/Frontpage.qml:192
 msgid "New Unread"
-msgstr ""
+msgstr "New Unread"
 
 #: ui/Frontpage.qml:201
 msgid "Users"
-msgstr ""
+msgstr "Users"
 
 #: ui/Frontpage.qml:210 ui/SettingsPage.qml:8
 msgid "Settings"
-msgstr ""
+msgstr "Settings"
 
 #: ui/Frontpage.qml:218
 msgid "Logout"
-msgstr ""
+msgstr "Logout"
 
 #: ui/Frontpage.qml:237
 msgid "Back"
-msgstr ""
+msgstr "Back"
 
 #: ui/Frontpage.qml:247
 msgid "Confirm"
-msgstr ""
+msgstr "Confirm"
 
 #: ui/Frontpage.qml:464
 msgid "All"
-msgstr ""
+msgstr "All"
 
 #: ui/SettingsPage.qml:15
 msgid "Startup"
-msgstr ""
+msgstr "Startup"
 
 #: ui/SettingsPage.qml:18
 msgid "Login automatically at startup"
-msgstr ""
+msgstr "Login automatically at startup"
 
 #: ui/SettingsPage.qml:29
 msgid "Internal Browser"
-msgstr ""
+msgstr "Internal Browser"
 
 #: ui/SettingsPage.qml:33
 msgid "Open links internally"
-msgstr ""
+msgstr "Open links internally"
 
 #: ui/SettingsPage.qml:44
 msgid "Image Previews"
-msgstr ""
+msgstr "Image Previews"
 
 #: ui/SettingsPage.qml:52
 msgid "Don't show images"
-msgstr ""
+msgstr "Don't show images"
 
 #: ui/SettingsPage.qml:52
 msgid "Show large previews"
-msgstr ""
+msgstr "Show large previews"
 
 #: ui/SettingsPage.qml:52
 msgid "Show thumbnail previews"
-msgstr ""
+msgstr "Show thumbnail previews"
 
 #: ui/SettingsPage.qml:60
 msgid "Theme"
-msgstr ""
+msgstr "Theme"
 
 #: ui/ArticlePage.qml:89
 msgid "Share image link"
-msgstr ""
+msgstr "Share image link"
