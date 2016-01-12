@@ -447,6 +447,11 @@ var QReddit = function(userAgent, applicationName) {
         return srName ? new SubredditObj(this, srName) : new SubredditObj(this);
     }
 
+    this.getMultisObj = function(mName) {
+        //Returns a Multis Object.
+        return new MultisObj(this, mName);
+    }
+
     this.getUserObj = function(username) {
         //Returns a User Object.
         return new UserObj(this, username || "");

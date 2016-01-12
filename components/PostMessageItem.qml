@@ -1,6 +1,6 @@
-import QtQuick 2.0
+import QtQuick 2.4
 import QtFeedback 5.0
-import Ubuntu.Components 1.1
+import Ubuntu.Components 1.3
 import "../utils/RedditLinker.js" as AutoLinkText
 
 Rectangle {

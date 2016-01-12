@@ -1,5 +1,5 @@
-import QtQuick 2.0
-import Ubuntu.Components 1.1
+import QtQuick 2.4
+import Ubuntu.Components 1.3
 import Qt.labs.settings 1.0
 
 import "ui"
@@ -25,9 +25,6 @@ MainView {
     */
     automaticOrientation: true
 
-    // Removes the old toolbar and enables new features of the new header.
-    useDeprecatedToolbar: false
-
     // Make room for the keyboard
     anchorToKeyboard: true
 
@@ -49,6 +46,7 @@ MainView {
     headerColor: currentTheme.backgroundHeaderColor
     backgroundColor: currentTheme.backgroundColor
     footerColor: currentTheme.backgroundFooterColor
+    theme.name: currentTheme.baseThemeName
 
     property var qreddit: new QReddit.QReddit("uReadIt", "ureadit");
 

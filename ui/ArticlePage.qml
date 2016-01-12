@@ -1,8 +1,8 @@
-import QtQuick 2.0
-import Ubuntu.Components 1.1
+import QtQuick 2.4
+import Ubuntu.Components 1.3
 import Ubuntu.Components.ListItems 1.0
 import Ubuntu.Web 0.2
-import Ubuntu.Content 0.1
+import Ubuntu.Content 1.1
 import Ubuntu.DownloadManager 0.1
 import "../components"
 
@@ -21,8 +21,8 @@ Page {
         fontSize: "x-large"
         fontSizeMode: Text.Fit
 
-        maximumLineCount: 3
-        minimumPointSize: 8
+        maximumLineCount: 4
+        minimumPointSize: 6
         elide: Text.Right
         wrapMode: Text.WordWrap
     }

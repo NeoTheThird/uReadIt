@@ -46,6 +46,14 @@ var API = {
     'subreddits_mine': '/subreddits/mine/%s',
     'subreddits_default': '/reddits',
 
+    //*Multis
+    'multi_mine': '/api/multi/mine',
+    'multi_hot': '[/me/m/%s]/hot',
+    'multi_new': '[/me/m/%s]/new',
+    'multi_rising': '[/me/m/%s]/rising',
+    'multi_top': '[/me/m/%s]/top',
+    'multi_controversial': '[/me/m/%s]/controversial',
+
     //*Users
     'friend': '/api/friend',
     'unfriend': '/api/unfriend',
@@ -58,7 +66,7 @@ var SSLPaths = ['login'];
 var GETPaths = ['comments', 'hot', 'new', 'rising', 'random', 'top', 'controversial', 'message', 'search',
                 'subreddit_recommendations', 'subreddits_by_topic', 'subreddit_about', 'subreddits_search',
                 'subreddits_new', 'subreddits_popular', 'subreddits_banned', 'subreddits_mine', 'subreddits_default',
-                'user_about', 'user_where']
+                'user_about', 'user_where', 'multi_mine', 'multi_hot', 'multi_new', 'multi_rising', 'multi_top', 'multi_controversial']
 var GetURL = 'www.reddit.com';
 var PostURL = 'api.reddit.com';
 var SecureURL = 'ssl.reddit.com';
@@ -178,10 +186,10 @@ var BaseReddit = function() {
         if (!paramObj) paramObj = {};
 
         if(GETPaths.indexOf(apiBaseCommand) !== -1) {
-            redditURL = 'http://' + GetURL;
+            redditURL = 'https://' + GetURL;
             method = 'GET';
         } else if(GETPaths.indexOf(apiBaseCommand) === -1) {
-            redditURL = 'http://' + PostURL;
+            redditURL = 'https://' + PostURL;
         }
 
         if(SSLPaths.indexOf(apiBaseCommand) !== -1) {
@@ -313,6 +321,83 @@ var SubredditObj = function (reddit, srName) {
         paramObj.limit = limitNo || paramObj.limit || 25;
         paramObj.after = this.data.after;
 
+        var connMoreObj = reddit.getAPIConnection(this.currentCommand, paramObj);
+        var that = this;
+
+        connMoreObj.onConnection.connect(function(response){
+            var postObjArray = getPostObjArray(response.data.children)
+            that.data.children.push(postObjArray);
+            that.data.after = response.data.after;
+            connMoreObj.response = postObjArray;
+            connMoreObj.success();
+        });
+
+        return connMoreObj;
+    }
+}
+
+var MultisObj = function (reddit, mName) {
+    this.mName = mName || "";
+    this.currentCommand = "";
+    this.currentParamObj = {};
+    this.data = {};
+
+    function getCommand(command) {
+        return "multi_"+command+" " + mName;
+    }
+
+    function getPostObjArray(postArray) {
+        var postObjArray = [];
+        for(var i = 0; i < postArray.length; i++) {
+            postObjArray.push(new PostObj(reddit, postArray[i]));
+        }
+        return postObjArray;
+    }
+
+    this.toString = function() {
+        return "[object MultisObject]"
+    }
+
+    this._setCurrentProperties = function(apiCommand, paramObj) {
+        this.currentCommand  = apiCommand;
+        this.currentParamObj = paramObj;
+        this.data = {};
+    }
+
+    this.getPostsListing = function(sort, paramObj) {
+        //Returns a Connection object. Has a response property containing the Posts Array.
+        var apiCommand = getCommand(sort);
+        paramObj = paramObj || {};
+        paramObj.limit = paramObj.limit || 25;
+        this._setCurrentProperties(apiCommand, paramObj);
+
+        var connSubrObj = reddit.getAPIConnection(apiCommand, paramObj);
+        var that = this;
+
+        connSubrObj.onConnection.connect(function(response){
+            that.data = response.data;
+            var postObjArray = getPostObjArray(response.data.children)
+            that.data.children = postObjArray;
+            connSubrObj.response = postObjArray;
+            connSubrObj.success();
+        });
+
+        return connSubrObj;
+    }
+
+    this.getSearchListing = function(sort, query, paramObj) {
+        //Returns a Listing object
+    }
+
+    this.getMoreListing = function(limitNo) {
+        //Returns a Connection object. Has a response property containing the Posts Array.
+        if (this.currentCommand === "") throw "Error: getMoreListing(): Cannot get more."
+
+        var paramObj = this.currentParamObj;
+        paramObj.limit = limitNo || paramObj.limit || 25;
+        paramObj.after = this.data.after;
+
+        console.log("MultisObj.getMoreListings uses command: "+this.currentCommand);
         var connMoreObj = reddit.getAPIConnection(this.currentCommand, paramObj);
         var that = this;
 

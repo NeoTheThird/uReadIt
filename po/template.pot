@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2015-07-07 22:59-0400\n"
+"POT-Creation-Date: 2016-01-08 16:03-0500\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -17,158 +17,175 @@ msgstr ""
 "Content-Type: text/plain; charset=CHARSET\n"
 "Content-Transfer-Encoding: 8bit\n"
 
-#: ui/InternalBrowserPage.qml:70 ui/ArticlePage.qml:89
+#: .ubuntu-sdk-deploy/ui/InternalBrowserPage.qml:70
+#: .ubuntu-sdk-deploy/ui/ArticlePage.qml:89 ui/InternalBrowserPage.qml:70
+#: ui/ArticlePage.qml:89
 msgid "Open link in browser"
 msgstr ""
 
-#: ui/InternalBrowserPage.qml:75 ui/ArticlePage.qml:94
+#: .ubuntu-sdk-deploy/ui/InternalBrowserPage.qml:75
+#: .ubuntu-sdk-deploy/ui/ArticlePage.qml:94 ui/InternalBrowserPage.qml:75
+#: ui/ArticlePage.qml:94
 msgid "Open image in browser"
 msgstr ""
 
-#: ui/InternalBrowserPage.qml:80 ui/ArticlePage.qml:104
+#: .ubuntu-sdk-deploy/ui/InternalBrowserPage.qml:80
+#: .ubuntu-sdk-deploy/ui/ArticlePage.qml:104 ui/InternalBrowserPage.qml:80
+#: ui/ArticlePage.qml:104
 msgid "Share image"
 msgstr ""
 
-#: ui/SettingsPage.qml:8 ui/Frontpage.qml:219
+#: .ubuntu-sdk-deploy/ui/SettingsPage.qml:8
+#: .ubuntu-sdk-deploy/ui/Frontpage.qml:229 ui/SettingsPage.qml:8
+#: ui/Frontpage.qml:229
 msgid "Settings"
 msgstr ""
 
-#: ui/SettingsPage.qml:15
+#: .ubuntu-sdk-deploy/ui/SettingsPage.qml:19 ui/SettingsPage.qml:19
 msgid "Startup"
 msgstr ""
 
-#: ui/SettingsPage.qml:18
+#: .ubuntu-sdk-deploy/ui/SettingsPage.qml:22 ui/SettingsPage.qml:22
 msgid "Login automatically at startup"
 msgstr ""
 
-#: ui/SettingsPage.qml:29
+#: .ubuntu-sdk-deploy/ui/SettingsPage.qml:33 ui/SettingsPage.qml:33
 msgid "Internal Browser"
 msgstr ""
 
-#: ui/SettingsPage.qml:33
+#: .ubuntu-sdk-deploy/ui/SettingsPage.qml:37 ui/SettingsPage.qml:37
 msgid "Open links internally"
 msgstr ""
 
-#: ui/SettingsPage.qml:44
+#: .ubuntu-sdk-deploy/ui/SettingsPage.qml:48 ui/SettingsPage.qml:48
 msgid "Image Previews"
 msgstr ""
 
-#: ui/SettingsPage.qml:52
+#: .ubuntu-sdk-deploy/ui/SettingsPage.qml:56 ui/SettingsPage.qml:56
 msgid "Don't show images"
 msgstr ""
 
-#: ui/SettingsPage.qml:52
+#: .ubuntu-sdk-deploy/ui/SettingsPage.qml:56 ui/SettingsPage.qml:56
 msgid "Show large previews"
 msgstr ""
 
-#: ui/SettingsPage.qml:52
+#: .ubuntu-sdk-deploy/ui/SettingsPage.qml:56 ui/SettingsPage.qml:56
 msgid "Show thumbnail previews"
 msgstr ""
 
-#: ui/SettingsPage.qml:60
+#: .ubuntu-sdk-deploy/ui/SettingsPage.qml:64 ui/SettingsPage.qml:64
 msgid "Theme"
 msgstr ""
 
-#: ui/ArticlePage.qml:99
+#: .ubuntu-sdk-deploy/ui/ArticlePage.qml:99 ui/ArticlePage.qml:99
 msgid "Share image link"
 msgstr ""
 
-#: ui/Frontpage.qml:18 ui/Frontpage.qml:275 ui/Frontpage.qml:479
+#: .ubuntu-sdk-deploy/ui/Frontpage.qml:20
+#: .ubuntu-sdk-deploy/ui/Frontpage.qml:285
+#: .ubuntu-sdk-deploy/ui/Frontpage.qml:503 ui/Frontpage.qml:20
+#: ui/Frontpage.qml:285 ui/Frontpage.qml:503
 msgid "Frontpage"
 msgstr ""
 
-#: ui/Frontpage.qml:77
+#: .ubuntu-sdk-deploy/ui/Frontpage.qml:85 ui/Frontpage.qml:85
 msgid "Hot"
 msgstr ""
 
-#: ui/Frontpage.qml:77
+#: .ubuntu-sdk-deploy/ui/Frontpage.qml:85 ui/Frontpage.qml:85
 msgid "New"
 msgstr ""
 
-#: ui/Frontpage.qml:77
+#: .ubuntu-sdk-deploy/ui/Frontpage.qml:85 ui/Frontpage.qml:85
 msgid "Top"
 msgstr ""
 
-#: ui/Frontpage.qml:77
+#: .ubuntu-sdk-deploy/ui/Frontpage.qml:85 ui/Frontpage.qml:85
 msgid "Controversial"
 msgstr ""
 
-#: ui/Frontpage.qml:77
+#: .ubuntu-sdk-deploy/ui/Frontpage.qml:85 ui/Frontpage.qml:85
 msgid "Rising"
 msgstr ""
 
-#: ui/Frontpage.qml:86
+#: .ubuntu-sdk-deploy/ui/Frontpage.qml:95 ui/Frontpage.qml:95
 msgid "Subscriptions"
 msgstr ""
 
-#: ui/Frontpage.qml:86
+#: .ubuntu-sdk-deploy/ui/Frontpage.qml:95 ui/Frontpage.qml:95
 msgid "Defaults"
 msgstr ""
 
-#: ui/Frontpage.qml:86
+#: .ubuntu-sdk-deploy/ui/Frontpage.qml:95 ui/Frontpage.qml:95
 msgid "Search"
 msgstr ""
 
-#: ui/Frontpage.qml:165
+#: .ubuntu-sdk-deploy/ui/Frontpage.qml:95 ui/Frontpage.qml:95
+msgid "Multis"
+msgstr ""
+
+#: .ubuntu-sdk-deploy/ui/Frontpage.qml:175 ui/Frontpage.qml:175
 msgid "Subreddit"
 msgstr ""
 
-#: ui/Frontpage.qml:174
+#: .ubuntu-sdk-deploy/ui/Frontpage.qml:184 ui/Frontpage.qml:184
 msgid "Login"
 msgstr ""
 
-#: ui/Frontpage.qml:183
-msgid "Inbox"
-msgstr ""
-
-#: ui/Frontpage.qml:192
+#: .ubuntu-sdk-deploy/ui/Frontpage.qml:193 ui/Frontpage.qml:193
 msgid "New Unread"
 msgstr ""
 
-#: ui/Frontpage.qml:201
+#: .ubuntu-sdk-deploy/ui/Frontpage.qml:202 ui/Frontpage.qml:202
 msgid "View as Gallery"
 msgstr ""
 
-#: ui/Frontpage.qml:210
+#: .ubuntu-sdk-deploy/ui/Frontpage.qml:211 ui/Frontpage.qml:211
+msgid "Inbox"
+msgstr ""
+
+#: .ubuntu-sdk-deploy/ui/Frontpage.qml:220 ui/Frontpage.qml:220
 msgid "Users"
 msgstr ""
 
-#: ui/Frontpage.qml:227 ui/AboutPage.qml:8
+#: .ubuntu-sdk-deploy/ui/Frontpage.qml:237
+#: .ubuntu-sdk-deploy/ui/AboutPage.qml:8 ui/Frontpage.qml:237
+#: ui/AboutPage.qml:8
 msgid "About"
 msgstr ""
 
-#: ui/Frontpage.qml:235
+#: .ubuntu-sdk-deploy/ui/Frontpage.qml:245 ui/Frontpage.qml:245
 msgid "Logout"
 msgstr ""
 
-#: ui/Frontpage.qml:254
+#: .ubuntu-sdk-deploy/ui/Frontpage.qml:264 ui/Frontpage.qml:264
 msgid "Back"
 msgstr ""
 
-#: ui/Frontpage.qml:264
+#: .ubuntu-sdk-deploy/ui/Frontpage.qml:274 ui/Frontpage.qml:274
 msgid "Confirm"
 msgstr ""
 
-#: ui/Frontpage.qml:481
+#: .ubuntu-sdk-deploy/ui/Frontpage.qml:505 ui/Frontpage.qml:505
 msgid "All"
 msgstr ""
 
-#: ui/AboutPage.qml:26
+#: .ubuntu-sdk-deploy/ui/AboutPage.qml:30 ui/AboutPage.qml:30
 msgid "Name"
 msgstr ""
 
-#: ui/AboutPage.qml:30
+#: .ubuntu-sdk-deploy/ui/AboutPage.qml:34 ui/AboutPage.qml:34
 msgid "Author"
 msgstr ""
 
-#: ui/AboutPage.qml:34
+#: .ubuntu-sdk-deploy/ui/AboutPage.qml:38 ui/AboutPage.qml:38
 msgid "Version"
 msgstr ""
 
-#: ui/AboutPage.qml:38
+#: .ubuntu-sdk-deploy/ui/AboutPage.qml:42 ui/AboutPage.qml:42
 msgid "Released"
 msgstr ""
 
-#: Main.qml:137
+#: .ubuntu-sdk-deploy/Main.qml:135 Main.qml:135
 msgid "Link to a Reddit thread"
 msgstr ""

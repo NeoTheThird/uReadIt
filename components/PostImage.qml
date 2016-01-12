@@ -1,4 +1,4 @@
-import QtQuick 2.0
+import QtQuick 2.4
 
 Image {
     id: postThumbnail
@@ -7,6 +7,7 @@ Image {
     property string thumbnail
     property bool hires: false
     source: ""
+    asynchronous: true
 
     onUrlChanged: update_source()
 

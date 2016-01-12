@@ -1,8 +1,10 @@
-import QtQuick 2.0
-import Ubuntu.Components 1.1
+import QtQuick 2.4
+import Ubuntu.Components 1.3
 import Ubuntu.Components.Themes.Ambiance 0.1
 
 QtObject {
+    property string baseThemeName: "Ubuntu.Components.Themes.Ambiance"
+
     // MainView
     property color backgroundColor: '#EDEDED'
     property color backgroundHeaderColor: '#cee3f8'

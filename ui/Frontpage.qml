@@ -1,5 +1,5 @@
-import QtQuick 2.0
-import Ubuntu.Components 1.1
+import QtQuick 2.4
+import Ubuntu.Components 1.3
 import Ubuntu.Components.ListItems 1.0 as ListItems
 import "../components"
 import "../models/QReddit"
@@ -8,21 +8,23 @@ import "../models/QReddit/QReddit.js" as QReddit
 Page {
     id: frontpage
 
+    property string subredditPrefix: '/r/'
     property string subreddit: ""
+    property string multis: ""
     property string subredditFilter: "hot"
 
     property alias autoLoad: postsModel.autoLoad
 
     property alias lastPageAfter: postsModel.startAfter
 
-    title: subreddit === "" ? i18n.tr("Frontpage") : "/r/"+subreddit
+    title: (subreddit==="" && subredditPrefix==="/r/") ? i18n.tr("Frontpage") : subredditPrefix+(subredditPrefix=="/r/"?subreddit:multis)
 
     state: "default"
     focus: true
 
     Keys.onPressed: {
         if (event.key == Qt.Key_F5) { refresh(); return; }
-        if (event.key == Qt.Key_Home) { postsList.contentY = frontpage.clip ? 0 : 0-frontpage.header.height; return; }
+        if (event.key == Qt.Key_Home) { postsList.contentY = frontpage.clip ? 0 : 0-units.gu(10); return; }
 
         if (event.key == Qt.Key_PageDown) {
             var nextY = postsList.contentY + (postsList.height/1.5);
@@ -62,6 +64,12 @@ Page {
         }
 
         if ((event.modifiers & Qt.ControlModifier) && (event.key == Qt.Key_M)) {
+            frontpage.state = "change_subreddit"
+            head.sections.selectedIndex = 3
+            return;
+        }
+
+        if ((event.modifiers & Qt.ControlModifier) && (event.key == Qt.Key_I)) {
             if (uReadIt.qreddit.notifier.isLoggedIn && uReadIt.qreddit.notifier.hasUnreadMessages) {
                 inboxUnreadAction.trigger()
             } else {
@@ -84,9 +92,9 @@ Page {
 
     PageHeadSections {
         id: changeSubredditStateSections
-        model: [i18n.tr("Subscriptions"), i18n.tr("Defaults"), i18n.tr("Search")]
+        model: [i18n.tr("Subscriptions"), i18n.tr("Defaults"), i18n.tr("Search"), i18n.tr("Multis")]
         selectedIndex: uReadIt.qreddit.notifier.isLoggedIn ? 0 : 1
-        property var subreddit_sources: ["subreddits_mine subscriber", "subreddits_default", "subreddits_search"]
+        property var subreddit_sources: ["subreddits_mine subscriber", "subreddits_default", "subreddits_search", "multi_mine"]
         onSelectedIndexChanged: {
             subredditsList.subredditSource = subreddit_sources[selectedIndex]
         }
@@ -152,7 +160,8 @@ Page {
                     height: parent.height
 
                     onClicked: {
-                        postsList.contentY = frontpage.clip ? 0 : 0-frontpage.header.height;
+                        console.log("Frontpage title clicked");
+                        postsList.contentY = frontpage.clip ? 0 : 0-units.gu(10);
                     }
                 }
             }
@@ -180,15 +189,6 @@ Page {
                     }
                 },
                 Action {
-                    id: inboxAction
-                    text: i18n.tr("Inbox")
-                    iconName: "email"
-                    visible: uReadIt.qreddit.notifier.isLoggedIn && !inboxUnreadAction.visible
-                    onTriggered: {
-                        mainStack.push(Qt.resolvedUrl("UserMessagesPage.qml"), {'where': 'inbox'});
-                    }
-                },
-                Action {
                     id: inboxUnreadAction
                     text: i18n.tr("New Unread")
                     iconSource: Qt.resolvedUrl("../images/email-unread.svg")
@@ -203,7 +203,16 @@ Page {
                     iconName: "stock_image"
                     visible: subreddit != ""
                     onTriggered: {
-                        mainStack.push(Qt.resolvedUrl("SubredditGalleryPage.qml"), {'subreddit': subreddit});
+                        mainStack.push(Qt.resolvedUrl("SubredditGalleryPage.qml"), {'subreddit': subreddit, 'subredditFilter': subredditFilter});
+                    }
+                },
+                Action {
+                    id: inboxAction
+                    text: i18n.tr("Inbox")
+                    iconName: "email"
+                    visible: uReadIt.qreddit.notifier.isLoggedIn && !inboxUnreadAction.visible
+                    onTriggered: {
+                        mainStack.push(Qt.resolvedUrl("UserMessagesPage.qml"), {'where': 'inbox'});
                     }
                 },
                 Action {
@@ -281,6 +290,7 @@ Page {
                 onAccepted: confirmChangeAction.triggered(subredditField)
                 onTextChanged: {
                     subredditsList.subredditSearch = text;
+                    changeSubredditStateSections.selectedIndex = 2;
                 }
                 Keys.onPressed: { if (event.key == Qt.Key_Escape) frontpage.state = "default"; }
             }
@@ -332,13 +342,19 @@ Page {
                 SmoothedAnimation { duration: 500 }
         }
 
-        model: SubredditListModel {
+        SubredditListModel {
             id: postsModel
             redditObj: uReadIt.qreddit
             subreddit: frontpage.subreddit
             filter: frontpage.subredditFilter
-
         }
+        MultisListModel {
+            id: multisModel
+            redditObj: uReadIt.qreddit
+            multis: frontpage.multis
+            filter: frontpage.subredditFilter
+        }
+        model: postsModel
 
         delegate: PostListItem {
             title: model.data.title
@@ -410,7 +426,7 @@ Page {
                     moreLoaderItem.overflow = pf.contentY - pf.contentHeight + pf.height
                     if ((moreLoaderItem.overflow > moreLoaderItem.loadMoreLength) && !moreLoaderItem.spaceRect) {
                         moreLoaderItem.spaceRect = Qt.createQmlObject("import QtQuick 2.0; Item{width: 1; height: " + moreLoaderItem.loadMoreLength + "}", frontpage)
-                        postsModel.loadMore()
+                        postsList.model.loadMore()
                     }
 
                 } else {
@@ -475,6 +491,13 @@ Page {
                                 subredditsModel.append(response.data.children[index])
                             }
                         });
+                    } else if (subredditsList.subredditSource == "multi_mine") {
+                            var multiConnObj = uReadIt.qreddit.getAPIConnection(subredditsList.subredditSource);
+                            multiConnObj.onConnection.connect(function(response){
+                                for (var index in response){
+                                    subredditsModel.append({'data': {'is_multi': true, 'display_name': response[index].data.name, 'title': response[index].data.display_name}})
+                                }
+                            });
                     } else {
                         if (subredditsList.subredditSource == "subreddits_mine subscriber") {
                             subredditsModel.append({'data': {'display_name': '', 'title': i18n.tr("Frontpage")}})
@@ -507,11 +530,22 @@ Page {
                 delegate: ListItems.Standard {
                     text: model.data['display_name'] === "" ? model.data['title'] : model.data['display_name']
                     property string subreddit_name: model.data['display_name']
+                    property bool is_multi: model.data['is_multi'] || false
                     selected: this.focus
                     progression: this.focus
                     onClicked: {
-                        subredditField.text = subredditsList.subredditSource == "subreddits_search" ? subredditsList.subredditSearch : this.subreddit_name
-                        subreddit = this.subreddit_name
+                        console.log("Checking " + model.data['display_name']+" is_multi: "+model.data['is_multi']);
+                        if (is_multi) {
+                            postsList.model = multisModel
+                            subredditPrefix = '/m/'
+                            subredditField.text = this.subreddit_name
+                            multis = this.subreddit_name
+                        } else {
+                            postsList.model = postsModel
+                            subredditPrefix = '/r/'
+                            subredditField.text = subredditsList.subredditSource == "subreddits_search" ? subredditsList.subredditSearch : this.subreddit_name
+                            subreddit = this.subreddit_name
+                        }
                         frontpage.state = "default"
                     }
                 }
@@ -523,8 +557,10 @@ Page {
         }
     }
 
-    clip: false//uReadIt.height < units.gu(70) ? false : true
-    flickable: frontpage.clip ? null : (subscriptionsPanel.visible ? subredditsList : postsList)//uReadIt.height < units.gu(70) ? postsList : null
+    head.locked: uReadIt.height < units.gu(70) ? false : true
+    clip: head.locked
+    head.onLockedChanged: if (head.locked) head.visible = true;
+    flickable: (subscriptionsPanel.visible ? subredditsList : postsList)//uReadIt.height < units.gu(70) ? postsList : null
 
     ActivityIndicator {
         id: loadingIndicator

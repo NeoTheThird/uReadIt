@@ -1,7 +1,7 @@
 {
     "architecture": "all",
     "description": "Reddit browser for Ubuntu",
-    "framework": "ubuntu-sdk-14.10-qml",
+    "framework": "ubuntu-sdk-15.04.3-qml",
     "hooks": {
         "ureadit": {
             "apparmor": "ureadit.apparmor",
@@ -12,5 +12,5 @@
     "maintainer": "Michael Hall <mhall119@ubuntu.com>",
     "name": "com.ubuntu.developer.mhall119.ureadit-dev",
     "title": "uReadIt",
-    "version": "4.0"
+    "version": "4.7"
 }

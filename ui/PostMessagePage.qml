@@ -1,5 +1,5 @@
-import QtQuick 2.0
-import Ubuntu.Components 1.1
+import QtQuick 2.4
+import Ubuntu.Components 1.3
 import Ubuntu.Components.ListItems 1.0
 import "../components"
 import "../models/QReddit/QReddit.js" as QReddit
@@ -130,6 +130,8 @@ Page {
 
         }
     }
-    clip: uReadIt.height < units.gu(70) ? false : true
-    flickable: postMessagePage.clip ? null : postMessageContent
+
+    head.locked: uReadIt.height < units.gu(70) ? false : true
+    head.onLockedChanged: if (head.locked) head.visible = true;
+    flickable: postMessageContent
 }

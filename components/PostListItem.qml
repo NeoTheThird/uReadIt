@@ -1,7 +1,6 @@
-import QtQuick 2.0
+import QtQuick 2.4
 import QtFeedback 5.0
-import Ubuntu.Components 1.1
-import Ubuntu.Connectivity 1.0
+import Ubuntu.Components 1.3
 
 Item {
     id: postitemroot
@@ -32,19 +31,7 @@ Item {
         fadeTime: 50
         fadeIntensity: 0.0
     }
-    Connections {
-        target: NetworkingStatus
-        // full status can be retrieved from the base C++ class
-        // status property
-        onStatusChanged: {
-            if (status === NetworkingStatus.Offline)
-                console.log("Status: Offline")
-            if (status === NetworkingStatus.Connecting)
-                console.log("Status: Connecting")
-            if (status === NetworkingStatus.Online)
-                console.log("Status: Online")
-        }
-    }
+
     Loader {
         id: postItemLoader
         property string title: parent.title
