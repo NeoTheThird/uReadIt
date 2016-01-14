@@ -1,7 +1,7 @@
 [Desktop Entry]
 Name=uReadIt
 Exec=qmlscene $@ Main.qml --url=%u
-Icon=images/uReaditDev.png
+Icon=images/uReadit.png
 Terminal=false
 Type=Application
 X-Ubuntu-Touch=true

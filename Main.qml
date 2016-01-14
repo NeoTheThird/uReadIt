@@ -16,8 +16,8 @@ MainView {
     objectName: "mainView"
 
     // Note! applicationName needs to match the "name" field of the click manifest
-    //applicationName: "com.ubuntu.developer.mhall119.ureadit"
-    applicationName: "com.ubuntu.developer.mhall119.ureadit-dev"
+    applicationName: "com.ubuntu.developer.mhall119.ureadit"
+    //applicationName: "com.ubuntu.developer.mhall119.ureadit-dev"
 
     /*
      This property enables the application to change orientation

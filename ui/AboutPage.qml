@@ -22,7 +22,7 @@ Page {
                 radius: "medium"
 
                 image: Image {
-                    source: Qt.resolvedUrl("../images/Reddit.png")
+                    source: Qt.resolvedUrl("../images/uReadit.png")
                 }
             }
 
