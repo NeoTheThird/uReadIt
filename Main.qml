@@ -83,7 +83,10 @@ MainView {
 
     PageStack {
         id: mainStack
-        anchors.fill: parent
+        anchors {
+                 fill: parent
+                 topMargin: units.gu(10)
+                }
 
         Keys.onPressed: { if (mainStack.depth > 1 && event.key == Qt.Key_Escape) pop(); }
         onCurrentPageChanged: {
