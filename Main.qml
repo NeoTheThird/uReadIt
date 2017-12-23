@@ -16,7 +16,7 @@ MainView {
     objectName: "mainView"
 
     // Note! applicationName needs to match the "name" field of the click manifest
-    applicationName: "com.ubuntu.developer.mhall119.ureadit"
+    applicationName: "ureadit.neothethird"
     //applicationName: "com.ubuntu.developer.mhall119.ureadit-dev"
 
     /*
@@ -201,4 +201,3 @@ MainView {
     }
 
 }
-

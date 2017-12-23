@@ -1,5 +1,5 @@
 {
-    "architecture": "all",
+    "architecture": "armhf",
     "description": "Reddit browser for Ubuntu",
     "framework": "ubuntu-sdk-15.04.3-qml",
     "hooks": {
@@ -9,8 +9,8 @@
             "desktop": "ureadit.desktop"
         }
     },
-    "maintainer": "Michael Hall <mhall119@ubuntu.com>",
-    "name": "com.ubuntu.developer.mhall119.ureadit",
+    "maintainer": "Jan Sprinz <neo@neothethird.de>",
+    "name": "ureadit.neothethird",
     "title": "uReadIt",
-    "version": "4.7"
+    "version": "4.8"
 }

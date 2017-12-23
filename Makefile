@@ -20,7 +20,7 @@
 #################################################################
 
 #APP_ID needs to match the "name" field of the click manifest
-APP_ID=com.ubuntu.developer.mhall119.ureadit-dev
+APP_ID=ureadit.neothethird
 
 #provides a way for the IDE to set a specific target folder for the translations
 TRANSLATION_ROOT=.
@@ -50,4 +50,3 @@ po/template.pot: $(QMLJS_FILES)
 
 $(TRANSLATION_ROOT)/share/locale/%/LC_MESSAGES/$(APP_ID).mo: po/%.po
 	mkdir -p $(TRANSLATION_ROOT)/share/locale/$*/LC_MESSAGES && msgfmt -o $(@) $(<)
-
