@@ -35,6 +35,10 @@ Page {
                 value: Manifest.appData.maintainer
             }
             ListItems.SingleValue {
+                text: i18n.tr("Based on work done by")
+                value: "Michael Hall"
+            }
+            ListItems.SingleValue {
                 text: i18n.tr("Version")
                 value: Manifest.appData.version
             }
@@ -45,4 +49,3 @@ Page {
         }
     }
 }
-
